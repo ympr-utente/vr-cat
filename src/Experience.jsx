@@ -1,13 +1,22 @@
-import { OrbitControls } from "@react-three/drei";
+import { BakeShadows, Loader, OrbitControls } from "@react-three/drei";
 import World from "./world/World";
+import Lights from "./lights/Lights";
+import Environments from "./environments/Environments";
+import { Perf } from "r3f-perf";
+import { Suspense } from "react";
 
 const Experience = () => {
     return (
         <>
-            <ambientLight />
-            <directionalLight position={[10, 10, 5]} />
+            <Perf position="top-left" />
+            <BakeShadows />
             <OrbitControls makeDefault />
-            <World/>
+
+            <Suspense fallback={null}>
+                <Lights />
+                <Environments />
+                <World />
+            </Suspense>
         </>
     )
 }
