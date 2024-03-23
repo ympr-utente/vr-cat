@@ -13,3 +13,11 @@ body,
 canvas{
     touch-action: none;
 }
+
+/* .welcome-text{
+    background: #00000088;
+    color: white;
+    padding: 1rem;
+    border-radius: 2rem;
+    user-select: none;
+}	 */

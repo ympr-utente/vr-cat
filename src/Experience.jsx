@@ -5,17 +5,20 @@ import Environments from "./world/Environments";
 import { Perf } from "r3f-perf";
 import { Suspense } from "react";
 import { Girl } from "./world/Girl";
+import WelcomeText from "./world/WelcomeText";
 
 const Experience = () => {
     return (
         <>
             {/* <Perf position="top-left" /> */}
-            {/* <OrbitControls  /> */}
+            <OrbitControls target={[0, 1.5, -95]} />
             <Suspense fallback={null}>
                 <Lights />
                 <Environments />
                 <World />
-                <Girl />
+                <Girl>
+                    <WelcomeText position={[0, 1.5, -92]} />
+                </Girl>
             </Suspense>
         </>
     )
