@@ -12,18 +12,16 @@ const Experience = () => {
         <>
             {/* <Perf position="top-left" /> */}
             <OrbitControls
-                target={[0, 1.5, -95]}
-                //target={[0, 1.5, 0]}
+                target={[0, 1.5, 0]}
                 enableZoom={false}
-                enablePan={false} 
-                />
+                enablePan={false}
+            />
             <Suspense fallback={null}>
                 <Lights />
                 <Environments />
                 <World />
-                <Girl>
-                    <WelcomeText position={[0, 1.5, -92]} />
-                </Girl>
+                <Girl />
+                <WelcomeText position={[0, 1, -2]} />
             </Suspense>
         </>
     )
