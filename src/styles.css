@@ -1,13 +1,44 @@
-html, body, #root{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: blueviolet;
+* {
+  box-sizing: border-box;
 }
 
-canvas{
-    touch-action: none;
-    
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  font-family: "InterVariable", sans-serif;
+}
+
+canvas {
+  touch-action: none;
+}
+
+.interface {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+
+
+.cta {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  color: #ffffff;
+  font-size: 80px;
+  background-color: #00000033;
+  padding: 10px 0;
+  pointer-events: auto;
+  cursor: pointer;
 }
