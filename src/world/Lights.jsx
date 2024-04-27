@@ -1,22 +1,52 @@
-import { Color } from "three";
+import { useHelper } from "@react-three/drei";
+import React, { useRef } from "react";
+import { PointLightHelper } from "three";
 
 const Lights = () => {
-    return <>
-        <ambientLight
-            intensity={0.5}
-        />
-        <directionalLight
-            castShadow={true}
-            position={[2, 10, 0]}
-            color={new Color("#FFF700")}
-            intensity={2}
-            shadow-mapSize = {[2048, 2048]}
-            shadow-camera-far = {50}
-            shadow-camera-left = {-10}
-            shadow-camera-right = {10}
-            shadow-camera-top = {10}
-            shadow-camera-bottom = {-10}
-        />
-    </>
+    const pointLightRef = useRef(null);
+    const pointLightHelperRef = useRef(null); // Referencia para el helper de la luz
+
+    useHelper(pointLightRef, PointLightHelper); 
+
+    return (
+        <>
+            <ambientLight intensity={1} /> 
+            <pointLight
+             
+                position={[12.99, -1.5, 4]} 
+                intensity={5}
+              
+                distance={3} 
+                decay={-1} 
+                castShadow={true}
+           
+            />
+            <pointLight
+                ref={pointLightRef}
+                position={[24.5, -1.5, 4.5]} 
+                intensity={2}
+              
+                distance={2} 
+                decay={-5} 
+                castShadow 
+               
+            />
+
+        
+            <ambientLight intensity={2} color={"blue"} />
+            
+            {/* La luz puntual */}
+            <pointLight
+                ref={pointLightRef}
+                position={[5, 5, 5]}
+                intensity={15}  
+                color={"red"}
+                distance={30}
+                decay={1}
+                castShadow={true} 
+            />
+        </>
+    );
 }
+
 export default Lights;
