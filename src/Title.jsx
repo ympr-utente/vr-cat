@@ -20,7 +20,7 @@ function Title() {
             <Float speed={2} rotationIntensity={1} floatIntensity={1}>
                 <Center>
                     <Text3D {...fontSettings}>
-                        {'NIVEL  ONE'}
+                        {'LEVEL 1'}
                         <meshPhysicalMaterial color="#ffffff" roughness={0.4} thickness={1} transmission={1.2} opacity={1} />
                     </Text3D>
                 </Center> 
