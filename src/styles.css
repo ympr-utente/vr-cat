@@ -87,6 +87,7 @@ canvas {
   margin: 4px;
   border: 2px solid #ffffff;
   background: #ffffff44;
+  text-align: center;
 }
 
 .controls .key.large {
