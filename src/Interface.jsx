@@ -43,6 +43,7 @@ function Interface() {
         e.target.blur()
     }
 
+
     return (
         <div className="interface">
             {highScore > 0 && (
@@ -53,8 +54,28 @@ function Interface() {
 
             <button className="audio-toggle" onClick={handleToggleAudio}>
                 <UseAnimations animation={volume} reverse={!audio} strokeColor="white" />
-            </button>
-                        <div className="controls">
+            </button>{
+                /*
+            <h2 ref={timerRef} className="time">
+                0.00
+            </h2>
+            
+             */
+             }
+
+            {gamePhase === 'ready' && (
+                <h2 className="cta" onClick={startGame}>
+                    Play
+                </h2>
+            )}
+
+            {gamePhase === 'ended' && (
+                <h2 className="cta" onClick={restartGame}>
+                    Restart
+                </h2>
+            )}
+
+            <div className="controls">
                 <div className="raw">
                     <div className={`key ${controls.forward ? 'active' : ''}`}></div>
                 </div>
@@ -68,7 +89,17 @@ function Interface() {
                 </div>
             </div>
 
+            <div className="misc-controls">
+                <div className="misc-control">
+                    <div className="key">Tecla R</div>
+                    <div className="label">Empezar de nuevo</div>
+                </div>
+                <div className="misc-control">
+                    <div className="key">Tecla M</div>
+                    <div className="label">Activar/Desactivar sonido</div>
+                </div>
             </div>
+        </div>
     )
 }
 
