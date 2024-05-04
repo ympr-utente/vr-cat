@@ -1,6 +1,6 @@
 import { useKeyboardControls } from '@react-three/drei'
 // import { addEffect } from '@react-three/fiber'
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import UseAnimations from 'react-useanimations'
 import volume from 'react-useanimations/lib/volume'
 import { useAudio } from './stores/useAudio'
@@ -8,35 +8,39 @@ import { useGame } from './stores/useGame'
 
 function Interface() {
     const timerRef = useRef()
-
+    const [countdown, setCountdown] = useState(60); // Estado local para el temporizador
     const audio = useAudio((state) => state.audio)
     const toggleAudio = useAudio((state) => state.toggleAudio)
 
-    const highScore = useGame((state) => state.highScore)
     const gamePhase = useGame((state) => state.phase)
     const startGame = useGame((state) => state.start)
     const restartGame = useGame((state) => state.restart)
 
     const controls = useKeyboardControls((state) => state)
 
-    // useEffect(() => {
-    //     return addEffect(() => {
-    //         const state = useGame.getState()
+       // Manejar el temporizador
+       useEffect(() => {
+        let intervalId;
 
-    //         let elapsedTime = 0
+        if (gamePhase === 'playing') {
+            intervalId = setInterval(() => {
+                setCountdown((prevCountdown) => {
+                    if (prevCountdown > 0) {
+                        return prevCountdown - 1;
+                    } else {
+                        clearInterval(intervalId); // Detener el temporizador cuando llegue a cero
+                        restartGame(); // Reiniciar el juego
+                        return 60; // Reiniciar el temporizador
+                    }
+                });
+            }, 1000);
+        } else {
+            clearInterval(intervalId); // Limpiar el intervalo si el juego no está en fase de juego
+            setCountdown(60); // Reiniciar el temporizador cuando el juego no está en curso
+        }
 
-    //         if (state.phase === 'playing') {
-    //             elapsedTime = Date.now() - state.startTime
-    //         } else if (state.phase === 'ended') {
-    //             elapsedTime = state.endTime - state.startTime
-    //         }
-
-    //         elapsedTime /= 1000
-    //         elapsedTime = elapsedTime.toFixed(2)
-
-    //         if (timerRef.current) timerRef.current.innerText = elapsedTime
-    //     })
-    // }, [])
+        return () => clearInterval(intervalId); // Limpiar el intervalo al desmontar el componente
+    }, [gamePhase, restartGame]);
 
     function handleToggleAudio(e) {
         toggleAudio()
@@ -46,22 +50,13 @@ function Interface() {
 
     return (
         <div className="interface">
-            {highScore > 0 && (
-                <div className="high-score">
-                    <h2>High Score: {(highScore / 1000).toFixed(2)}</h2>
-                </div>
-            )}
+            <div className="time">
+                <h2>{countdown}</h2>
+            </div>
 
             <button className="audio-toggle" onClick={handleToggleAudio}>
                 <UseAnimations animation={volume} reverse={!audio} strokeColor="white" />
-            </button>{
-                /*
-            <h2 ref={timerRef} className="time">
-                0.00
-            </h2>
-            
-             */
-             }
+            </button>
 
             {gamePhase === 'ready' && (
                 <h2 className="cta" onClick={startGame}>
@@ -89,16 +84,6 @@ function Interface() {
                 </div>
             </div>
 
-            <div className="misc-controls">
-                <div className="misc-control">
-                    <div className="key">Tecla R</div>
-                    <div className="label">Empezar de nuevo</div>
-                </div>
-                <div className="misc-control">
-                    <div className="key">Tecla M</div>
-                    <div className="label">Activar/Desactivar sonido</div>
-                </div>
-            </div>
         </div>
     )
 }

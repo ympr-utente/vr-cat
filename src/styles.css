@@ -28,14 +28,15 @@ canvas {
 
 .time {
   position: absolute;
-  margin-top: 0;
-  left: 0;
+  top: 20px;
+  left: 40px;
   width: 200px;
   color: #ffffff;
   font-size: 70px;
   background-color: #00000033;
   padding: 10px 20px;
   text-align: center;
+  justify-content: center;
   border-radius: 10px;
   box-shadow: inset 0 0 0 0 #ffffff;
 }
@@ -111,23 +112,6 @@ canvas {
   
   color: #ffffff;
   font-size: 24px;
-}
-
-.high-score {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: absolute;
-  top: 20px;
-  left: 40px;
-  color: #ffffff;
-  font-size: 16px;
-  background-color: #00000033;
-  height: 64px;
-  padding: 0 16px;
-
-  border-radius: 8px;
 }
 
 .audio-toggle {
