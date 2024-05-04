@@ -84,6 +84,7 @@ function Interface() {
                 </div>
                 <div className="misc-controls">
                     <div className="misc-control">
+
                         <div className={`key ${controls.restart? 'active' : ''}`}>R</div>
                         <div className="label">Empezar de nuevo</div>
                     </div>
