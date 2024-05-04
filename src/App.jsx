@@ -13,7 +13,7 @@ import { ShortcutManager } from './ShortcutManager'
 
 function Experience() {
     return (
-        <Physics>
+        <Physics debug>
             <Title />
             <Level />
             <SoundManager />
