@@ -60,13 +60,13 @@ function Interface() {
 
             {gamePhase === 'ready' && (
                 <h2 className="cta" onClick={startGame}>
-                    Play
+                Play
                 </h2>
             )}
 
             {gamePhase === 'ended' && (
                 <h2 className="cta" onClick={restartGame}>
-                    Restart
+                    Empezar de nuevo
                 </h2>
             )}
 
@@ -84,11 +84,12 @@ function Interface() {
                 </div>
                 <div className="misc-controls">
                     <div className="misc-control">
-                        <div className="key">Tecla R</div>
+
+                        <div className={`key ${controls.restart? 'active' : ''}`}>R</div>
                         <div className="label">Empezar de nuevo</div>
                     </div>
                     <div className="misc-control">
-                        <div className="key">Tecla M</div>
+                        <div className={`key ${controls.audio ? 'active' : ''}`}>M</div>
                         <div className="label">Activar/Desactivar sonido</div>
                     </div>
                 </div>
