@@ -82,8 +82,17 @@ function Interface() {
                 <div className="raw">
                     <div className={`key large ${controls.jump ? 'active' : ''}`}></div>
                 </div>
+                <div className="misc-controls">
+                    <div className="misc-control">
+                        <div className="key">Tecla R</div>
+                        <div className="label">Empezar de nuevo</div>
+                    </div>
+                    <div className="misc-control">
+                        <div className="key">Tecla M</div>
+                        <div className="label">Activar/Desactivar sonido</div>
+                    </div>
+                </div>
             </div>
-
         </div>
     )
 }
