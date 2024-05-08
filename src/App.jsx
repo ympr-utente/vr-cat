@@ -8,8 +8,8 @@ import Lights from './Lights'
 import { NavigationControls } from './NavigationControls'
 import { Title } from './Title'
 import { SoundManager } from './SoundManager'
-import '@fontsource/inter'
 import { ShortcutManager } from './ShortcutManager'
+import { CatModelProvider } from './CatModelProvider'
 
 function Experience() {
     return (
@@ -24,6 +24,9 @@ function Experience() {
 function App() {
 
     return (
+    <CatModelProvider>
+        
+
         <NavigationControls>
             <Canvas
                 shadows
@@ -41,6 +44,7 @@ function App() {
             <Interface />
             <ShortcutManager />
         </NavigationControls>
+    </CatModelProvider>
     )
 }
 export default App

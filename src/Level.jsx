@@ -1,5 +1,5 @@
 import { Environment, KeyboardControls } from '@react-three/drei'
-import {CatModel} from './CatModel'
+import CatModel from './CatModel'
 import Floor from './Floor'
 import Obstacle from './Obstacle'
 import Ecctrl from "ecctrl";
@@ -63,6 +63,12 @@ export default function Level() {
             <Obstacle.Spinner position-z={-10} />
             <Obstacle position-z={-20} />
             <Obstacle.Limbo position-z={-34} />
+            <Obstacle.Limbo position-z={-38} initialShift={0.5} />
+            <Obstacle.Limbo position-z={-42} initialShift={1} />
+            <Obstacle.SlidingWall position-z={-45} />
+            <Obstacle.Spinner position-z={-60} speed={5} />
+            <Obstacle.Spinner position-z={-75} speed={5} position-x={4} scale-x={0.75} />
+            <Obstacle.Spinner position-z={-75} speed={5} position-x={-4} scale-x={0.75} invert />
         </>
     )
 }

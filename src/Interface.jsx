@@ -1,5 +1,4 @@
 import { useKeyboardControls } from '@react-three/drei'
-// import { addEffect } from '@react-three/fiber'
 import { useState, useEffect, useRef } from 'react'
 import UseAnimations from 'react-useanimations'
 import volume from 'react-useanimations/lib/volume'
