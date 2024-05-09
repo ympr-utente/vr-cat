@@ -1,19 +1,16 @@
 import { Color, MeshBasicMaterial } from "three";
 import { Environment, OrbitControls } from "@react-three/drei";
-import World from "./World/World.jsx";
-import Environments from "./environments/Environments.jsx";
-import Lights from "./lights/Lights.jsx";
+import World from "./pages/level1/world/World.jsx";
+import Environments from "./pages/level1/environments/Environments.jsx";
+import Lights from "./pages/level1/lights/Lights.jsx";
 import { Perf } from "r3f-perf";
+import RoutesGames from "./routes/RoutesGame.jsx";
 
-const Experience    = ({title,subtitle}) => {
+const Experience    = () => {
     return (
-        <>
-        <Perf position="top-left"/> 
-        <Lights/>   
-        <OrbitControls />
-        <Environments/>
-        <World/>
-       </>
+        
+        <RoutesGames />
+        
     );
 }
 
