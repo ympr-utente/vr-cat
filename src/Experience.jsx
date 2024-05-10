@@ -5,11 +5,13 @@ import Environments from "./pages/level1/environments/Environments.jsx";
 import Lights from "./pages/level1/lights/Lights.jsx";
 import { Perf } from "r3f-perf";
 import RoutesGames from "./routes/RoutesGame.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 
-const Experience    = () => {
+const Experience = () => {
     return (
-        
-        <RoutesGames />
+        <AuthProvider>
+                    <RoutesGames />
+        </AuthProvider>
         
     );
 }
