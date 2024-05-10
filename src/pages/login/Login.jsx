@@ -8,14 +8,17 @@ export default function Login() {
             <div className='wrapper'>
                 <form action=''>
                     <div className="logo-meow">
-                        <img src="/assets/images/logo.png" alt="Logo" />
+                        <img src="/assets/images/threedy-logo.svg" alt="Logo" />
 
                     </div>
                     <div className='title-login'>
                         <h1>MeowVr</h1>
                     </div>
                     <div className='google-button'>
-                        <button type='submit'>Login</button>
+                        <button type='submit'>Login with Google</button>
+                    </div>
+                    <div className='guest-button'>
+                        <button type='submit'>Guest</button>
                     </div>
                 </form>
             </div>
