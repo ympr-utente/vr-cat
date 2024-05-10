@@ -8,7 +8,7 @@ export default function RoutesGames() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/login" element={<Login />} />
+                <Route path="/" element={<Login />} />
                 <Route path="/level1" element={<Level1 />} />
                 {/* <Route path="/level2" element={<Level1 />} />
                 <Route path="/level3" element={<Level1 />} />

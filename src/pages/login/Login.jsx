@@ -1,24 +1,25 @@
 import React from 'react';
-import './Login.css';
+import './StylesLogin.css';
 
 
-export default function Login ()
-{
+export default function Login() {
     return (
+        <div className='container'>
             <div className='wrapper'>
                 <form action=''>
-                    <h1>Login</h1>
-                    <div className='input-box'>
-                        <input type='text' placeholder='Username' />
+                    <div className="logo-meow">
+                        <img src="/assets/images/logo.png" alt="Logo" />
+
                     </div>
-                    <div className='input-box'>
-                        <input type='password' placeholder='Password' />
+                    <div className='title-login'>
+                        <h1>MeowVr</h1>
                     </div>
                     <div className='google-button'>
-                        <button type='submit'>Google</button>
+                        <button type='submit'>Login</button>
                     </div>
                 </form>
             </div>
+        </div>
     )
 }
 
