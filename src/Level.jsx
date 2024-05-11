@@ -6,6 +6,7 @@ import Ecctrl from "ecctrl";
 import { Fish } from './Fish';
 import { RigidBody } from '@react-three/rapier';
 import { useState } from 'react';
+import Trophy from './Trophy'
 
 export default function Level() {
 
@@ -44,7 +45,12 @@ export default function Level() {
             ground={{height: 20, scale: 512, radius: 400}}
             />
             <KeyboardControls map={keyboardMap} capsuleHalfHeight={1} capsuleRadius={0.9}>
-                <Ecctrl>
+                <Ecctrl
+                  camInitDis={-10}
+                  camMaxDis={-2}
+                  maxVelLimit={8}
+                  jumpVel={6}
+                >
                     <CatModel position-y={-1} />
                 </Ecctrl>
             </KeyboardControls>
@@ -69,6 +75,7 @@ export default function Level() {
             <Obstacle.Spinner position-z={-60} speed={5} />
             <Obstacle.Spinner position-z={-75} speed={5} position-x={4} scale-x={0.75} />
             <Obstacle.Spinner position-z={-75} speed={5} position-x={-4} scale-x={0.75} invert />
+            <Trophy position-z={-45} position-y={1}/>
         </>
     )
 }

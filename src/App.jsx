@@ -13,7 +13,7 @@ import { CatModelProvider } from './CatModelProvider'
 
 function Experience() {
     return (
-        <Physics debug>
+        <Physics>
             <Title />
             <Level />
             <SoundManager />
