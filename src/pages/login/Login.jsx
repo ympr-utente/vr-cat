@@ -36,12 +36,16 @@ export default function Login() {
     const navigate = useNavigate();
     //useAuth();
     const auth = useAuth();
-    
+
     const onHandleButtonLogin = async (e) => {
         e.preventDefault()
         // const result = 
-        const result = await auth.loginWithGoogle();
-        console.log(result)
+        const result = await auth.loginWithGoogle()
+            .then((res) => {
+                // console.log(result),
+                navigate('/level1')
+            })
+            .catch((error) => console.error(error));
     }
 
 
