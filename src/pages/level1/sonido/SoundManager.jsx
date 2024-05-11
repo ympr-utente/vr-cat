@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react'
-import { useAudio } from './stores/useAudio'
-import { useGame } from './stores/useGame'
+import { useAudio } from '../../../stores/useAudio'
+import { useGame } from '../../../stores/useGame'
 
 function SoundManager() {
     const audio = useAudio((state) => state.audio)

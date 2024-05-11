@@ -1,9 +1,9 @@
 import { Environment, KeyboardControls } from '@react-three/drei'
-import {CatModel} from './CatModel'
-import Floor from './Floor'
-import Obstacle from './Obstacle'
+import { CatModel } from '../characters/CatModel'
+import Floor from '../world/Floor'
+import Obstacle from '../obstacles/Obstacle'
 import Ecctrl from "ecctrl";
-import { Fish } from './Fish';
+import { Fish } from '../rewards/Fish';
 import { RigidBody } from '@react-three/rapier';
 import { useState } from 'react';
 
@@ -21,14 +21,14 @@ export default function Level() {
         { name: "action2", keys: ["2"] },
         { name: "action3", keys: ["3"] },
         { name: "action4", keys: ["KeyF"] },
-      ];
+    ];
 
     const [score, setScore] = useState(0);
 
     const [fishes, setFishes] = useState([
-        {position: [0,2,-25], id: 1},
-        {position: [0,2,-45], id: 2},
-        {position: [0,2,-55], id: 3}
+        { position: [0, 2, -25], id: 1 },
+        { position: [0, 2, -45], id: 2 },
+        { position: [0, 2, -55], id: 3 }
     ]);
 
     const onEatFish = (id) => {
@@ -39,25 +39,25 @@ export default function Level() {
     return (
         <>
             <Environment
-            files = './geometries/hdris/satara_night_no_lamps_4k.hdr'
-            background = {true}
-            ground={{height: 20, scale: 512, radius: 400}}
+                files='./geometries/hdris/satara_night_no_lamps_4k.hdr'
+                background={true}
+                ground={{ height: 20, scale: 512, radius: 400 }}
             />
             <KeyboardControls map={keyboardMap} capsuleHalfHeight={1} capsuleRadius={0.9}>
                 <Ecctrl>
                     <CatModel position-y={-1} />
                 </Ecctrl>
             </KeyboardControls>
-             
-             {fishes.map((fish) => (
+
+            {fishes.map((fish) => (
                 <RigidBody scale={0.7} key={fish.id} type='fixed' colliders={"hull"} onCollisionEnter={() => onEatFish(fish.id)}>
-                <Fish 
-                    position={fish.position}
-                    
-                />
+                    <Fish
+                        position={fish.position}
+
+                    />
                 </RigidBody>
-             ))}
-            
+            ))}
+
 
             <Floor scale-y={5} position-z={-45} />
             <Obstacle.Spinner position-z={-10} />

@@ -2,7 +2,7 @@ import { useFrame } from '@react-three/fiber'
 import { RigidBody } from '@react-three/rapier'
 import { forwardRef, useRef, useMemo, useEffect } from 'react'
 import * as THREE from 'three'
-import { useAudio } from './stores/useAudio'
+import { useAudio } from '../../../stores/useAudio'
 
 const Obstacle = forwardRef(function Obstacle(props, ref) {
     const audio = useAudio((state) => state.audio)

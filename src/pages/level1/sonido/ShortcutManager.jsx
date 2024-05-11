@@ -1,7 +1,7 @@
 import { useKeyboardControls } from '@react-three/drei'
 import { useEffect } from 'react'
-import { useAudio } from './stores/useAudio'
-import { useGame } from './stores/useGame'
+import { useAudio } from '../../../stores/useAudio'
+import { useGame } from '../../../stores/useGame'
 
 function ShortcutManager() {
     const [subscribeKeys, getKeys] = useKeyboardControls()

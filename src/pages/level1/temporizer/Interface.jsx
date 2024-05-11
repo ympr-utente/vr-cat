@@ -3,8 +3,8 @@ import { useKeyboardControls } from '@react-three/drei'
 import { useState, useEffect, useRef } from 'react'
 import UseAnimations from 'react-useanimations'
 import volume from 'react-useanimations/lib/volume'
-import { useAudio } from './stores/useAudio'
-import { useGame } from './stores/useGame'
+import { useAudio } from '../../../stores/useAudio'
+import { useGame } from '../../../stores/useGame'
 
 function Interface() {
     const timerRef = useRef()
