@@ -6,6 +6,7 @@ import volume from 'react-useanimations/lib/volume'
 import { useAudio } from '../../../stores/useAudio'
 import { useGame } from '../../../stores/useGame'
 
+
 function Interface() {
     const timerRef = useRef()
     const [countdown, setCountdown] = useState(60); // Estado local para el temporizador
@@ -71,17 +72,17 @@ function Interface() {
             )}
 
             <div className="controls">
-                <div className="raw">
+                {/* <div className="raw">
                     <div className={`key ${controls.forward ? 'active' : ''}`}></div>
-                </div>
-                <div className="raw">
+                </div> */}
+                {/* <div className="raw">
                     <div className={`key ${controls.left ? 'active' : ''}`}></div>
                     <div className={`key ${controls.backward ? 'active' : ''}`}></div>
                     <div className={`key ${controls.right ? 'active' : ''}`}></div>
-                </div>
-                <div className="raw">
+                </div> */}
+                {/* <div className="raw">
                     <div className={`key large ${controls.jump ? 'active' : ''}`}></div>
-                </div>
+                </div> */}
                 <div className="misc-controls">
                     <div className="misc-control">
 

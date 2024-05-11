@@ -10,6 +10,8 @@ import { Title } from './pages/level1/abstractions/Title'
 import { SoundManager } from './pages/level1/sonido/SoundManager'
 import '@fontsource/inter'
 import { ShortcutManager } from './pages/level1/sonido/ShortcutManager'
+import { AuthProvider } from './context/AuthContext'
+import RoutesGames from './routes/RoutesGame'
 
 const Experience = () => {
     return (
@@ -18,9 +20,9 @@ const Experience = () => {
         //     <Level />
         //     <SoundManager />
         // </Physics>
-        <>
-            <Level1 />
-        </>
+        <AuthProvider>
+            <RoutesGames />
+        </AuthProvider>
     )
 }
 

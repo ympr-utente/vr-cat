@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'SigmarOne-Regular';
+    src: url('../../../public/assets/fonts/sigma/SigmarOne-Regular.ttf') format('truetype');
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.container{
+    font-family: 'sigmarOne-Regular', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgba(241, 17, 17, 0.9);
+
+}
+
+
+.wrapper{
+    display: flex;
+   width: 420px;
+   background-color: rgba(15, 210, 245, 0.932);
+   color: black;
+   border-radius: 10px;
+   padding: 30px 40px;
+
+}
+
+.wrapper h1{
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px; 
+    z-index: 2;
+}
+
+
+.wrapper button{
+    font-family: 'sigmarOne-Regular', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+    background: rgb(235, 237, 247);
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: black;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.logo-meow{
+    
+}
+
+.wrapper logo-meow {
+    top: 100%; 
+    left: 100%; 
+    width: 114px;
+    height: 159px;
+    margin-bottom: 100px;
+    z-index: 1;
+}
+
+
+
+

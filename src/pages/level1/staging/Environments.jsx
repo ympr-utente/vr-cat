@@ -39,7 +39,7 @@ export default function Level() {
     return (
         <>
             <Environment
-                files='./geometries/hdris/satara_night_no_lamps_4k.hdr'
+                files='./assets/geometries/hdris/satara_night_no_lamps_4k.hdr'
                 background={true}
                 ground={{ height: 20, scale: 512, radius: 400 }}
             />

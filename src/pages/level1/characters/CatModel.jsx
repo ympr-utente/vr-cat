@@ -3,7 +3,7 @@ import { useGLTF, useAnimations } from '@react-three/drei'
 
 export function CatModel(props) {
   const group = useRef()
-  const { nodes, materials} = useGLTF('./geometries/personaje/threedy-realease.glb')
+  const { nodes, materials} = useGLTF('./assets/geometries/personaje/threedy-realease.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
@@ -27,4 +27,4 @@ export function CatModel(props) {
   )
 }
 
-useGLTF.preload('./geometries/personaje/threedy-realease.glb')
+useGLTF.preload('./assets/geometries/personaje/threedy-realease.glb')

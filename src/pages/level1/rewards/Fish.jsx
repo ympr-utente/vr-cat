@@ -4,7 +4,7 @@ import { useGLTF } from '@react-three/drei'
 import { MeshBasicMaterial } from 'three'
 
 export function Fish(props) {
-  const { nodes, materials } = useGLTF('./geometries/pez/pez.glb')
+  const { nodes, materials } = useGLTF('./assets/geometries/pez/pez.glb')
   const material = new MeshBasicMaterial({ color: 'blue' });
 
   return (

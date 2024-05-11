@@ -3,7 +3,7 @@ import { RigidBody } from '@react-three/rapier'
 import { useControls } from 'leva'
 
 const fontSettings = {
-    font: '/fonts/inter.json',
+    font: './assets/fonts/inter.json',
     bevelEnabled: true,
     curveSegments: 12,
     bevelThickness: 0.2,

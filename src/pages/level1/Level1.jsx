@@ -22,7 +22,7 @@ import Experience from '../../Experience'
 //     )
 // }
 
-export default function App() {
+export default function Level1() {
 
     return (
         <NavigationControls>

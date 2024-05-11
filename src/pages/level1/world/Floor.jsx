@@ -4,9 +4,9 @@ import { MeshStandardMaterial, TextureLoader } from 'three';
 export default function Floor(props) {
     // Carga de las texturas
     const textureLoader = new TextureLoader();
-    const textureColor = textureLoader.load('./geometries/floor/oakfloor_basecolor.png');
-    const textureRoughness = textureLoader.load('./geometries/floor/oakfloor_roughness.png');
-    const textureMetalness = textureLoader.load('./geometries/floor/oakfloor_Height.png');
+    const textureColor = textureLoader.load('./assets/geometries/floor/oakfloor_basecolor.png');
+    const textureRoughness = textureLoader.load('./assets/geometries/floor/oakfloor_roughness.png');
+    const textureMetalness = textureLoader.load('./assets/geometries/floor/oakfloor_Height.png');
 
     return (
         <RigidBody type="fixed" rotation-x={Math.PI * -0.5} restitution={0.2} friction={4} {...props}>
