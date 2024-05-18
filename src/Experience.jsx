@@ -1,26 +1,31 @@
 import { OrbitControls } from "@react-three/drei";
 import { useState, useEffect } from "react";
-import Lights from "./world/Lights";
-import Environments from "./world/Environments";
+import Lights from "./world/Lights/Lights";
+import Environments from "./world/Environments/Environments";
 import { Suspense } from "react";
-import WelcomeText from "./world/WelcomeText";
+import WelcomeText from "./world/text/WelcomeText";
 import LevelJuly from "./world/levelJuly";
-import Palmera from "./world/palmera";
+import Palmera from "./world/palmera/palmera";
 import { Canvas } from '@react-three/fiber';
-import Person from "./world/person";
+import Person from "./world/person/person";
+import { Physics } from "@react-three/rapier";
+import PelotasPlaya from "./world/obstaculos/obstaculos";
+import SillaPlaya from "./world/obstaculos/SillaPlaya";
 
 const Experience = () => {
 
     return (
 
         <>
+        
             
             <OrbitControls
-                target={[0, 1.5, -95]}
-                enableZoom={false}
+                target={[0, 3, -110]}
+                enableZoom={true}
                 enablePan={false} 
                 />
             <Suspense fallback={null}>
+            <Physics debug={true}>
                 <Lights />
                 <Environments />
                 <Palmera position={[-2, 3.9, -105]}/>
@@ -50,11 +55,15 @@ const Experience = () => {
                 <LevelJuly 
                     position={[0, 0, -90]}
                 />
-                <Person 
-                    position={[0, -1, -100]}
-                    scale={0.2}
-                />
-                    <WelcomeText position={[0, 1.5, -92]} />
+                        <PelotasPlaya />
+                        {/* <SillaPlaya /> */}
+                        <Person 
+                          position={[0, -1, -105]}
+                            scale={0.2}
+                    />
+            </Physics>
+                
+                    <WelcomeText position={[0, 1.5, -70]} />
     
             </Suspense>
         </>
