@@ -1,5 +1,7 @@
 import { useGLTF } from '@react-three/drei'
 import React from 'react'
+import { RigidBody } from '@react-three/rapier';
+
 
 export default function Palmera({position, props}) {
     const { nodes, materials } = useGLTF('/assets/models/palmera/palmera.glb')

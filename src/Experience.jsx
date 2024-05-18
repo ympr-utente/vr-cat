@@ -11,19 +11,19 @@ import Person from "./world/person/person";
 import { Physics } from "@react-three/rapier";
 import PelotasPlaya from "./world/obstaculos/obstaculos";
 import SillaPlaya from "./world/obstaculos/SillaPlaya";
+import { CatModel } from "./world/CatModel/CatModel";
+import { RigidBody } from 'cannon-es';
 
 const Experience = () => {
 
     return (
 
         <>
-        
-            
             <OrbitControls
-                target={[0, 3, -110]}
+                target={[0, 1, 0]}
                 enableZoom={true}
                 enablePan={false} 
-                />
+                 />
             <Suspense fallback={null}>
             <Physics debug={true}>
                 <Lights />
@@ -58,15 +58,18 @@ const Experience = () => {
                         <PelotasPlaya />
                         {/* <SillaPlaya /> */}
                         <Person 
-                          position={[0, -1, -105]}
+                          position={[0, -1, -75]}
                             scale={0.2}
                     />
+                    <CatModel position={[0, -1, -105]} scale={0.5}/>
             </Physics>
                 
                     <WelcomeText position={[0, 1.5, -70]} />
     
             </Suspense>
+            
         </>
+
         
     )
 }
