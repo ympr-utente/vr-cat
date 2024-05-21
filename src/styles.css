@@ -10,6 +10,7 @@ body,
   margin: 0;
   padding: 0;
 
+  flex-direction: row;
   font-family: "InterVariable", sans-serif;
 }
 
@@ -40,8 +41,6 @@ canvas {
   border-radius: 10px;
   box-shadow: inset 0 0 0 0 #ffffff;
 }
-
-
 
 .cta {
   display: inline-block;
@@ -95,6 +94,13 @@ canvas {
   margin-bottom: 0;
 }
 
+.controls .key.shift {
+  width: 120px;
+  margin-bottom: 0;
+  color: #ffffff;
+  font-size: 24px;
+}
+
 .controls .key.active {
   background: #ffffff99;
 }
@@ -110,16 +116,18 @@ canvas {
 .misc-control {
   display: flex;
   gap: 16px;
-  
   color: #ffffff;
   font-size: 24px;
+}
+
+.misc-controls .misc-controls.active {
+  background: #ffffff99;
 }
 
 .audio-toggle {
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: absolute;
   top: 20px;
   right: 40px;
@@ -130,12 +138,11 @@ canvas {
   border: none;
   cursor: pointer;
   pointer-events: auto;
-
   border-radius: 8px;
 }
 
 @media screen and (min-width: 2048px) {
-  .high-score {
+  .time {
     left: 20vw;
   }
 

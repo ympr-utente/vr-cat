@@ -1,6 +1,6 @@
 import create from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
-import { getLocalStorage, setLocalStorage } from './utils'
+import { getLocalStorage, setLocalStorage } from './localStorageUtils';
 
 const useGame = create(
     subscribeWithSelector((set) => ({
