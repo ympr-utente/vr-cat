@@ -45,8 +45,9 @@ export default function World() {
     const fishes = useGame((state) => state.fishes);
     const updateCatPosition = useGame((state) => state.updateCatPosition);
     const catPosition = useGame((state) => state.catPosition);
+    const resetBonusVisible = useGame((state) => state.resetBonusVisible);
+    const bonusVisible = useGame((state) => state.bonusVisible);
 
-    const [bonusVisible, setBonusVisible] = useState(false); // Estado para controlar la visibilidad del "+5"
     const catRef = useRef(); // Referencia para el modelo del gato
 
     const successSound = useMemo(() => {
@@ -62,19 +63,18 @@ export default function World() {
         }));
         useGame.getState().addTime(); // Añadir 5 segundos al temporizador
         successSound.play(); // Reproducir sonido de "+5"
-        setBonusVisible(true); // Mostrar "+5"
     }
 
-    // Mostrar "+5" durante 1 segundo cuando se añade tiempo
+    // Resetear la visibilidad del "+5" después de 1 segundo
     useEffect(() => {
         if (bonusVisible) {
             const timer = setTimeout(() => {
-                setBonusVisible(false);
+                resetBonusVisible();
             }, 1000);
 
             return () => clearTimeout(timer);
         }
-    }, [bonusVisible]);
+    }, [bonusVisible, resetBonusVisible]);
 
     // Resetear la posición del gato cuando se reinicia el juego
     useEffect(() => {

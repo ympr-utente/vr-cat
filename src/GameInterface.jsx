@@ -1,5 +1,5 @@
 import { useKeyboardControls } from '@react-three/drei'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import UseAnimations from 'react-useanimations'
 import volume from 'react-useanimations/lib/volume'
 import { useAudio } from './stores/useAudio'
@@ -7,7 +7,6 @@ import { useGame } from './stores/useGame'
 
 function GameInterface() {
     const timerRef = useRef()
-    const [bonusVisible, setBonusVisible] = useState(false); 
     const audio = useAudio((state) => state.audio)
     const toggleAudio = useAudio((state) => state.toggleAudio)
 
@@ -16,6 +15,7 @@ function GameInterface() {
     const startGame = useGame((state) => state.start)
     const restartGame = useGame((state) => state.restart)
     const gameStarted = useGame((state) => state.gameStarted); 
+    const bonusVisible = useGame((state) => state.bonusVisible); 
     const controls = useKeyboardControls((state) => state)
 
     useEffect(() => {
@@ -37,7 +37,6 @@ function GameInterface() {
         e.target.blur()
     }
 
- 
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === 'r' || event.key === 'R') {
@@ -49,27 +48,6 @@ function GameInterface() {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
-
-  
-    useEffect(() => {
-        if (bonusVisible) {
-            const timer = setTimeout(() => {
-                setBonusVisible(false);
-            }, 1000);
-
-            return () => clearTimeout(timer);
-        }
-    }, [bonusVisible]);
-
-    useEffect(() => {
-        const unsubscribe = useGame.subscribe(
-            (state) => state.bonusVisible,
-            (visible) => {
-                setBonusVisible(visible);
-            }
-        );
-        return () => unsubscribe();
     }, []);
 
     return (

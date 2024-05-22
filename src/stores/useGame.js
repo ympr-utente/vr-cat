@@ -1,3 +1,4 @@
+// src/stores/useGame.js
 import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
@@ -12,7 +13,7 @@ const useGame = create(
             { position: [0, 2, -25], id: 1 },
             { position: [0, 2, -45], id: 2 },
             { position: [0, 2, -55], id: 3 }
-        ], // Estado inicial de los peces
+        ], 
         start: () =>
             set((state) => {
                 if (state.phase === 'ready' || state.phase === 'ended') {
@@ -52,6 +53,10 @@ const useGame = create(
                 }
                 return {}
             }),
+        resetBonusVisible: () =>
+            set(() => ({
+                bonusVisible: false
+            })),
         updateCatPosition: (position) =>
             set(() => ({
                 catPosition: position
