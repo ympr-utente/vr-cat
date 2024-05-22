@@ -1,12 +1,14 @@
 import { useGLTF } from '@react-three/drei'
 import React from 'react'
 import { RigidBody } from '@react-three/rapier';
+import { Physics } from '@react-three/cannon';
 
 
 export default function Palmera({position, props}) {
     const { nodes, materials } = useGLTF('/assets/models/palmera/palmera.glb')
     return (
-      <RigidBody type='fixed' colliders={"ball"}>
+      <RigidBody type='fixed'>
+          {/* <Physics colliders="trimesh"> */}
       <group position={position} {...props} dispose={null}>
         <group rotation={[-2.861, 0, -Math.PI]} scale={[0.24, 1, 1]}>
           <mesh
@@ -23,6 +25,7 @@ export default function Palmera({position, props}) {
           />
         </group>
       </group>
+      {/* </Physics> */}
       </RigidBody>
     )
   }

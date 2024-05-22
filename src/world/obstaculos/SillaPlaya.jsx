@@ -12,7 +12,7 @@ import { RigidBody } from '@react-three/rapier';
 export default function SillaPlaya(props) {
   const { nodes, materials } = useGLTF('/assets/models/sillaPlaya/sillaPlaya.glb')
   return (
-    <RigidBody type='fixed' colliders={"cuboid"}>
+    <RigidBody type='fixed' colliders={"hull"}>
     <group {...props} dispose={null}>
       <mesh
         castShadow

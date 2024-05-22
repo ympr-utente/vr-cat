@@ -11,7 +11,7 @@ export default function PelotaPlayaCircular({position}) {
   const redManCircleBodyRef = useRef(null)
   const { nodes, materials } = useGLTF('/assets/models/pelotaPlaya/pelota.glb')
 
-  const radius = 2
+  const radius = 1
   const speed = 2
 
   useFrame(({clock}) => {
@@ -30,11 +30,15 @@ export default function PelotaPlayaCircular({position}) {
   })
 
   return (
-    <RigidBody ref={redManCircleBodyRef} type="fixed" colliders={"ball"} position={position}>
-        <group ref={redManCircleRef} dispose={null} scale={2}>
-        <group rotation={[5, 0, 2]} scale={0.03}>
+    // <RigidBody ref={redManCircleBodyRef} type="fixed" colliders={'ball'} position={position}>
+    //     <group ref={redManCircleRef} dispose={null} scale={2}>
+    //     <group rotation={[3.999, 2, 2]} scale={0.03}>
+    <RigidBody ref={redManCircleBodyRef} type="fixed"  colliders={'ball'} position={position}>
+    <group ref={redManCircleRef} dispose={null}>
+      {/* <group rotation={[2.996, 0.539, -2.965]} scale={0.312}> */}
+      <group rotation={[3, 5, 9]} scale={0.03}>
           <mesh
-            castShadow
+            castShadow  
             receiveShadow
             geometry={nodes['13517_Beach_Ball_v2_L3_1'].geometry}
             material={materials.Beach_Ball_transparent_plastic}

@@ -73,10 +73,10 @@ export function PelotaPlayaLineal(props) {
   })
 
   return (
-    <RigidBody ref={pelotaBodyRef} type="fixed" position={props.position}>
+    <RigidBody ref={pelotaBodyRef} type="fixed"  colliders={'ball'} position={props.position}>
       <group ref={pelotaRef} {...props} dispose={null}>
         {/* <group rotation={[2.996, 0.539, -2.965]} scale={0.312}> */}
-        <group rotation={[2, 0, 2]} scale={0.03}>
+        <group rotation={[3, 0, 9]} scale={0.03}>
           <mesh
             castShadow
             receiveShadow

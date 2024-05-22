@@ -25,7 +25,7 @@ const Experience = () => {
                 enablePan={false} 
                  />
             <Suspense fallback={null}>
-            <Physics debug={true}>
+            <Physics debug={false} colliders="trimesh"> 
                 <Lights />
                 <Environments />
                 <Palmera position={[-2, 3.9, -105]}/>
@@ -64,7 +64,7 @@ const Experience = () => {
                     <CatModel position={[0, -1, -105]} scale={0.5}/>
             </Physics>
                 
-                    <WelcomeText position={[0, 1.5, -70]} />
+                    <WelcomeText position={[0, 1.5, -105]} />
     
             </Suspense>
             
