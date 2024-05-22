@@ -1,91 +1,119 @@
 import { Environment, KeyboardControls } from '@react-three/drei'
-import CatModel from '../../../components/characters/CatModel'
-import Floor from '../floor/Floor'
-import Obstacle from '../../../components/obstacles/Obstacle'
+import { RigidBody } from '@react-three/rapier'
 import Ecctrl, { EcctrlAnimation } from 'ecctrl'
-import { Fish } from '../../../components/rewards/Fish';
-import { RigidBody } from '@react-three/rapier';
-import { useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react'
+import CatModel from '../../../components/characters/CatModel'
+import Obstacle from '../../../components/obstacles/Obstacle'
+import { Fish } from '../../../components/rewards/Fish'
+import { useGame } from '../../../stores/useGame'
+import Floor from '../floor/Floor'
 import Trophy from '../trophy/Trophy'
-import { useGame} from '../../../stores/useGame'
 
 export default function World() {
-
     const characterURL = "./assets/character/threedy-realease.glb";
   
     const keyboardMap = [
-    { name: "forward", keys: ["ArrowUp", "KeyW"] },
-    { name: "backward", keys: ["ArrowDown", "KeyS"] },
-    { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
-    { name: "rightward", keys: ["ArrowRight", "KeyD"] },
-    { name: "jump", keys: ["Space"] },
-    { name: "run", keys: ["Shift"] },
-    // Optional animation key map
-    { name: "action1", keys: ["1"] },
-    { name: "action2", keys: ["2"] },
-    { name: "action3", keys: ["3"] },
-    { name: "action4", keys: ["KeyF"] },
+        { name: "forward", keys: ["ArrowUp", "KeyW"] },
+        { name: "backward", keys: ["ArrowDown", "KeyS"] },
+        { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
+        { name: "rightward", keys: ["ArrowRight", "KeyD"] },
+        { name: "jump", keys: ["Space"] },
+        { name: "run", keys: ["Shift"] },
+        { name: "action1", keys: ["1"] },
+        { name: "action2", keys: ["2"] },
+        { name: "action3", keys: ["3"] },
+        { name: "action4", keys: ["KeyF"] },
     ];
 
     const animationSet = {
-    idle: "Listisimo",
-    walk: "CaminarConEstilacho",
-    run: "CorriendoALoMazeRunner",
-    jump: "SaltadorIntrepido",  
-    jumpIdle: "AterrizandoConParkour", 
-    jumpLand: "AterrizandoConParkour", 
-    fall: "Paracaidista", 
-    action1: "Izquierdazo",
-    action2: "Derechazo",
-    action3: "PatadaVoladora",
-    //action3: "BreakDanceALoPro",
+        idle: "Listisimo",
+        walk: "CaminarConEstilacho",
+        run: "CorriendoALoMazeRunner",
+        jump: "SaltadorIntrepido",  
+        jumpIdle: "AterrizandoConParkour", 
+        jumpLand: "AterrizandoConParkour", 
+        fall: "Paracaidista", 
+        action1: "Izquierdazo",
+        action2: "Derechazo",
+        action3: "PatadaVoladora",
     };
 
     const [score, setScore] = useState(0);
 
-    const [fishes, setFishes] = useState([
-        {position: [0,2,-25], id: 1},
-        {position: [0,2,-45], id: 2},
-        {position: [0,2,-55], id: 3}
-    ]);
+    const gameStarted = useGame((state) => state.gameStarted);
+    const restartGame = useGame((state) => state.restart);
+    const fishes = useGame((state) => state.fishes);
+    const updateCatPosition = useGame((state) => state.updateCatPosition);
+    const catPosition = useGame((state) => state.catPosition);
+
+    const [bonusVisible, setBonusVisible] = useState(false); // Estado para controlar la visibilidad del "+5"
+    const catRef = useRef(); // Referencia para el modelo del gato
+
+    const successSound = useMemo(() => {
+        const sound = new Audio('./assets/sounds/+5.mp3')
+        sound.volume = 0.2
+        return sound
+    }, [])
 
     const onEatFish = (id) => {
         setScore(score + 1);
-        setFishes(fishes.filter((fish) => fish.id !== id))
+        useGame.setState((state) => ({
+            fishes: state.fishes.filter((fish) => fish.id !== id)
+        }));
+        useGame.getState().addTime(); // Añadir 5 segundos al temporizador
+        successSound.play(); // Reproducir sonido de "+5"
+        setBonusVisible(true); // Mostrar "+5"
     }
+
+    // Mostrar "+5" durante 1 segundo cuando se añade tiempo
+    useEffect(() => {
+        if (bonusVisible) {
+            const timer = setTimeout(() => {
+                setBonusVisible(false);
+            }, 1000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [bonusVisible]);
+
+    // Resetear la posición del gato cuando se reinicia el juego
+    useEffect(() => {
+        if (catRef.current) {
+            catRef.current.position.set(catPosition.x, catPosition.y, catPosition.z); // Restablecer la posición inicial del gato
+        }
+    }, [gameStarted, catPosition]);
 
     return (
         <>
             <Environment
-            files = './assets/hdris/satara_night_no_lamps_4k.hdr'
-            background = {true}
-            ground={{height: 20, scale: 512, radius: 400}}
+                files = './assets/hdris/satara_night_no_lamps_4k.hdr'
+                background = {true}
+                ground={{height: 20, scale: 512, radius: 400}}
             />
-                <KeyboardControls map={keyboardMap}>
-                    <Ecctrl animated={true}
+            <KeyboardControls map={keyboardMap}>
+                <Ecctrl animated={true}
                     camInitDis={-8}
                     camMaxDis={-8}
-                    maxVelLimit={5}
-                    jumpVel={6}
+                    maxVelLimit={gameStarted ? 5 : 0} // Deshabilitar el movimiento si el juego no ha comenzado
+                    jumpVel={gameStarted ? 6 : 0} // Deshabilitar el salto si el juego no ha comenzado
                     position={[0, 40, 0]}
-                    >
-                        <EcctrlAnimation
+                >
+                    <EcctrlAnimation
                         characterURL={characterURL}
                         animationSet={animationSet}
-                        >
-                        <CatModel/>
-                        </EcctrlAnimation>
-                    </Ecctrl>
-                </KeyboardControls>
+                    >
+                        <CatModel ref={catRef} />
+                    </EcctrlAnimation>
+                </Ecctrl>
+            </KeyboardControls>
              
-             {fishes.map((fish) => (
+            {fishes.map((fish) => (
                 <RigidBody scale={0.7} key={fish.id} type='fixed' colliders={"hull"} onCollisionEnter={() => onEatFish(fish.id)}>
-                <Fish 
-                    position={fish.position}
-                />
+                    <Fish 
+                        position={fish.position}
+                    />
                 </RigidBody>
-             ))}
-            
+            ))}
 
             <Floor scale-y={5} position-z={-45} />
             <Obstacle.Spinner position-z={-10} />

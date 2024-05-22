@@ -1,37 +1,63 @@
-import create from 'zustand'
-import { subscribeWithSelector } from 'zustand/middleware'
-import { getLocalStorage, setLocalStorage } from './localStorageUtils';
+import create from 'zustand';
+import { subscribeWithSelector } from 'zustand/middleware';
 
 const useGame = create(
     subscribeWithSelector((set) => ({
-        countdown: getLocalStorage('countdown') || 60, // Iniciar el temporizador en 60 segundos, o recuperar del almacenamiento local si está disponible
+        countdown: 60, // Iniciar el temporizador en 60 segundos
         phase: 'ready',
+        bonusVisible: false,
+        gameStarted: false, // Nuevo estado para controlar si el juego ha comenzado
+        catPosition: { x: 0, y: 0, z: 0 }, // Estado inicial de la posición del gato
+        fishes: [
+            { position: [0, 2, -25], id: 1 },
+            { position: [0, 2, -45], id: 2 },
+            { position: [0, 2, -55], id: 3 }
+        ], // Estado inicial de los peces
         start: () =>
             set((state) => {
                 if (state.phase === 'ready' || state.phase === 'ended') {
-                    return { phase: 'playing' }
+                    return { phase: 'playing', gameStarted: true }
                 }
                 return {}
             }),
         restart: () =>
             set(() => ({
                 countdown: 60, // Reiniciar el temporizador a 60 segundos
-                phase: 'ready'
+                phase: 'ready',
+                bonusVisible: false,
+                gameStarted: false, // Restablecer el estado del juego a no comenzado
+                catPosition: { x: 0, y: 0, z: 0 }, // Restablecer la posición inicial del gato
+                fishes: [
+                    { position: [0, 2, -25], id: 1 },
+                    { position: [0, 2, -45], id: 2 },
+                    { position: [0, 2, -55], id: 3 }
+                ] // Restablecer la posición inicial de los peces
             })),
         tick: () =>
             set((state) => {
                 if (state.phase === 'playing') {
                     const newCountdown = state.countdown - 1
                     if (newCountdown <= 0) {
-                        setLocalStorage('countdown', 60) // Reiniciar el temporizador al valor inicial si llega a cero
                         return { phase: 'ready', countdown: 60 }
                     }
-                    setLocalStorage('countdown', newCountdown) // Actualizar el temporizador en el almacenamiento local
                     return { countdown: newCountdown }
                 }
                 return {}
-            })
+            }),
+        addTime: () =>
+            set((state) => {
+                if (state.phase === 'playing') {
+                    const newCountdown = state.countdown + 5
+                    return { countdown: newCountdown, bonusVisible: true }
+                }
+                return {}
+            }),
+        updateCatPosition: (position) =>
+            set(() => ({
+                catPosition: position
+            })),
     }))
 )
 
-export { useGame }
+export { useGame };
+
