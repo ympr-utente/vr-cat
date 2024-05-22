@@ -3,11 +3,11 @@ import { subscribeWithSelector } from 'zustand/middleware';
 
 const useGame = create(
     subscribeWithSelector((set) => ({
-        countdown: 60, // Iniciar el temporizador en 60 segundos
+        countdown: 60, 
         phase: 'ready',
         bonusVisible: false,
-        gameStarted: false, // Nuevo estado para controlar si el juego ha comenzado
-        catPosition: { x: 0, y: 0, z: 0 }, // Estado inicial de la posición del gato
+        gameStarted: false, 
+        catPosition: { x: 0, y: 0, z: 0 }, 
         fishes: [
             { position: [0, 2, -25], id: 1 },
             { position: [0, 2, -45], id: 2 },
@@ -22,16 +22,16 @@ const useGame = create(
             }),
         restart: () =>
             set(() => ({
-                countdown: 60, // Reiniciar el temporizador a 60 segundos
+                countdown: 60, 
                 phase: 'ready',
                 bonusVisible: false,
-                gameStarted: false, // Restablecer el estado del juego a no comenzado
-                catPosition: { x: 0, y: 0, z: 0 }, // Restablecer la posición inicial del gato
+                gameStarted: false,
+                catPosition: { x: 0, y: 0, z: 0 }, 
                 fishes: [
                     { position: [0, 2, -25], id: 1 },
                     { position: [0, 2, -45], id: 2 },
                     { position: [0, 2, -55], id: 3 }
-                ] // Restablecer la posición inicial de los peces
+                ] 
             })),
         tick: () =>
             set((state) => {

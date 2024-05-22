@@ -7,7 +7,7 @@ import { useGame } from './stores/useGame'
 
 function GameInterface() {
     const timerRef = useRef()
-    const [bonusVisible, setBonusVisible] = useState(false); // Estado para controlar la visibilidad del "+5"
+    const [bonusVisible, setBonusVisible] = useState(false); 
     const audio = useAudio((state) => state.audio)
     const toggleAudio = useAudio((state) => state.toggleAudio)
 
@@ -15,8 +15,7 @@ function GameInterface() {
     const countdown = useGame((state) => state.countdown)
     const startGame = useGame((state) => state.start)
     const restartGame = useGame((state) => state.restart)
-    const gameStarted = useGame((state) => state.gameStarted); // Nuevo estado para controlar si el juego ha comenzado
-
+    const gameStarted = useGame((state) => state.gameStarted); 
     const controls = useKeyboardControls((state) => state)
 
     useEffect(() => {
@@ -27,10 +26,10 @@ function GameInterface() {
                 useGame.getState().tick();
             }, 1000);
         } else {
-            clearInterval(intervalId); // Limpiar el intervalo si el juego no está en fase de juego
+            clearInterval(intervalId); 
         }
 
-        return () => clearInterval(intervalId); // Limpiar el intervalo al desmontar el componente
+        return () => clearInterval(intervalId);
     }, [gamePhase]);
 
     function handleToggleAudio(e) {
@@ -38,11 +37,11 @@ function GameInterface() {
         e.target.blur()
     }
 
-    // Manejar el reinicio del juego al presionar "R"
+ 
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === 'r' || event.key === 'R') {
-                window.location.reload(); // Recargar la página para reiniciar el juego
+                window.location.reload(); 
             }
         };
 
@@ -52,7 +51,7 @@ function GameInterface() {
         };
     }, []);
 
-    // Mostrar "+5" durante 1 segundo cuando se añade tiempo
+  
     useEffect(() => {
         if (bonusVisible) {
             const timer = setTimeout(() => {
