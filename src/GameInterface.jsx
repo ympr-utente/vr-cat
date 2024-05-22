@@ -1,58 +1,60 @@
 import { useKeyboardControls } from '@react-three/drei'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import UseAnimations from 'react-useanimations'
 import volume from 'react-useanimations/lib/volume'
 import { useAudio } from './stores/useAudio'
 import { useGame } from './stores/useGame'
 
-
-
 function GameInterface() {
     const timerRef = useRef()
-    const [countdown, setCountdown] = useState(60); // Estado local para el temporizador
     const audio = useAudio((state) => state.audio)
     const toggleAudio = useAudio((state) => state.toggleAudio)
 
     const gamePhase = useGame((state) => state.phase)
+    const countdown = useGame((state) => state.countdown)
     const startGame = useGame((state) => state.start)
     const restartGame = useGame((state) => state.restart)
-
+    const gameStarted = useGame((state) => state.gameStarted); 
+    const bonusVisible = useGame((state) => state.bonusVisible); 
     const controls = useKeyboardControls((state) => state)
 
-       // Manejar el temporizador
-       useEffect(() => {
+    useEffect(() => {
         let intervalId;
 
         if (gamePhase === 'playing') {
             intervalId = setInterval(() => {
-                setCountdown((prevCountdown) => {
-                    if (prevCountdown > 0) {
-                        return prevCountdown - 1;
-                    } else {
-                        clearInterval(intervalId); // Detener el temporizador cuando llegue a cero
-                        restartGame(); // Reiniciar el juego
-                        return 60; // Reiniciar el temporizador
-                    }
-                });
+                useGame.getState().tick();
             }, 1000);
         } else {
-            clearInterval(intervalId); // Limpiar el intervalo si el juego no está en fase de juego
-            setCountdown(60); // Reiniciar el temporizador cuando el juego noestá en curso
+            clearInterval(intervalId); 
         }
 
-        return () => clearInterval(intervalId); // Limpiar el intervalo al desmontar el componente
-    }, [gamePhase, restartGame]);
-   
+        return () => clearInterval(intervalId);
+    }, [gamePhase]);
+
     function handleToggleAudio(e) {
         toggleAudio()
         e.target.blur()
     }
 
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === 'r' || event.key === 'R') {
+                window.location.reload(); 
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
 
     return (
         <div className="interface">
             <div className="time">
                 <h2>{countdown}</h2>
+                {bonusVisible && <span className="bonus">+5</span>}
             </div>
 
             <button className="audio-toggle" onClick={handleToggleAudio}>
@@ -61,7 +63,7 @@ function GameInterface() {
 
             {gamePhase === 'ready' && (
                 <h2 className="cta" onClick={startGame}>
-                Play
+                    Play
                 </h2>
             )}
 
@@ -70,51 +72,51 @@ function GameInterface() {
                     Empezar de nuevo
                 </h2>
             )}
-        <div className="controls">
-            {/* Teclas de movimiento */}
-            <div className="raw">
-                <div className={`key ${controls.forward ? 'active' : ''}`}></div>
-            </div>
-            <div className="raw">
-                <div className={`key ${controls.left ? 'active' : ''}`}></div>
-                <div className={`key ${controls.backward ? 'active' : ''}`}></div>
-                <div className={`key ${controls.right ? 'active' : ''}`}></div>
-            </div>
-            <div className="raw">
-                <div className={`key large ${controls.jump ? 'active' : ''}`}></div>
-            </div>
-            
-            <div className="raw">
-                <div className="misc-controls" style={{ right: 'auto', left: '40px' }}>
-                    <div className="key shift">Shift</div>
-                            <div className="misc-control">
-                                <div className="key">1</div>
-                            <div className="misc-control">
-                                <div className="key">2</div>
-                            <div className="misc-control">
-                                <div className="key">3</div>
-                            </div>
+
+            <div className="controls">
+                <div className="raw">
+                    <div className={`key ${controls.forward ? 'active' : ''}`}></div>
+                </div>
+                <div className="raw">
+                    <div className={`key ${controls.left ? 'active' : ''}`}></div>
+                    <div className={`key ${controls.backward ? 'active' : ''}`}></div>
+                    <div className={`key ${controls.right ? 'active' : ''}`}></div>
+                </div>
+                <div className="raw">
+                    <div className={`key large ${controls.jump ? 'active' : ''}`}></div>
+                </div>
+                
+                <div className="raw">
+                    <div className="misc-controls" style={{ right: 'auto', left: '40px' }}>
+                        <div className="key shift">Shift</div>
+                        <div className="misc-control">
+                            <div className="key">1</div>
+                        </div>
+                        <div className="misc-control">
+                            <div className="key">2</div>
+                        </div>
+                        <div className="misc-control">
+                            <div className="key">3</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div className="raw">
+                    <div className="misc-controls">
+                        <div className={`misc-control ${controls.restart ? 'active' : ''}`} onClick={() => window.location.reload()}>
+                            <div className="key">R</div>
+                            <div className="label">Resetear</div>
+                        </div>
+                        <div className={`misc-control ${controls.audio ? 'active' : ''}`} onClick={() => handleToggleAudio()}>
+                            <div className="key">M</div>
+                            <div className="label">Mutear</div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div className="raw">
-                <div className="misc-controls">
-                    <div className={`misc-control ${controls.restart ? 'active' : ''}`} onClick={() => handleControlChange('restart')}>
-                        <div className="key">R</div>
-                        <div className="label">Resetear</div>
-                    </div>
-                    <div className={`misc-control ${controls.audio ? 'active' : ''}`} onClick={() => handleControlChange('audio')}>
-                        <div className="key">M</div>
-                        <div className="label">Mutear</div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-
     )
 }
 
 export { GameInterface }
+

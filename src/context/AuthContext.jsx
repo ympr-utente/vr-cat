@@ -1,11 +1,7 @@
-import { onAuthStateChanged, signOut, updateCurrentUser, signInWithRedirect } from "firebase/auth";
-import { useEffect } from "react";
-import { auth } from '../firebase/firebase.config';
-import { getAuth } from "firebase/auth";
-import { createContext, useContext, useState} from "react";
-import { GoogleAuthProvider } from "firebase/auth";
-import { signInWithPopup } from "firebase/auth";
-import { si } from "firebase/auth";
+// src/context/AuthContext.jsx
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { createContext, useContext, useEffect, useState } from "react";
+import { auth } from '../stores/firebase.config'; // Asegúrate de que la ruta sea correcta
 
 export const authContext = createContext();
 
@@ -20,15 +16,12 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }) {
     const [userLogged, setUserLogged] = useState(null);
-    useEffect(()=> {
+    useEffect(() => {
         const suscribed = onAuthStateChanged(auth, (currentUser) => {
             !currentUser ? setUserLogged(null) : setUserLogged(currentUser);
         });
         return () => suscribed();
-
-     }, []);
-
-
+    }, []);
 
     const loginWithGoogle = async () => {
         console.log('Iniciando inicio de sesión con Google...');
@@ -44,20 +37,17 @@ export function AuthProvider({ children }) {
         }
     }
 
-
-
-
     const logout = async () => {
         try {
             await signOut(auth);
             return { success: true };
         } catch (error) {
-            return { success: false, error: error};
+            return { success: false, error: error };
         }
     };
 
     return (
-        <authContext.Provider value={{ userLogged, loginWithGoogle, logout}}>
+        <authContext.Provider value={{ userLogged, loginWithGoogle, logout }}>
             {children}
         </authContext.Provider>
     )
