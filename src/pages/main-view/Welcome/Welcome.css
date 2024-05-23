@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'SigmarOne-Regular';
+    src: url('../../../../public/assets/fonts/sigma/SigmarOne-Regular.ttf') format('truetype');
+}
+
+
+.title-main{
+	font-size: 2rem;
+	font-family: 'sigmarOne-Regular', Arial, sans-serif;
+	font-weight: bold;
+	color: #1E1E1F;
+	text-align: center;
+	margin: 10px;
+	text-transform: uppercase;
+	text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
