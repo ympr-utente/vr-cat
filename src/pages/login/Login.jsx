@@ -43,7 +43,7 @@ export default function Login() {
         const result = await auth.loginWithGoogle()
             .then((res) => {
                 // console.log(result),
-                navigate('/level1')
+                navigate('/home')
             })
             .catch((error) => console.error(error));
     }
