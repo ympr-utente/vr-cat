@@ -86,7 +86,7 @@ export default function World() {
     return (
         <>
             <Environment
-                files = './assets/hdris/satara_night_no_lamps_4k.hdr'
+                files={"./assets/hdris/belfast_sunset_puresky_4k.hdr"}
                 background = {true}
                 ground={{height: 20, scale: 512, radius: 400}}
             />

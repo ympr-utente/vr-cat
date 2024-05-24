@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import { GameInterface } from '../../GameInterface';
 import Lights from '../level1/lights/Lights';
 import { NavigationControls } from '../../utils/NavigationControls';
-import { Title } from '../../components/titles/Title';
+import { Title2 } from '../../components/titles/Title2';
 import { SoundManager } from '../../managers/SoundManager';
 import { CatModelProvider } from '../../context/CatModelContext';
 import World from './world/World';
@@ -27,7 +27,7 @@ export default function Level1() {
 
           <Suspense fallback={null}>
             <Physics>
-              <Title />
+              <Title2 />
               <World />
               <ShortcutManager />
               <SoundManager />
