@@ -7,6 +7,7 @@ import Obstacle from '../../../components/obstacles/Obstacle'
 import Castillo from '../../../components/obstacles/nivel2/Castillo'
 import { Fish } from '../../../components/rewards/Fish'
 import { useGame } from '../../../stores/useGame'
+import Spinner from '../../../components/obstacles/Spinner'
 import Floor from '../floor/Floor'
 import Trophy from '../trophy/Trophy'
 
@@ -117,8 +118,8 @@ export default function World() {
             ))}
 
             <Floor scale-y={5} position-z={-45} />
-            <Obstacle.Spinner position-z={-10} />
-            <Castillo position-z={-12} />
+
+
             <Obstacle position-z={-20} />
             <Obstacle.Limbo position-z={-34} />
             <Obstacle.Limbo position-z={-38} initialShift={0.5} />
