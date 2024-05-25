@@ -172,7 +172,6 @@ export default function World() {
             <Boxer position={[-0.5,2.15,-37.6]} rotation-y={0} scale={35}/>
             
             <Trophy position-z={-45} position-y={1}/>
-
         </>
     )
 }
