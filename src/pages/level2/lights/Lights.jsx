@@ -17,7 +17,7 @@ export default function Lights() {
                 position={[0, -1, -100]}
                 castShadow={true}
                 intensity={1000}
-                angle={180}
+                angle={90}
             />
         </>
     )

@@ -119,17 +119,14 @@ export default function World() {
 
             <Floor scale-y={5} position-z={-45} />
 
-            <Spinner position={[-8, 4, -20]} speed={8}/>
-            <Spinner position={[8, 4, -10]} speed={4}/>
+            <Spinner position={[-8, 4, -26]} speed={8}/>
+            <Spinner position={[8, 4, -16]} speed={4} initialShift={1}/>
 
-            <Obstacle color='white' position-z={-2} />
-            <Obstacle.Limbo position-z={-34} />
-            <Obstacle.Limbo position-z={-38} initialShift={0.5} />
-            <Obstacle.Limbo position-z={-42} initialShift={1} />
-            <Obstacle.SlidingWall position-z={-45} />
-            <Obstacle.Spinner position-z={-60} speed={5} />
-            <Obstacle.Spinner position-z={-75} speed={5} position-x={4} scale-x={0.75} />
-            <Obstacle.Spinner position-z={-75} speed={5} position-x={-4} scale-x={0.75} invert />
+            <Obstacle color='white' position-z={-4} />
+            <Obstacle.SlidingWall color='white' position-z={-45} />
+            <Obstacle.Spinner color='white' position-z={-32} speed={5} />
+            <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
+            <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert />
             <Trophy position-z={-45} position-y={1}/>
         </>
     )
