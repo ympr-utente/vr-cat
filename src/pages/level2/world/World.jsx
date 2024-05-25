@@ -122,7 +122,7 @@ export default function World() {
             <Spinner position={[-8, 4, -20]} speed={8}/>
             <Spinner position={[8, 4, -10]} speed={4}/>
 
-            <Obstacle position-z={-20} />
+            <Obstacle color='white' position-z={-2} />
             <Obstacle.Limbo position-z={-34} />
             <Obstacle.Limbo position-z={-38} initialShift={0.5} />
             <Obstacle.Limbo position-z={-42} initialShift={1} />
