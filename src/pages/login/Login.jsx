@@ -1,44 +1,51 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import './StylesLogin.css';
+// src/context/AuthContext.jsx
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { createContext, useContext, useEffect, useState } from "react";
+import { auth } from '../stores/firebase.config';
 
-export default function Login() {
-    const navigate = useNavigate();
-    const auth = useAuth();
+export const authContext = createContext();
 
-    const onHandleButtonLogin = async (e) => {
-        e.preventDefault();
+export const useAuth = () => {
+    const context = useContext(authContext);
+    if (!context) {
+        console.error("useAuth must be used within an AuthProvider");
+        return;
+    }
+    return context;
+}
+
+export function AuthProvider({ children }) {
+    const [user, setUser] = useState(null);
+    useEffect(() => {
+        const subscribed = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser || null);
+        });
+        return () => subscribed();
+    }, []);
+
+    const loginWithGoogle = async () => {
         try {
-            const result = await auth.loginWithGoogle();
-            if (result.success) {
-                navigate('/home');
-            } else {
-                console.error(result.error);
-            }
+            const provider = new GoogleAuthProvider();
+            const res = await signInWithPopup(auth, provider);
+            return { success: true, user: res.user };
         } catch (error) {
-            console.error(error);
+            console.error('Error al iniciar sesión con Google:', error);
+            return { success: false, error: error };
+        }
+    }
+
+    const logout = async () => {
+        try {
+            await signOut(auth);
+            return { success: true };
+        } catch (error) {
+            return { success: false, error: error };
         }
     };
 
     return (
-        <div className='container'>
-            <div className='wrapper'>
-                <form action=''>
-                    <div className="logo-meow">
-                        <img src="/assets/images/threedy-logo.svg" alt="Logo" />
-                    </div>
-                    <div className='title-login'>
-                        <h1>MeowVr</h1>
-                    </div>
-                    <div onClick={onHandleButtonLogin} className="Button-Start">
-                        <button>Login with Google</button>
-                    </div>
-                    <div className='guest-button'>
-                        <button type='submit'>Guest</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    );
+        <authContext.Provider value={{ user, loginWithGoogle, logout }}>
+            {children}
+        </authContext.Provider>
+    )
 }
