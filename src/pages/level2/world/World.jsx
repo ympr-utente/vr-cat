@@ -3,7 +3,7 @@ import { RigidBody } from '@react-three/rapier'
 import Ecctrl, { EcctrlAnimation } from 'ecctrl'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import CatModel from '../../../components/characters/CatModel'
-import { RotatingObstacle, MovingObstacle, GrowingObstacle } from '../../../components/obstacles/nivel2/Animaciones'
+import Obstacle from '../../../components/obstacles/Obstacle'
 import Castillo from '../../../components/obstacles/nivel2/Castillo'
 import { Fish } from '../../../components/rewards/Fish'
 import { useGame } from '../../../stores/useGame'
@@ -115,13 +115,18 @@ export default function World() {
                     />
                 </RigidBody>
             ))}
+
             <Floor scale-y={5} position-z={-45} />
-            <RotatingObstacle position={[10, 5, -15]} speed={2} />
-            <RigidBody type="fixed" colliders={'trimesh'} position={[0, 0, -20]}>
-                <Castillo />
-            </RigidBody>
-            <MovingObstacle position={[3, 2, -30]} speed={1.5} amplitude={3} />
-            <GrowingObstacle position={[-5, 1, -4]} speed={1} maxScale={2} />
+            <Obstacle.Spinner position-z={-10} />
+            <Castillo position-z={-12} />
+            <Obstacle position-z={-20} />
+            <Obstacle.Limbo position-z={-34} />
+            <Obstacle.Limbo position-z={-38} initialShift={0.5} />
+            <Obstacle.Limbo position-z={-42} initialShift={1} />
+            <Obstacle.SlidingWall position-z={-45} />
+            <Obstacle.Spinner position-z={-60} speed={5} />
+            <Obstacle.Spinner position-z={-75} speed={5} position-x={4} scale-x={0.75} />
+            <Obstacle.Spinner position-z={-75} speed={5} position-x={-4} scale-x={0.75} invert />
             <Trophy position-z={-45} position-y={1}/>
         </>
     )
