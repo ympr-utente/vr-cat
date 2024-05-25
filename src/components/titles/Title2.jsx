@@ -11,7 +11,6 @@ const Title2 = (props) => {
                 bevelE
                 bevelThickness={0.01}
                 height={0.1}
-                //lineHeight={2}
                 letterSpacing={0.05}
                 size={0.3}
                     >
