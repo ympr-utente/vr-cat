@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
 
-// Tu configuración de Firebase
+
 const firebaseConfig = {
   apiKey: "AIzaSyCdLIM9hiWWP_D_PAlCAiwI35JcJXqKv3s",
   authDomain: "vr-cat-a8b3a.firebaseapp.com",
@@ -14,7 +14,6 @@ const firebaseConfig = {
   appId: "1:16540522175:web:5615aa1564ca725a73180a"
 };
 
-// Inicializa Firebase
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
