@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/rapier';
-import { Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { GameInterface } from '../../GameInterface';
+import { Title } from '../../components/titles/Title';
+import { CatModelProvider } from '../../context/CatModelContext';
+import { ShortcutManager } from '../../managers/ShortcutManager';
+import { SoundManager } from '../../managers/SoundManager';
 import Lights from '../../pages/level1/lights/Lights';
 import { NavigationControls } from '../../utils/NavigationControls';
-import { Title } from '../../components/titles/Title';
-import { SoundManager } from '../../managers/SoundManager';
-import { CatModelProvider } from '../../context/CatModelContext';
 import World from './world/World';
-import { ShortcutManager } from '../../managers/ShortcutManager';
 
 
 export default function Level1() {
