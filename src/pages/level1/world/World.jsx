@@ -1,46 +1,48 @@
-// src/pages/level1/world/World.jsx
-import { Environment, KeyboardControls } from '@react-three/drei';
-import { RigidBody } from '@react-three/rapier';
-import Ecctrl, { EcctrlAnimation } from 'ecctrl';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three';
-import CatModel from '../../../components/characters/CatModel';
-import Obstacle from '../../../components/obstacles/Obstacle';
-import { Fish } from '../../../components/rewards/Fish';
+// src/pages/level2/world/World.jsx
+import { Environment, KeyboardControls } from '@react-three/drei'
+import { RigidBody } from '@react-three/rapier'
+import Ecctrl, { EcctrlAnimation } from 'ecctrl'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import CatModel from '../../../components/characters/CatModel'
+import Obstacle from '../../../components/obstacles/Obstacle'
+import Castillo from '../../../components/obstacles/nivel2/Castillo'
+import { Fish } from '../../../components/rewards/Fish'
 import { useAuth } from '../../../context/AuthContext'; // Ruta ajustada
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
-import { useGame } from '../../../stores/useGame';
-import Floor from '../floor/Floor';
-import Trophy from '../trophy/Trophy';
+import { useGame } from '../../../stores/useGame'
+import Spinner from '../../../components/obstacles/Spinner'
+import Floor from '../floor/Floor'
+import Trophy from '../trophy/Trophy'
+import Boxer from '../Boxer/Boxer'
 
 export default function World() {
     const { user } = useAuth();
-    const characterURL = './assets/character/threedy-realease.glb';
-
+    const characterURL = "./assets/character/threedy-realease.glb";
+  
     const keyboardMap = [
-        { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
-        { name: 'backward', keys: ['ArrowDown', 'KeyS'] },
-        { name: 'leftward', keys: ['ArrowLeft', 'KeyA'] },
-        { name: 'rightward', keys: ['ArrowRight', 'KeyD'] },
-        { name: 'jump', keys: ['Space'] },
-        { name: 'run', keys: ['Shift'] },
-        { name: 'action1', keys: ['1'] },
-        { name: 'action2', keys: ['2'] },
-        { name: 'action3', keys: ['3'] },
-        { name: 'action4', keys: ['KeyF'] },
+        { name: "forward", keys: ["ArrowUp", "KeyW"] },
+        { name: "backward", keys: ["ArrowDown", "KeyS"] },
+        { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
+        { name: "rightward", keys: ["ArrowRight", "KeyD"] },
+        { name: "jump", keys: ["Space"] },
+        { name: "run", keys: ["Shift"] },
+        { name: "action1", keys: ["1"] },
+        { name: "action2", keys: ["2"] },
+        { name: "action3", keys: ["3"] },
+        { name: "action4", keys: ["KeyF"] },
     ];
 
     const animationSet = {
-        idle: 'Listisimo',
-        walk: 'CaminarConEstilacho',
-        run: 'CorriendoALoMazeRunner',
-        jump: 'SaltadorIntrepido',
-        jumpIdle: 'AterrizandoConParkour',
-        jumpLand: 'AterrizandoConParkour',
-        fall: 'Paracaidista',
-        action1: 'Izquierdazo',
-        action2: 'Derechazo',
-        action3: 'PatadaVoladora',
+        idle: "Listisimo",
+        walk: "CaminarConEstilacho",
+        run: "CorriendoALoMazeRunner",
+        jump: "SaltadorIntrepido",  
+        jumpIdle: "AterrizandoConParkour", 
+        jumpLand: "AterrizandoConParkour", 
+        fall: "Paracaidista", 
+        action1: "Izquierdazo",
+        action2: "Derechazo",
+        action3: "PatadaVoladora",
     };
 
     const [score, setScore] = useState(0);
@@ -58,19 +60,19 @@ export default function World() {
     const catRef = useRef(); // Referencia para el modelo del gato
 
     const successSound = useMemo(() => {
-        const sound = new Audio('./assets/sounds/+5.mp3');
-        sound.volume = 0.2;
-        return sound;
-    }, []);
+        const sound = new Audio('./assets/sounds/+5.mp3')
+        sound.volume = 0.2
+        return sound
+    }, [])
 
     const onEatFish = (id) => {
         setScore(score + 1);
         useGame.setState((state) => ({
-            fishes: state.fishes.filter((fish) => fish.id !== id),
+            fishes: state.fishes.filter((fish) => fish.id !== id)
         }));
         useGame.getState().addTime(); // Añadir 5 segundos al temporizador
         successSound.play(); // Reproducir sonido de "+5"
-    };
+    }
 
     const onContactYellowSquare = async () => {
         if (catRef.current && user) {
@@ -103,44 +105,42 @@ export default function World() {
         }
     }, [bonusVisible, resetBonusVisible]);
 
-    // Resetear la posición del gato cuando se reinicia el juego o se carga el checkpoint
+    // Resetear la posición del gato cuando se reinicia el juego
     useEffect(() => {
         if (catRef.current) {
-            catRef.current.position.set(catPosition.x, catPosition.y, catPosition.z); // Restablecer la posición del gato
+            catRef.current.position.set(catPosition.x, catPosition.y, catPosition.z); // Restablecer la posición inicial del gato
         }
-    }, [catPosition]);
+    }, [gameStarted, catPosition]);
 
     return (
         <>
             <Environment
-                files="./assets/hdris/satara_night_no_lamps_4k.hdr"
-                background={true}
-                ground={{ height: 20, scale: 512, radius: 400 }}
+                files={"./assets/hdris/belfast_sunset_puresky_4k.hdr"}
+                background = {true}
+                ground={{height: 20, scale: 512, radius: 400}}
             />
             <KeyboardControls map={keyboardMap}>
-                <Ecctrl
-                    animated={true}
+                <Ecctrl animated={true}
                     camInitDis={-8}
                     camMaxDis={-8}
                     maxVelLimit={gameStarted ? 5 : 0} // Deshabilitar el movimiento si el juego no ha comenzado
                     jumpVel={gameStarted ? 6 : 0} // Deshabilitar el salto si el juego no ha comenzado
                     position={[0, 40, 0]}
                 >
-                    <EcctrlAnimation characterURL={characterURL} animationSet={animationSet}>
+                    <EcctrlAnimation
+                        characterURL={characterURL}
+                        animationSet={animationSet}
+                    >
                         <CatModel ref={catRef} />
                     </EcctrlAnimation>
                 </Ecctrl>
             </KeyboardControls>
-
-            {fishes && fishes.map((fish) => (
-                <RigidBody
-                    scale={0.7}
-                    key={fish.id}
-                    type="fixed"
-                    colliders={"hull"}
-                    onCollisionEnter={() => onEatFish(fish.id)}
-                >
-                    <Fish position={fish.position} />
+             
+            {fishes.map((fish) => (
+                <RigidBody scale={0.7} key={fish.id} type='fixed' colliders={"hull"} onCollisionEnter={() => onEatFish(fish.id)}>
+                    <Fish 
+                        position={fish.position}
+                    />
                 </RigidBody>
             ))}
 
@@ -159,16 +159,20 @@ export default function World() {
             </RigidBody>
 
             <Floor scale-y={5} position-z={-45} />
-            <Obstacle.Spinner position-z={-10} />
-            <Obstacle position-z={-20} />
-            <Obstacle.Limbo position-z={-34} />
-            <Obstacle.Limbo position-z={-38} initialShift={0.5} />
-            <Obstacle.Limbo position-z={-42} initialShift={1} />
-            <Obstacle.SlidingWall position-z={-45} />
-            <Obstacle.Spinner position-z={-60} speed={5} />
-            <Obstacle.Spinner position-z={-75} speed={5} position-x={4} scale-x={0.75} />
-            <Obstacle.Spinner position-z={-75} speed={5} position-x={-4} scale-x={0.75} invert />
-            <Trophy position-z={-45} position-y={1} />
+
+            <Spinner position={[-8, 4, -26]} speed={8}/>
+            <Spinner position={[8, 4, -16]} speed={4} initialShift={1}/>
+
+            <Obstacle color='white' position-z={-4} />
+            <Obstacle.SlidingWall color='white' position-z={-45} />
+            <Obstacle.Spinner color='white' position-z={-32} speed={5} />
+            <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
+            <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert />
+           
+            <Boxer position={[-0.5,2.15,-37.6]} rotation-y={0} scale={35}/>
+            
+            <Trophy position-z={-45} position-y={1}/>
+
         </>
-    );
+    )
 }
