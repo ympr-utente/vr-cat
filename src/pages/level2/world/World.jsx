@@ -10,6 +10,7 @@ import { useGame } from '../../../stores/useGame'
 import Spinner from '../../../components/obstacles/Spinner'
 import Floor from '../floor/Floor'
 import Trophy from '../trophy/Trophy'
+import Boxer from '../Boxer/Boxer'
 
 export default function World() {
     const characterURL = "./assets/character/threedy-realease.glb";
@@ -127,7 +128,11 @@ export default function World() {
             <Obstacle.Spinner color='white' position-z={-32} speed={5} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert />
+           
+           <Boxer position={[-0.5,0.34,-37.6]} rotation-y={3} scale={15}/>
+            
             <Trophy position-z={-45} position-y={1}/>
+
         </>
     )
 }
