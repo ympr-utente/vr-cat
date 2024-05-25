@@ -144,22 +144,19 @@ export default function World() {
                 </RigidBody>
             ))}
 
-            {/* Checkpoints */}
-            {[[-10, 2, -35], [0, 2, -70], [10, 2, -105], [20, 2, -140]].map((pos, index) => (
-                <RigidBody
-                    scale={0.7}
-                    key={`checkpoint-${index}`}
-                    type="fixed"
-                    colliders={"hull"}
-                    onCollisionEnter={onContactYellowSquare}
-                    position={pos}
-                >
-                    <mesh>
-                        <boxGeometry args={[1, 1, 1]} />
-                        <meshStandardMaterial color="yellow" />
-                    </mesh>
-                </RigidBody>
-            ))}
+            {/* el coso del checkpoint */}
+            <RigidBody
+                scale={0.7}
+                type="fixed"
+                colliders={"hull"}
+                onCollisionEnter={onContactYellowSquare}
+                position={[0, 2, -35]} 
+            >
+                <mesh>
+                    <boxGeometry args={[1, 1, 1]} />
+                    <meshStandardMaterial color="yellow" />
+                </mesh>
+            </RigidBody>
 
             <Floor scale-y={5} position-z={-45} />
 
