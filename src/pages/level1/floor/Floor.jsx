@@ -2,7 +2,6 @@ import { RigidBody } from '@react-three/rapier';
 import { MeshStandardMaterial, TextureLoader } from 'three';
 
 export default function Floor(props) {
-    // Carga de las texturas
     const textureLoader = new TextureLoader();
     const textureColor = textureLoader.load('./assets/floor/oakfloor_basecolor.png');
     const textureRoughness = textureLoader.load('./assets/floor/oakfloor_roughness.png');

@@ -4,7 +4,7 @@ import { forwardRef, useRef, useMemo, useEffect, useState} from 'react'
 import * as THREE from 'three'
 import { useAudio } from '../../stores/useAudio'
 
-const Obstacle = forwardRef(function Obstacle(props, ref) {
+const Obstacle = forwardRef(function Obstacle({ color: defaultColor = '#A876F5', ...props }, ref) {
     const audio = useAudio((state) => state.audio)
     const hitSound = useMemo(() => new Audio('./assets/sounds/hit.mp3'), [])
 
@@ -22,30 +22,29 @@ const Obstacle = forwardRef(function Obstacle(props, ref) {
         <RigidBody ref={ref} type="kinematicPosition" position-y={2} restitution={2} friction={1} onContactForce={onHit} {...props}>
             <mesh receiveShadow castShadow>
                 <boxGeometry args={[10, 1, 1]} />
-                <meshStandardMaterial color="#A876F5" />
+                <meshStandardMaterial color={defaultColor} />
             </mesh>
         </RigidBody>
     )
-})
+});
 
-const Spinner = function ({ speed = 1, initialShift = Math.random() * 10, invert = false, ...props }) {
-    const obstacleRef = useRef()
-    const rotation = useRef(new THREE.Quaternion())
+const Spinner = function ({ speed = 1, initialShift = Math.random() * 10, invert = false, color, ...props }) {
+    const obstacleRef = useRef();
+    const rotation = useRef(new THREE.Quaternion());
 
     useFrame(({ clock }) => {
-        const time = clock.getElapsedTime()
+        const time = clock.getElapsedTime();
 
         if (obstacleRef.current) {
-            rotation.current.setFromEuler(new THREE.Euler(0, (time * speed + initialShift) * (invert ? -1 : 1), 0))
-            obstacleRef.current.setNextKinematicRotation(rotation.current)
+            rotation.current.setFromEuler(new THREE.Euler(0, (time * speed + initialShift) * (invert ? -1 : 1), 0));
+            obstacleRef.current.setNextKinematicRotation(rotation.current);
         }
-    })
+    });
 
-    return <Obstacle ref={obstacleRef} {...props} />
+    return <Obstacle ref={obstacleRef} color={color} {...props} />
 }
 
-
-const Limbo = function ({ speed = 1, initialShift = 0, ...props }) {
+const Limbo = function ({ speed = 1, initialShift = 0, color, ...props }) {
     const obstacleRef = useRef();
 
     useFrame(({ clock }) => {
@@ -61,15 +60,14 @@ const Limbo = function ({ speed = 1, initialShift = 0, ...props }) {
         }
     });
 
-    return <Obstacle ref={obstacleRef} scale-x={2} {...props} />;
+    return <Obstacle ref={obstacleRef} color={color} scale-x={2} {...props} />;
 };
 
-
-const SlidingWall = function ({ speed = 1, initialShift = 0, ...props }) {
-    const obstacleRef = useRef()
+const SlidingWall = function ({ speed = 1, initialShift = 0, color, ...props }) {
+    const obstacleRef = useRef();
 
     useFrame(({ clock }) => {
-        const time = clock.getElapsedTime()
+        const time = clock.getElapsedTime();
 
         if (obstacleRef.current) {
             const obstacleTranslation = obstacleRef.current.translation();
@@ -79,12 +77,10 @@ const SlidingWall = function ({ speed = 1, initialShift = 0, ...props }) {
                 z: obstacleTranslation.z
             });
         }
-    })
+    });
 
-    return <Obstacle ref={obstacleRef} scale-y={5} position-y={3} {...props} />
+    return <Obstacle ref={obstacleRef} color={color} scale-y={5} position-y={3} {...props} />
 }
-
-
 
 Obstacle.Spinner = Spinner
 Obstacle.Limbo = Limbo
