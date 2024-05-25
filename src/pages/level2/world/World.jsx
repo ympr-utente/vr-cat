@@ -129,7 +129,7 @@ export default function World() {
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert />
            
-           <Boxer position={[-0.5,0.34,-37.6]} rotation-y={3} scale={15}/>
+           <Boxer position={[-0.5,2.15,-37.6]} rotation-y={0} scale={35}/>
             
             <Trophy position-z={-45} position-y={1}/>
 

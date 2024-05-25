@@ -9,7 +9,7 @@ export default function Boxer(props) {
   const [dir, setDir] = useState(false)
   const { nodes, materials, animations } = useGLTF('/assets/level-models/boxer/boxer.glb')
   const { actions } = useAnimations(animations, group)
-  const speed = 1
+  const speed = 4
   useEffect(() => {
     console.log(actions)
     actions["motionless_jab"].play()
@@ -21,10 +21,10 @@ export default function Boxer(props) {
     let moveX = currentPosition?.x
     let moveY = currentPosition?.y
 
-    if (currentPosition?.x >= 1) {
+    if (currentPosition?.x >= 6) {
       setDir(false)
     }
-    if (currentPosition?.x <= -1) {
+    if (currentPosition?.x <= -6) {
       setDir(true)
     }
 
