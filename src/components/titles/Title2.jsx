@@ -1,35 +1,28 @@
-import { Center, Float, Html, Text, Text3D } from "@react-three/drei";
+import { Center, Float, Text3D } from '@react-three/drei'
+import { RigidBody } from '@react-three/rapier'
 
 const Title2 = (props) => {
-    const text = "Level 2";
-
     return (
-        <Float
-            speed={3}
-            rotationIntensity={0.01}
-            floatIntensity={0.5}
-            floatingRange={[1, 2]}
-
-        >
-        <Center
-            position={[0, 4, 3]}
-        >
-            <Text3D
+        <RigidBody position={[0, 4, 3]} type="fixed" restitution={8} friction={1}>
+            <Float speed={2} rotationIntensity={1} floatIntensity={1}>
+                <Center>
+                    <Text3D
                 font={"/assets/fonts/nivel2/nivel2.json"}
-                bevelEnabled
-                bevelSize={0.005}
+                bevelE
                 bevelThickness={0.01}
                 height={0.1}
                 //lineHeight={2}
                 letterSpacing={0.05}
                 size={0.3}
-            >
-                <meshNormalMaterial />
-                {text}
-            </Text3D>
-        </Center>
-        </Float>
-        
+                    >
+                    
+                        {'LEVEL 2'}
+                        <meshPhysicalMaterial color="#ffffff" roughness={0.4} thickness={1} transmission={1.2} opacity={1} />
+                    </Text3D>
+                </Center> 
+            </Float>
+        </RigidBody>
     )
 }
+
 export {Title2};

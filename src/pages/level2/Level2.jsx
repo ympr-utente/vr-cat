@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/rapier';
 import { Suspense } from 'react';
 import { GameInterface } from '../../GameInterface';
-import Lights from '../level1/lights/Lights';
+import Lights from './lights/Lights';
 import { NavigationControls } from '../../utils/NavigationControls';
 import { Title2 } from '../../components/titles/Title2';
 import { SoundManager } from '../../managers/SoundManager';
