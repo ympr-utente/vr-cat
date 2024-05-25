@@ -1,22 +1,24 @@
-import { useKeyboardControls } from '@react-three/drei'
-import { useEffect, useRef } from 'react'
-import UseAnimations from 'react-useanimations'
-import volume from 'react-useanimations/lib/volume'
-import { useAudio } from './stores/useAudio'
-import { useGame } from './stores/useGame'
+import { useKeyboardControls } from '@react-three/drei';
+import { useEffect, useRef } from 'react';
+import UseAnimations from 'react-useanimations';
+import volume from 'react-useanimations/lib/volume';
+import { loadCheckpoint } from './stores/loadCheckpoint';
+import { useAudio } from './stores/useAudio';
+import { useGame } from './stores/useGame';
 
 function GameInterface() {
-    const timerRef = useRef()
-    const audio = useAudio((state) => state.audio)
-    const toggleAudio = useAudio((state) => state.toggleAudio)
+    const timerRef = useRef();
+    const audio = useAudio((state) => state.audio);
+    const toggleAudio = useAudio((state) => state.toggleAudio);
 
-    const gamePhase = useGame((state) => state.phase)
-    const countdown = useGame((state) => state.countdown)
-    const startGame = useGame((state) => state.start)
-    const restartGame = useGame((state) => state.restart)
-    const gameStarted = useGame((state) => state.gameStarted); 
-    const bonusVisible = useGame((state) => state.bonusVisible); 
-    const controls = useKeyboardControls((state) => state)
+    const gamePhase = useGame((state) => state.phase);
+    const countdown = useGame((state) => state.countdown);
+    const startGame = useGame((state) => state.start);
+    const restartGame = useGame((state) => state.restart);
+    const gameStarted = useGame((state) => state.gameStarted);
+    const bonusVisible = useGame((state) => state.bonusVisible);
+    const controls = useKeyboardControls((state) => state);
+    const notification = useGame((state) => state.notification);
 
     useEffect(() => {
         let intervalId;
@@ -26,21 +28,23 @@ function GameInterface() {
                 useGame.getState().tick();
             }, 1000);
         } else {
-            clearInterval(intervalId); 
+            clearInterval(intervalId);
         }
 
         return () => clearInterval(intervalId);
     }, [gamePhase]);
 
     function handleToggleAudio(e) {
-        toggleAudio()
-        e.target.blur()
+        toggleAudio();
+        e.target.blur();
     }
 
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === 'r' || event.key === 'R') {
-                window.location.reload(); 
+                window.location.reload();
+            } else if (event.key === 'g' || event.key === 'G') {
+                loadCheckpoint();
             }
         };
 
@@ -52,6 +56,7 @@ function GameInterface() {
 
     return (
         <div className="interface">
+            {notification && <div className="notification">{notification}</div>}
             <div className="time">
                 <h2>{countdown}</h2>
                 {bonusVisible && <span className="bonus">+5</span>}
@@ -85,7 +90,7 @@ function GameInterface() {
                 <div className="raw">
                     <div className={`key large ${controls.jump ? 'active' : ''}`}></div>
                 </div>
-                
+
                 <div className="raw">
                     <div className="misc-controls" style={{ right: 'auto', left: '40px' }}>
                         <div className="key shift">Shift</div>
@@ -100,23 +105,27 @@ function GameInterface() {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="raw">
                     <div className="misc-controls">
-                        <div className={`misc-control ${controls.restart ? 'active' : ''}`} onClick={() => window.location.reload()}>
+                        <div className={`misc-control ${controls.reset ? 'active' : ''}`} onClick={() => window.location.reload()}>
                             <div className="key">R</div>
                             <div className="label">Resetear</div>
                         </div>
-                        <div className={`misc-control ${controls.audio ? 'active' : ''}`} onClick={() => handleToggleAudio()}>
+                        <div className={`misc-control ${controls.audio ? 'active' : ''}`} onClick={handleToggleAudio}>
                             <div className="key">M</div>
                             <div className="label">Mutear</div>
+                        </div>
+                        <div className={`misc-control ${controls.loadCheckpoint ? 'active' : ''}`} onClick={loadCheckpoint}>
+                            <div className="key">G</div>
+                            <div className="label">Cargar Checkpoint</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export { GameInterface }
+export { GameInterface };
 

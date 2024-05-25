@@ -9,7 +9,6 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-
   flex-direction: row;
   font-family: "InterVariable", sans-serif;
 }
@@ -141,6 +140,27 @@ canvas {
   border-radius: 8px;
 }
 
+.checkpoint-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1000;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 @media screen and (min-width: 2048px) {
   .time {
     left: 20vw;
@@ -149,4 +169,38 @@ canvas {
   .audio-toggle, .misc-controls {
     right: 20vw;
   }
+}.interface .notification {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  opacity: 0.9;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.interface .notification.hidden {
+  opacity: 0;
+}
+
+.interface .load-checkpoint {
+  position: absolute;
+  top: 70px; /* Ajusta la posición más abajo */
+  right: 20px;
+  background-color: #f39c12;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.interface .load-checkpoint:hover {
+  background-color: #e67e22;
 }
