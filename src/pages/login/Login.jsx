@@ -1,25 +1,53 @@
+// import React from 'react';
+// import './StylesLogin.css';
+// import { useNavigate } from 'react-router-dom';
+
+
+// export default function Login() {
+
+//     return (
+//         <div className='container'>
+//             <div className='wrapper'>
+//                 <form action=''>
+//                     <div className="logo-meow">
+//                         <img src="/assets/images/logo.png" alt="Logo" />
+
+//                     </div>
+//                     <div className='title-login'>
+//                         <h1>MeowVr</h1>
+//                     </div>
+//                     <div className='google-button'>
+//                         <button type='submit'>Login</button>
+//                     </div>
+//                 </form>
+//             </div>
+//         </div>
+//     )
+// }
+
+
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 import './StylesLogin.css';
+import { useNavigate } from 'react-router-dom';
+import { useAuth, loginWithGoogle } from '../../context/AuthContext';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 export default function Login() {
     const navigate = useNavigate();
+    //useAuth();
     const auth = useAuth();
 
     const onHandleButtonLogin = async (e) => {
-        e.preventDefault();
-        try {
-            const result = await auth.loginWithGoogle();
-            if (result.success) {
-                navigate('/home');
-            } else {
-                console.error(result.error);
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    };
+        e.preventDefault()
+        // const result = 
+        const result = await auth.loginWithGoogle()
+            .then((res) => {
+                // console.log(result),
+                navigate('/level1')
+            })
+            .catch((error) => console.error(error));
+    }
+
 
     return (
         <div className='container'>
@@ -27,6 +55,7 @@ export default function Login() {
                 <form action=''>
                     <div className="logo-meow">
                         <img src="/assets/images/threedy-logo.svg" alt="Logo" />
+
                     </div>
                     <div className='title-login'>
                         <h1>MeowVr</h1>
@@ -40,5 +69,5 @@ export default function Login() {
                 </form>
             </div>
         </div>
-    );
+    )
 }
