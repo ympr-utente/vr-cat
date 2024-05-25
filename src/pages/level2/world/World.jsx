@@ -119,6 +119,8 @@ export default function World() {
 
             <Floor scale-y={5} position-z={-45} />
 
+            <Spinner position={[-8, 4, -20]} speed={8}/>
+            <Spinner position={[8, 4, -10]} speed={4}/>
 
             <Obstacle position-z={-20} />
             <Obstacle.Limbo position-z={-34} />
