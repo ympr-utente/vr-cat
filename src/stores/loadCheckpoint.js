@@ -1,10 +1,9 @@
-// src/stores/loadCheckpoint.js
 import { get, ref } from "firebase/database";
-import { database } from "./firebase.config";
+import { db } from "./firebase.config";
 import { useGame } from "./useGame";
 
 const loadCheckpoint = async () => {
-    const checkpointRef = ref(database, 'checkpoints/latest');
+    const checkpointRef = ref(db, 'checkpoints/latest');
     try {
         const snapshot = await get(checkpointRef);
         if (snapshot.exists()) {
@@ -27,3 +26,4 @@ const loadCheckpoint = async () => {
 };
 
 export { loadCheckpoint };
+

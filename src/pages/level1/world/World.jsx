@@ -1,3 +1,4 @@
+// src/pages/level1/world/World.jsx
 import { Environment, KeyboardControls } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
 import Ecctrl, { EcctrlAnimation } from 'ecctrl';
@@ -6,12 +7,14 @@ import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel';
 import Obstacle from '../../../components/obstacles/Obstacle';
 import { Fish } from '../../../components/rewards/Fish';
+import { useAuth } from '../../../context/AuthContext'; // Ruta ajustada
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import { useGame } from '../../../stores/useGame';
 import Floor from '../floor/Floor';
 import Trophy from '../trophy/Trophy';
 
 export default function World() {
+    const { user } = useAuth();
     const characterURL = './assets/character/threedy-realease.glb';
 
     const keyboardMap = [
@@ -69,8 +72,8 @@ export default function World() {
         successSound.play(); // Reproducir sonido de "+5"
     };
 
-    const onContactYellowSquare = () => {
-        if (catRef.current) {
+    const onContactYellowSquare = async () => {
+        if (catRef.current && user) {
             const catObject = catRef.current;
             const catPosition = new THREE.Vector3();
             catObject.getWorldPosition(catPosition);
@@ -83,9 +86,9 @@ export default function World() {
 
             saveCheckpointState(catPos, countdown, fishes);
             setNotification('Checkpoint saved!');
-            saveCheckpoint(catPos, countdown, fishes);
+            await saveCheckpoint(user.uid, catPos, countdown, fishes);
         } else {
-            console.error("Cat ref is not defined");
+            console.error("Cat ref is not defined or user is not logged in");
         }
     };
 
@@ -141,7 +144,7 @@ export default function World() {
                 </RigidBody>
             ))}
 
-            {/* el coso del chekpoitnt*/}
+            {/* el coso del checkpoint */}
             <RigidBody
                 scale={0.7}
                 type="fixed"
