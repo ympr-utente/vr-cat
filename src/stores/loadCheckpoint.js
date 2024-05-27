@@ -1,9 +1,15 @@
+// src/stores/loadCheckpoint.js
 import { get, ref } from "firebase/database";
-import { db } from "./firebase.config";
+import { database } from "./firebase.config";
 import { useGame } from "./useGame";
 
-const loadCheckpoint = async () => {
-    const checkpointRef = ref(db, 'checkpoints/latest');
+const loadCheckpoint = async (uid) => {
+    if (!uid) {
+        console.error("No user logged in");
+        return;
+    }
+
+    const checkpointRef = ref(database, `checkpoints/${uid}/latest`);
     try {
         const snapshot = await get(checkpointRef);
         if (snapshot.exists()) {
