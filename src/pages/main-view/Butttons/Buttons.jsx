@@ -15,7 +15,7 @@ export default function Buttons() {
                 <button className="button" onClick={() => handleClick('/level1')}>Level 1</button>
             </div>
             <div className="button-container">
-                <button className="button">Level 2</button>
+                <button className="button" onClick={() => handleClick('/level2')}>Level 2</button>
             </div>
             <div className="button-container">
                 <button className="button">Level 3</button>
