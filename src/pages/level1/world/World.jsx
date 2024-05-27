@@ -1,4 +1,3 @@
-// src/pages/level1/world/World.jsx
 import { Environment, KeyboardControls } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
 import Ecctrl, { EcctrlAnimation } from 'ecctrl';
@@ -7,7 +6,8 @@ import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel';
 import Obstacle from '../../../components/obstacles/Obstacle';
 import { Fish } from '../../../components/rewards/Fish';
-import { useAuth } from '../../../context/AuthContext'; // Ruta ajustada
+import { useAuth } from '../../../context/AuthContext';
+import { loadCheckpoint } from '../../../stores/loadCheckpoint';
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import { useGame } from '../../../stores/useGame';
 import Floor from '../floor/Floor';
@@ -109,6 +109,23 @@ export default function World() {
             catRef.current.position.set(catPosition.x, catPosition.y, catPosition.z); // Restablecer la posición del gato
         }
     }, [catPosition]);
+
+    // Cargar el checkpoint cuando se presiona 'G'
+    useEffect(() => {
+        const handleKeyPress = async (event) => {
+            if (event.key === 'G' || event.key === 'g') {
+                if (user) {
+                    console.log("Loading checkpoint for user:", user.uid);
+                    await loadCheckpoint(user.uid);
+                } else {
+                    console.error("No user logged in");
+                }
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+        return () => window.removeEventListener('keydown', handleKeyPress);
+    }, [user]);
 
     return (
         <>

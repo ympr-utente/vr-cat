@@ -1,4 +1,3 @@
-// src/pages/level2/world/World.jsx
 import { Environment, KeyboardControls } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
 import Ecctrl, { EcctrlAnimation } from 'ecctrl';
@@ -100,7 +99,10 @@ export default function World() {
                 case 'g':
                 case 'G':
                     if (user) {
+                        console.log("Loading checkpoint for user:", user.uid);
                         await loadCheckpoint(user.uid);
+                    } else {
+                        console.error("No user logged in");
                     }
                     break;
                 // Handle other key events if necessary

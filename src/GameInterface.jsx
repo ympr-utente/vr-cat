@@ -2,6 +2,7 @@ import { useKeyboardControls } from '@react-three/drei';
 import { useEffect, useRef } from 'react';
 import UseAnimations from 'react-useanimations';
 import volume from 'react-useanimations/lib/volume';
+import { useAuth } from './context/AuthContext';
 import { loadCheckpoint } from './stores/loadCheckpoint';
 import { useAudio } from './stores/useAudio';
 import { useGame } from './stores/useGame';
@@ -10,6 +11,7 @@ function GameInterface() {
     const timerRef = useRef();
     const audio = useAudio((state) => state.audio);
     const toggleAudio = useAudio((state) => state.toggleAudio);
+    const { user } = useAuth();
 
     const gamePhase = useGame((state) => state.phase);
     const countdown = useGame((state) => state.countdown);
@@ -40,11 +42,14 @@ function GameInterface() {
     }
 
     useEffect(() => {
-        const handleKeyDown = (event) => {
+        const handleKeyDown = async (event) => {
             if (event.key === 'r' || event.key === 'R') {
                 window.location.reload();
+            } else if ((event.key === 'g' || event.key === 'G') && user) {
+                console.log("Loading checkpoint for user:", user.uid);
+                await loadCheckpoint(user.uid);
             } else if (event.key === 'g' || event.key === 'G') {
-                loadCheckpoint();
+                console.error("No user logged in");
             }
         };
 
@@ -52,7 +57,7 @@ function GameInterface() {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    }, [user]);
 
     return (
         <div className="interface">
@@ -116,7 +121,7 @@ function GameInterface() {
                             <div className="key">M</div>
                             <div className="label">Mutear</div>
                         </div>
-                        <div className={`misc-control ${controls.loadCheckpoint ? 'active' : ''}`} onClick={loadCheckpoint}>
+                        <div className={`misc-control ${controls.loadCheckpoint ? 'active' : ''}`} onClick={() => user && loadCheckpoint(user.uid)}>
                             <div className="key">G</div>
                             <div className="label">Cargar Checkpoint</div>
                         </div>

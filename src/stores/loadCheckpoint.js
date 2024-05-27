@@ -1,4 +1,3 @@
-// src/stores/loadCheckpoint.js
 import { get, ref } from "firebase/database";
 import { database } from "./firebase.config";
 import { useGame } from "./useGame";
@@ -9,6 +8,7 @@ const loadCheckpoint = async (uid) => {
         return;
     }
 
+    console.log("Attempting to load checkpoint for UID:", uid);
     const checkpointRef = ref(database, `checkpoints/${uid}/latest`);
     try {
         const snapshot = await get(checkpointRef);
