@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel'
 import Obstacle from '../../../components/obstacles/Obstacle'
-import Castillo from '../../../components/obstacles/nivel2/Castillo'
+import Palmera from '../../../components/obstacles/nivel2/Palmera'
 import { Fish } from '../../../components/rewards/Fish'
 import { useAuth } from '../../../context/AuthContext';
 import { loadCheckpoint } from '../../../stores/loadCheckpoint';
@@ -13,10 +13,8 @@ import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import Boxer from '../Boxer/Boxer';
 import { useGame } from '../../../stores/useGame'
 import Spinner from '../../../components/obstacles/Spinner'
-import Pendulum from '../../../components/obstacles/Pendulum'
 import Floor from '../floor/Floor'
 import Trophy from '../trophy/Trophy'
-import { Physics } from '@react-three/cannon';
 import { Suspense } from 'react';
 
 export default function World() {
@@ -184,16 +182,12 @@ export default function World() {
 
             <Floor scale-y={5} position-z={-45} />
 
+            {/*x, z, y */}
             <Spinner position={[-8, 4, -26]} speed={8}/>
             <Spinner position={[8, 4, -16]} speed={4} initialShift={1}/>
-        ``  <Physics>
-            <Suspense fallback={null}>
-                <Pendulum position={[0, 5, -45]} impulse={[10, 20, 20]} />
-            </Suspense>
-            </Physics>``
 
-            <Obstacle color='white' position-z={-4} />
-            <Obstacle.SlidingWall color='white' position-z={-45} />
+            <Obstacle color='#88E6FF' position-z={-4} />
+            <Obstacle.SlidingWall color='#88E6FF' position-z={-45} />
             <Obstacle.Spinner color='white' position-z={-32} speed={5} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert />
