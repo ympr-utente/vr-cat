@@ -2,11 +2,6 @@ import { RigidBody } from '@react-three/rapier';
 import { MeshStandardMaterial, TextureLoader } from 'three';
 
 export default function Floor(props) {
-    // const textureLoader = new TextureLoader();
-    // const textureColor = textureLoader.load('./assets/floor-sand/wavy-sand_albedo.png');
-    // const textureRoughness = textureLoader.load('./assets/floor-sand/wavy-sand_roughness.png');
-    // const textureMetalness = textureLoader.load('./assets/floor-sand/wavy-sand_height.png');
-
     const textureLoader = new TextureLoader();
     const textureColor = textureLoader.load('./assets/floor-asphalt/asphalt_02_diff_1k.jpg');
     const textureRoughness = textureLoader.load('./assets/floor-asphalt/asphalt_02_rough_1k.png');
@@ -21,9 +16,10 @@ export default function Floor(props) {
                     map={textureColor}
                     roughnessMap={textureRoughness}
                     metalnessMap={textureMetalness}
+                    // normalMap={textureNormal}
+                    // displacementMap={textureDisplacement}
                 />
             </mesh>
         </RigidBody>
     )
 }
-
