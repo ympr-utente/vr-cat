@@ -10,17 +10,19 @@ import { SoundManager } from '../../managers/SoundManager';
 import { CatModelProvider } from '../../context/CatModelContext';
 import World from './world/World';
 import { ShortcutManager } from '../../managers/ShortcutManager';
+import { OrbitControls } from '@react-three/drei';
 
 
 export default function Level3() {
   return (
-    <CatModelProvider>
+    // <CatModelProvider>
       <NavigationControls>
         <Canvas
           shadows
           camera={{
             position: [0, 5, 10]
           }}>
+            <OrbitControls />
           <color attach="background" args={['#FEF9F7']} />
 
           <Lights />
@@ -37,6 +39,6 @@ export default function Level3() {
         {/* <GameInterface /> */}
         <ShortcutManager />
       </NavigationControls>
-    </CatModelProvider>
+    // </CatModelProvider>
   );
 }
