@@ -150,7 +150,7 @@ export default function World() {
                     }
                 }
             />
-            {/* <KeyboardControls map={keyboardMap}>
+            <KeyboardControls map={keyboardMap}>
                 <Ecctrl animated={true}
                     camInitDis={-8}
                     camMaxDis={-8}
@@ -165,7 +165,7 @@ export default function World() {
                         <CatModel ref={catRef} />
                     </EcctrlAnimation>
                 </Ecctrl>
-            </KeyboardControls> */}
+            </KeyboardControls>
 
             {fishes.map((fish) => (
                 <RigidBody scale={0.7} key={fish.id} type='fixed' colliders={"hull"} onCollisionEnter={() => onEatFish(fish.id)}>
@@ -188,14 +188,14 @@ export default function World() {
 
             <Floor scale-y={5} position-z={-45} />
 
-            {/* <Spinner position={[-8, 4, -26]} speed={8} />
+            <Spinner position={[-8, 4, -26]} speed={8} />
             <Spinner position={[8, 4, -16]} speed={4} initialShift={1} />
 
             <Obstacle color='white' position-z={-4} />
             <Obstacle.SlidingWall color='white' position-z={-45} />
             <Obstacle.Spinner color='white' position-z={-32} speed={5} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
-            <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert /> */}
+            <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert />
 
             <Boxer position={[-0.5, 2.15, -45]} rotation-y={0} scale={35} />
             <Trophy position-z={-45} position-y={1} />

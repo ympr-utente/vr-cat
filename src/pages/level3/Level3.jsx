@@ -15,7 +15,7 @@ import { OrbitControls } from '@react-three/drei';
 
 export default function Level3() {
   return (
-    // <CatModelProvider>
+    <CatModelProvider>
       <NavigationControls>
         <Canvas
           shadows
@@ -36,9 +36,9 @@ export default function Level3() {
             </Physics>
           </Suspense>
         </Canvas>
-        {/* <GameInterface /> */}
+        <GameInterface />
         <ShortcutManager />
       </NavigationControls>
-    // </CatModelProvider>
+    </CatModelProvider>
   );
 }
