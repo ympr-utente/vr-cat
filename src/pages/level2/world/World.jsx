@@ -1,5 +1,5 @@
 import { Environment, KeyboardControls } from '@react-three/drei';
-import { RigidBody } from '@react-three/rapier';
+import { Physics, RigidBody } from '@react-three/rapier';
 import Ecctrl, { EcctrlAnimation } from 'ecctrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -188,9 +188,8 @@ export default function World() {
             <Obstacle.Spinner color='white' position-z={-32} speed={5} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert />
-
+            
             <Boxer position={[-0.5, 2.15, -37.6]} rotation-y={0} scale={35} />
-
             <Trophy position-z={-45} position-y={1} />
         </>
     );
