@@ -4,7 +4,7 @@ import Ecctrl, { EcctrlAnimation } from 'ecctrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel';
-import Obstacle from '../../../components/obstacles/Obstacle';
+import ObstacleLevel3 from '../../../components/obstacles/nivel3/ObstacleLevel3';
 import Spinner from '../../../components/obstacles/Spinner';
 import { Fish } from '../../../components/rewards/Fish';
 import { useAuth } from '../../../context/AuthContext';
@@ -15,6 +15,7 @@ import Boxer from '../Boxer/Boxer';
 import Floor from '../floor/Floor';
 import Trophy from '../trophy/Trophy';
 import { Rascacielos } from '../rascacielos/Rascacielos';
+import Arbol from '../Arbol/Arbol';
 
 export default function World() {
     const { user } = useAuth();
@@ -144,7 +145,7 @@ export default function World() {
                 // ground={{ height: 100, scale: 512, radius: 400 }}
                 ground={
                     {
-                        height: 10,
+                        height: 50,
                         scale: 512,
                         radius: 400
                     }
@@ -188,23 +189,31 @@ export default function World() {
 
             <Floor scale-y={5} position-z={-45} />
 
-            <Spinner position={[-8, 4, -26]} speed={8} />
-            <Spinner position={[8, 4, -16]} speed={4} initialShift={1} />
+            {/* <Spinner position={[-3, 4, -12]} speed={4} />
+            <Spinner position={[2, 4, -10]} speed={4} /> */}
+            {/* <Spinner position={[0, 4, -16]} speed={10} initialShift={1} /> */}
+            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={0} color='gray' position-z={-35}/>
+            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={2} color='gray' position-z={-45}/>
 
-            <Obstacle color='white' position-z={-4} />
+            <ObstacleLevel3.Spinner color='white' position-z={-20} speed={5} />
+
+            {/* <Obstacle color='white' position-z={-4} />
             <Obstacle.SlidingWall color='white' position-z={-45} />
             <Obstacle.Spinner color='white' position-z={-32} speed={5} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
-            <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert />
+            <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert /> */}
 
             <Boxer position={[-0.5, 2.15, -45]} rotation-y={0} scale={35} />
             <Trophy position-z={-45} position-y={1} />
             <Rascacielos  position-z = {-85} position-x = {-8} scale={2}/>
             <Rascacielos  position-z = {-85} position-x = {8} scale={2}/>
-            <Rascacielos  position-z = {-75} position-x = {-8} scale={2}/>
-            <Rascacielos  position-z = {-75} position-x = {8} scale={2}/>
+            {/* <Rascacielos  position-z = {-75} position-x = {-8} scale={2}/>
+            <Rascacielos  position-z = {-75} position-x = {8} scale={2}/> */}
+            {/* <Arbol position-z = {-18} position-x = {-8.5} scale={2}/>
+            <Arbol position-z = {-18} position-x = {-26} scale={2}/> */}
             
-          
+            <Arbol position-z = {-10} position-x = {0.7} scale={1}/>
+            <Arbol position-z = {-10} position-x = {-17.5} scale={1}/>
         </>
     );
 }
