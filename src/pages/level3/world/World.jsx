@@ -179,7 +179,7 @@ export default function World() {
                 type="fixed"
                 colliders={"hull"}
                 onCollisionEnter={onContactYellowSquare}
-                position={[0, 2, -55]}
+                position={[0, 2, -49]}
             >
                 <mesh>
                     <boxGeometry args={[1, 1, 1]} />
@@ -189,13 +189,14 @@ export default function World() {
 
             <Floor scale-y={5} position-z={-45} />
 
-            {/* <Spinner position={[-3, 4, -12]} speed={4} />
-            <Spinner position={[2, 4, -10]} speed={4} /> */}
-            {/* <Spinner position={[0, 4, -16]} speed={10} initialShift={1} /> */}
-            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={0} color='gray' position-z={-35}/>
-            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={2} color='gray' position-z={-45}/>
+            {/* <Spinner position={[-2, 4, -12]} speed={2} />
+            <Spinner position={[2, 4, -27]} speed={2} invert/> */}
+       
+            {/* ESTOS DOS SI VAN  */}
+            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={0} color='gray' position-z={-45}/>
+            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={2} color='gray' position-z={-55}/>
 
-            <ObstacleLevel3.Spinner color='white' position-z={-20} speed={5} />
+            {/* <ObstacleLevel3.Spinner color='white' position-z={-20} speed={5} /> */}
 
             {/* <Obstacle color='white' position-z={-4} />
             <Obstacle.SlidingWall color='white' position-z={-45} />
@@ -205,8 +206,8 @@ export default function World() {
 
             <Boxer position={[-0.5, 2.15, -45]} rotation-y={0} scale={35} />
             <Trophy position-z={-45} position-y={1} />
-            <Rascacielos  position-z = {-85} position-x = {-8} scale={2}/>
-            <Rascacielos  position-z = {-85} position-x = {8} scale={2}/>
+            {/* <Rascacielos  position-z = {-85} position-x = {-8} scale={2}/>
+            <Rascacielos  position-z = {-85} position-x = {8} scale={2}/> */}
             {/* <Rascacielos  position-z = {-75} position-x = {-8} scale={2}/>
             <Rascacielos  position-z = {-75} position-x = {8} scale={2}/> */}
             {/* <Arbol position-z = {-18} position-x = {-8.5} scale={2}/>
