@@ -194,8 +194,6 @@ export default function World() {
 
             <Palmera position={[-6, 4, -65]}/>
             <Palmera position={[6, 4, -65]}/>
-
-            <Trophy position-z={-45} position-y={1}/>
             
             <Boxer position={[-0.5, 2.15, -37.6]} rotation-y={0} scale={35} />
             <Trophy position-z={-45} position-y={1} />
