@@ -23,11 +23,11 @@ export default function Level1() {
           }}>
           <color attach="background" args={['#FEF9F7']} />
 
-          <Lights />
+          {/* <Lights /> */}
 
           <Suspense fallback={null}>
             <Physics >
-              <Title2 />
+              {/* <Title2 /> */}
               <World />
               <ShortcutManager />
               <SoundManager />

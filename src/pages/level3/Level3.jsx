@@ -33,7 +33,7 @@ export default function Level3() {
               <World />
               <ShortcutManager />
               <SoundManager />
-            </Physics>
+            </Physics> 
           </Suspense>
         </Canvas>
         <GameInterface />

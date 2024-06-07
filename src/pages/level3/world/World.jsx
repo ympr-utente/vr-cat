@@ -1,5 +1,5 @@
 import { Environment, KeyboardControls } from '@react-three/drei';
-import { RigidBody } from '@react-three/rapier';
+import { Physics, RigidBody } from '@react-three/rapier';
 import Ecctrl, { EcctrlAnimation } from 'ecctrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -17,6 +17,7 @@ import Trophy from '../trophy/Trophy';
 import { Rascacielos } from '../rascacielos/Rascacielos';
 import Arbol from '../Arbol/Arbol';
 import Casa from '../casa/Casa';
+
 
 export default function World() {
     const { user } = useAuth();
@@ -204,6 +205,7 @@ export default function World() {
             <Casa position-z={-60} position-x={8} scale={0.9} rotation-y={3}/>
 
             <ObstacleLevel3.Limbo position-z={-57} initialShift={0.5} scale-x={1} position-x={-4.8}/>
+            {/* ESTE NO */}
             {/* <ObstacleLevel3.Limbo position-z={-80} initialShift={0.5} scale-x={1} position-x={-4.8}/> */}
 
              {/* ESTO NO VA OPCIONAL*/}
