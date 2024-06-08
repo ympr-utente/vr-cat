@@ -26,7 +26,7 @@ export default function Level1() {
           <Lights />
 
           <Suspense fallback={null}>
-            <Physics >
+            <Physics debug>
               <Title2 />
               <World />
               <ShortcutManager />
