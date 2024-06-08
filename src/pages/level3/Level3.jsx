@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/rapier';
-import { Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { GameInterface } from '../../GameInterface';
-import Lights from './lights/Lights';
-import { NavigationControls } from '../../utils/NavigationControls';
-import { Title2 } from '../../components/titles/Title2';
-import { SoundManager } from '../../managers/SoundManager';
 import { CatModelProvider } from '../../context/CatModelContext';
-import World from './world/World';
 import { ShortcutManager } from '../../managers/ShortcutManager';
-import { OrbitControls } from '@react-three/drei';
+import { SoundManager } from '../../managers/SoundManager';
+import { NavigationControls } from '../../utils/NavigationControls';
+import Lights from './lights/Lights';
+import World from './world/World';
 
 
 export default function Level3() {
@@ -28,7 +26,7 @@ export default function Level3() {
           <Lights />
 
           <Suspense fallback={null}>
-            <Physics debug>
+            <Physics >
               {/* <Title2 /> */}
               <World />
               <ShortcutManager />

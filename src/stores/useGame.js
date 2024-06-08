@@ -5,7 +5,7 @@ const useGame = create(
     subscribeWithSelector((set) => ({
         countdown: 60,
         phase: 'ready',
-        bonusVisible: false,
+        bonusVisible: null,
         gameStarted: false,
         catPosition: { x: 0, y: 0, z: 0 },
         fishes: [
@@ -26,7 +26,7 @@ const useGame = create(
             set(() => ({
                 countdown: 60,
                 phase: 'ready',
-                bonusVisible: false,
+                bonusVisible: null,
                 gameStarted: false,
                 catPosition: { x: 0, y: 0, z: 0 },
                 fishes: [
@@ -50,13 +50,21 @@ const useGame = create(
             set((state) => {
                 if (state.phase === 'playing') {
                     const newCountdown = state.countdown + 5;
-                    return { countdown: newCountdown, bonusVisible: true };
+                    return { countdown: newCountdown, bonusVisible: { type: 'add' } };
+                }
+                return {};
+            }),
+        subtractTime: () =>
+            set((state) => {
+                if (state.phase === 'playing') {
+                    const newCountdown = state.countdown - 5;
+                    return { countdown: newCountdown, bonusVisible: { type: 'subtract' } };
                 }
                 return {};
             }),
         resetBonusVisible: () =>
             set(() => ({
-                bonusVisible: false
+                bonusVisible: null
             })),
         updateCatPosition: (position) =>
             set(() => ({
@@ -100,3 +108,4 @@ const useGame = create(
 );
 
 export { useGame };
+

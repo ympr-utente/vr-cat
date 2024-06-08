@@ -1,5 +1,5 @@
 import { useKeyboardControls } from '@react-three/drei';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import UseAnimations from 'react-useanimations';
 import volume from 'react-useanimations/lib/volume';
 import { useAuth } from './context/AuthContext';
@@ -21,6 +21,8 @@ function GameInterface() {
     const bonusVisible = useGame((state) => state.bonusVisible);
     const controls = useKeyboardControls((state) => state);
     const notification = useGame((state) => state.notification);
+
+    const [lives, setLives] = useState(4);
 
     useEffect(() => {
         let intervalId;
@@ -50,39 +52,49 @@ function GameInterface() {
                 await loadCheckpoint(user.uid);
             } else if (event.key === 'g' || event.key === 'G') {
                 console.error("No user logged in");
+            } else if (event.key === '4' && lives > 0) {
+                setLives(prevLives => prevLives - 1);
+            } else if (event.key === '5' && countdown > 5) {
+                useGame.getState().subtractTime();
             }
         };
-
         window.addEventListener('keydown', handleKeyDown);
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [user]);
+    }, [user, lives]);
 
     return (
         <div className="interface">
-            {notification && <div className="notification">{notification}</div>}
+            {notification && (
+                <div className={`notification ${notification.type}`}>
+                    {notification.message}
+                </div>
+            )}
             <div className="time">
                 <h2>{countdown}</h2>
-                {bonusVisible && <span className="bonus">+5</span>}
+                {bonusVisible && bonusVisible.type === 'add' && <span className="bonus">+5</span>}
+                {bonusVisible && bonusVisible.type === 'subtract' && <span className="negative-five">-5</span>}
             </div>
-
+            <div className="lives">
+                {Array.from({ length: lives }, (_, index) => (
+                    <span key={index} role="img" aria-label="heart">❤️</span>
+                ))}
+                {lives === 0 && <span key="boxer" role="img" aria-label="boxer">🥊</span>}
+            </div>
             <button className="audio-toggle" onClick={handleToggleAudio}>
                 <UseAnimations animation={volume} reverse={!audio} strokeColor="white" />
             </button>
-
             {gamePhase === 'ready' && (
                 <h2 className="cta" onClick={startGame}>
                     Play
                 </h2>
             )}
-
             {gamePhase === 'ended' && (
                 <h2 className="cta" onClick={restartGame}>
                     Empezar de nuevo
                 </h2>
             )}
-
             <div className="controls">
                 <div className="raw">
                     <div className={`key ${controls.forward ? 'active' : ''}`}></div>
@@ -95,7 +107,6 @@ function GameInterface() {
                 <div className="raw">
                     <div className={`key large ${controls.jump ? 'active' : ''}`}></div>
                 </div>
-
                 <div className="raw">
                     <div className="misc-controls" style={{ right: 'auto', left: '40px' }}>
                         <div className="key shift">Shift</div>
@@ -110,7 +121,6 @@ function GameInterface() {
                         </div>
                     </div>
                 </div>
-
                 <div className="raw">
                     <div className="misc-controls">
                         <div className={`misc-control ${controls.reset ? 'active' : ''}`} onClick={() => window.location.reload()}>

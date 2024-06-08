@@ -204,3 +204,60 @@ canvas {
 .interface .load-checkpoint:hover {
   background-color: #e67e22;
 }
+.hud {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.lives {
+  display: flex;
+}
+
+.lives img {
+  width: 100px; /* Ajusta el ancho según tus preferencias */
+  height: 40px; /* Ajusta la altura según tus preferencias */
+  margin-right: 10px;
+}
+.timer {
+  margin-top: 10px;
+  font-size: 20px;
+  color: white;
+}
+.negative-five {
+  color: red; /* Cambia el color según tus preferencias */
+}
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: red; /* Cambia el color de fondo a rojo */
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.notification-message {
+  color: white; /* Cambia el color del texto a blanco */
+  font-size: 24px; /* Cambia el tamaño del texto */
+}
+.interface .notification {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background-color: red; /* Cambia el color de fondo a rojo */
+  color: white;
+  padding: 10px 10px;
+  border-radius: 5px;
+  z-index: 1000;
+  opacity: 0.9;
+  transition: opacity 0.5s ease-in-out;
+}
+.lives span {
+  font-size: 40px; /* Ajusta el tamaño del corazón según tus preferencias */
+  margin-right: 10px;
+}

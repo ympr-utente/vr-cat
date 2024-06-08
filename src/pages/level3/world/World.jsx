@@ -1,22 +1,21 @@
 import { Environment, KeyboardControls } from '@react-three/drei';
-import { Physics, RigidBody } from '@react-three/rapier';
+import { RigidBody } from '@react-three/rapier';
 import Ecctrl, { EcctrlAnimation } from 'ecctrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel';
-import ObstacleLevel3 from '../../../components/obstacles/nivel3/ObstacleLevel3';
 import Spinner from '../../../components/obstacles/Spinner';
+import ObstacleLevel3 from '../../../components/obstacles/nivel3/ObstacleLevel3';
 import { Fish } from '../../../components/rewards/Fish';
 import { useAuth } from '../../../context/AuthContext';
 import { loadCheckpoint } from '../../../stores/loadCheckpoint';
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import { useGame } from '../../../stores/useGame';
+import Arbol from '../Arbol/Arbol';
 import Boxer from '../Boxer/Boxer';
+import Casa from '../casa/Casa';
 import Floor from '../floor/Floor';
 import Trophy from '../trophy/Trophy';
-import { Rascacielos } from '../rascacielos/Rascacielos';
-import Arbol from '../Arbol/Arbol';
-import Casa from '../casa/Casa';
 
 
 export default function World() {
