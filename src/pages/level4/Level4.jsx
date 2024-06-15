@@ -27,7 +27,7 @@ export default function Experience() {
           <Lights />
           <Suspense fallback={null}>
             <Physics>
-              <World scale={[4,4, 4]} />
+              <World scale={[8,8,8]} />
               <World1/>
             
               
