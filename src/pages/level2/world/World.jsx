@@ -10,7 +10,7 @@ import { Fish } from '../../../components/rewards/Fish'
 import { useAuth } from '../../../context/AuthContext';
 import { loadCheckpoint } from '../../../stores/loadCheckpoint';
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
-import Boxer from '../Boxer/Boxer';
+import Villano2 from '../villano2/Villano2';
 import { useGame } from '../../../stores/useGame'
 import Spinner from '../../../components/obstacles/Spinner'
 import Floor from '../floor/Floor'
@@ -194,9 +194,8 @@ export default function World() {
 
             <Palmera position={[-6, 4, -65]}/>
             <Palmera position={[6, 4, -65]}/>
-            
-            <Boxer position={[-0.5, 2.15, -37.6]} rotation-y={0} scale={35} />
+            <Villano2 position={[-1, 1, -37]} rotation-y={0} scale={0.5} />
             <Trophy position-z={-45} position-y={1} />
-        </>
+            </>
     );
-}
+}   

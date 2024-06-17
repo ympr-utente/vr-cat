@@ -12,6 +12,7 @@ import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import { useGame } from '../../../stores/useGame';
 import Floor from '../floor/Floor';
 import Trophy from '../trophy/Trophy';
+import { Villano1 } from '../villano1/Villano1';
 
 export default function World() {
     const { user } = useAuth();
@@ -185,6 +186,7 @@ export default function World() {
             <Obstacle.Spinner position-z={-60} speed={5} />
             <Obstacle.Spinner position-z={-75} speed={5} position-x={4} scale-x={0.75} />
             <Obstacle.Spinner position-z={-75} speed={5} position-x={-4} scale-x={0.75} invert />
+            <Villano1 position={[-0.5, 0.3, -45]} rotation-y={0} scale={4} />
             <Trophy position-z={-45} position-y={1} />
         </>
     );
