@@ -36,15 +36,16 @@
     width: auto;
     height: 45px;
     background: rgb(235, 237, 247);
-    border: none;
+    border: 3px solid black;
     outline: none;
-    border-radius: 40px;
+    border-radius: 7px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
     color: black;
     font-weight: 700;
-    margin: 8px;
+    padding: 30px;
+    margin: 20px;
 }
 /* 
 .image-text {

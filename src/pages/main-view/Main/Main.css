@@ -19,15 +19,15 @@
 	justify-content: center;
 	align-items: center;
 	border-style: solid;
-	border-width: 5px;
-	border-color: #000000; /* Cambia esto al color que prefieras */
-	border-radius: 20px; /* Ajusta este valor según tus necesidades */
-
+	border-width: 3px;
+	border-color: #000000; 
+	border-radius: 20px; 
+	margin: 10px;
 }
 
 .image-container img{
 	height: 400px;
-	width: auto;
+	width: 600px;
 	max-height: 400px;
 }
 
@@ -35,7 +35,7 @@
 	width: 100%;
 	height: auto;
 	opacity: 0.4;
-	transition: transform 0.3s ease, opacity 0.3s ease
+	transition: transform 0.3s ease, opacity 0.4s ease
 }
 
 .image-text{
@@ -47,9 +47,9 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	padding: 20px;
-	border: 2px solid #1E1E1F;
+	border: 2px solid #ffffff;
   	border-radius: 10px;
-  	color: #1E1E1F;
+  	color: #ffffff;
   	text-align: center;
 	font-weight: bold;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -66,14 +66,14 @@
 }
 
 .image-container:hover .image-text{
-	color: #f2f4f5;
-	border: 2px solid #f2f4f5;
+	color: #000000;
+	border: 2px solid #000000;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.884)
 }
 
 .image-container:not(:hover) .image-opacity{
-	transform: scale(0.95);
-	opacity: 0.5;
+	transform: scale(1);
+	opacity: 0.8;
 }
 
 p{

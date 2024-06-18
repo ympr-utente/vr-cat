@@ -1,4 +1,4 @@
-import { Environment, KeyboardControls } from '@react-three/drei';
+import { Environment, KeyboardControls, OrbitControls } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
 import Ecctrl, { EcctrlAnimation } from 'ecctrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -140,7 +140,8 @@ export default function World() {
 
     return (
         <>
-           <Environment
+            {/* <OrbitControls /> */}
+            <Environment
                 files="./assets/hdris/shanghai_bund_4k.hdr"
                 background={true}
                 // ground={{ height: 100, scale: 512, radius: 400 }}
@@ -189,45 +190,18 @@ export default function World() {
             </RigidBody>
 
             <Floor scale-y={5} position-z={-45} />
-
-            {/* VAN */}
-
             <Spinner position={[-2, 4, -12]} speed={2} />
-            <Spinner position={[2, 4, -27]} speed={2} invert/>
-       
-            {/* ESTOS  SI VAN  */}
-            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={0} color='gray' position-z={-45}/>
-            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={2} color='gray' position-z={-55}/>
-            <ObstacleLevel3.Spinner color='white' position-z={-50} position-x={6} speed={0.5} scale-x={0.6}/>
-
+            <Spinner position={[2, 4, -27]} speed={2} invert />
+            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={0} color='gray' position-z={-45} />
+            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={2} color='gray' position-z={-55} />
+            <ObstacleLevel3.Spinner color='white' position-z={-50} position-x={6} speed={0.5} scale-x={0.6} />
             <Casa position-z={-40} position-x={-8} scale={0.9} />
-            <Casa position-z={-60} position-x={8} scale={0.9} rotation-y={3}/>
-
-            <ObstacleLevel3.Limbo position-z={-57} initialShift={0.5} scale-x={1} position-x={-4.8}/>
-            {/* ESTE NO */}
-            {/* <ObstacleLevel3.Limbo position-z={-80} initialShift={0.5} scale-x={1} position-x={-4.8}/> */}
-
-             {/* ESTO NO VA OPCIONAL*/}
-            {/* <ObstacleLevel3.Spinner color='white' position-z={-20} speed={5} /> */}
-            {/* <Obstacle color='white' position-z={-4} />
-            <Obstacle.SlidingWall color='white' position-z={-45} />
-            <Obstacle.Spinner color='white' position-z={-32} speed={5} />
-            <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
-            <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert /> */}
-
+            <Casa position-z={-60} position-x={8} scale={0.9} rotation-y={3} />
+            <ObstacleLevel3.Limbo position-z={-57} initialShift={0.5} scale-x={1} position-x={-4.8} />
             <Boxer position={[-0.5, 2.15, -42]} rotation-y={0} scale={35} />
             <Trophy position-z={-45} position-y={1} />
-
-            {/* ESTO NO VA OPCIONAL*/}
-            {/* <Rascacielos  position-z = {-85} position-x = {-8} scale={2}/>
-            <Rascacielos  position-z = {-85} position-x = {8} scale={2}/> */}
-            {/* <Rascacielos  position-z = {-75} position-x = {-8} scale={2}/>
-            <Rascacielos  position-z = {-75} position-x = {8} scale={2}/> */}
-            {/* <Arbol position-z = {-18} position-x = {-8.5} scale={2}/>
-            <Arbol position-z = {-18} position-x = {-26} scale={2}/> */}
-            
-            <Arbol position-z = {-10} position-x = {0.7} scale={1}/>
-            <Arbol position-z = {-10} position-x = {-17.5} scale={1}/>
+            <Arbol position-z={-10} position-x={0.7} scale={1} />
+            <Arbol position-z={-10} position-x={-17.5} scale={1} />
         </>
     );
 }

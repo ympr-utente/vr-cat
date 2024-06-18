@@ -30,7 +30,7 @@ export default function Experience() {
               <World  />
               <World1/>
             
-              
+
               <ShortcutManager />
               <SoundManager />
             </Physics>

@@ -1,4 +1,4 @@
-import { Environment, KeyboardControls } from '@react-three/drei'
+import { Environment, KeyboardControls, OrbitControls } from '@react-three/drei'
 import {RigidBody } from '@react-three/rapier';
 import Ecctrl, { EcctrlAnimation } from 'ecctrl'
 import { useEffect, useMemo, useRef, useState } from 'react'
