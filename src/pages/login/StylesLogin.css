@@ -19,7 +19,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: rgba(241, 17, 17, 0.9);
+    background-color: rgba(189, 12, 12, 0.9);
 
 }
 
@@ -27,7 +27,7 @@
 .wrapper{
     display: flex;
    width: 420px;
-   background-color: rgba(15, 210, 245, 0.932);
+   background-color: rgba(7, 179, 209, 0.932);
    color: black;
    border-radius: 10px;
    padding: 30px 40px;
