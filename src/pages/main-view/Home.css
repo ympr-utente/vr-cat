@@ -54,7 +54,9 @@ body {
   margin: 0;
   margin-right: 0.5px;
   padding: 0;
-  background: #f32314;
+  /* background: #9b0f05e3; */
+  /* background: #610903e3; */
+  background: #2eb0e4;
   color: #1E1E1F;
   font-family: 'sigmarOne-Regular', Arial, sans-serif ;
 }
