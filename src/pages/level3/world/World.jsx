@@ -15,10 +15,17 @@ import Floor from '../floor/Floor';
 import { Lampara } from '../lamparas/Lampara';
 import Trophy from '../trophy/Trophy';
 import Villano3 from '../villano3/Villano3';
+import { useNavigate, BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 export default function World() {
     const { user } = useAuth();
     const characterURL = "./assets/character/threedy-realease.glb";
+
+    const navigate = useNavigate()
+
+    const nextLevel = () => {
+        navigate('/level1')
+    }
 
     const keyboardMap = [
         { name: "forward", keys: ["ArrowUp", "KeyW"] },
