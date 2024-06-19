@@ -12,7 +12,7 @@ import World from './world/World';
 import { ShortcutManager } from '../../managers/ShortcutManager';
 
 
-export default function Level1() {
+export default function Level2() {
   return (
     <CatModelProvider>
       <NavigationControls>

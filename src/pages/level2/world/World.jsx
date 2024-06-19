@@ -15,11 +15,18 @@ import { useGame } from '../../../stores/useGame';
 import Floor from '../floor/Floor';
 import Trophy from '../trophy/Trophy';
 import Villano2 from '../villano2/Villano2';
+import { Suspense } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 export default function World() {
     const { user } = useAuth();
     const characterURL = "./assets/character/threedy-realease.glb";
 
+    const navigate = useNavigate()
+
+    const nextLevel = () => {
+        navigate('/level3')
+    }
     const keyboardMap = [
         { name: "forward", keys: ["ArrowUp", "KeyW"] },
         { name: "backward", keys: ["ArrowDown", "KeyS"] },
@@ -191,10 +198,10 @@ export default function World() {
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert />
 
-            <Palmera position={[-6, 4, -65]}/>
+            <Palmera position={[-6, 4, -65]} scale={1}/>
             <Palmera position={[6, 4, -65]}/>
             <Villano2 position={[-1, 1, -37]} rotation-y={0} scale={0.5} />
-            <Trophy position-z={-45} position-y={1} />
+            <Trophy onCollide={nextLevel} position-z={-45} position-y={1} />
             </>
     );
 }   

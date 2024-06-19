@@ -191,7 +191,7 @@ export default function World() {
          
             
             
-            <Trophy position-z={-45} position-y={1} />
+            <Trophy onCollide={nextLevel} position-z={-45} position-y={1} />
             <Lampara position-z={-8} position-y={1} position-x={0} scale={1} />
             <Lampara position-z={-10} position-y={1}position-x={-17.5} scale={1} />
             <Carreta position-z={-60} position-x={8}position-y={1} scale={0.9} rotation-y={2}/>

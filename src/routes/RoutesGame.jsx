@@ -3,8 +3,6 @@ import Level1 from "../pages/level1/Level1";
 import Level2 from "../pages/level2/Level2";
 import Level3 from "../pages/level3/Level3";
 import Level4 from "../pages/level4/Level4";
-// import Level3 from "../pages/level3/Level3";
-// import Level4 from "../pages/level4/Level4";
 import Login from "../pages/login/Login";
 import Home from "../pages/main-view/Home";
 
