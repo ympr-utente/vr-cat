@@ -175,7 +175,7 @@ export default function World1() {
             <Trophy position={[29, 1, 8]} rotation={[2, 12, 5]} /> {/* Rotación ajustada a 45 grados en el eje Y */}
             <Obstacle.RotatingCube position={[27 , 2, 3]} speed={1} color="#9400D3" />
             <Obstacle.SwingingSphere position={[30, 2, -21      ]} speed={1} amplitude={2} size={5} color="#FFA500" /> {/* Tamaño incrementado */}
-            <Obstacle.CircularMotionPrism position={[5, 1, 0]} speed={1} radius={5} color="#008080" />
+                       <Obstacle.CircularMotionPrism position={[8, 1, 0]} speed={1} radius={3} color="#008080" />
             <Obstacle.OscillatingWall position={[15  , 2, -2]} speed={1} amplitude={5} color="#FF4500" />
             <Obstacle.Pendulum position={[20 , 11, -13]} speed={1.5} length={10} color="#DAA520" />
             <Obstacle.RotatingWall position={[28, 2, -10]} speed={0.5} color="#4682B4" />
