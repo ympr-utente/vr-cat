@@ -11,26 +11,7 @@ const Lights = () => {
     return (
         <>
             <ambientLight intensity={1} /> 
-            <pointLight
-             
-                position={[12.99, -1.5, 4]} 
-                intensity={5}
-              
-                distance={3} 
-                decay={-1} 
-                castShadow={true}
-           
-            />
-            <pointLight
-                ref={pointLightRef}
-                position={[24.5, -1.5, 4.5]} 
-                intensity={2}
-              
-                distance={2} 
-                decay={-5} 
-                castShadow 
-               
-            />
+       
 
         
             <ambientLight intensity={2} color={"blue"} />

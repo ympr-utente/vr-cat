@@ -4,17 +4,16 @@ import Ecctrl, { EcctrlAnimation } from 'ecctrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel';
-
+import Obstacle from '../../../components/obstacles/nivel4/ObstacleLevel4'; // Asegúrate de ajustar la ruta según sea necesario
 import { Fish } from '../../../components/rewards/Fish';
 import { useAuth } from '../../../context/AuthContext';
 import { loadCheckpoint } from '../../../stores/loadCheckpoint';
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import { useGame } from '../../../stores/useGame';
-
 import Boxer from '../Boxer/Boxer';
 import Trophy from '../trophy/Trophy';
 
-export default function World() {
+export default function World1() {
     const { user } = useAuth();
     const characterURL = "./assets/character/threedy-realease.glb";
 
@@ -50,8 +49,6 @@ export default function World() {
         { id: 1, position: [2, 9, 16] },
         { id: 2, position: [50, 20, -6] },
         { id: 3, position: [80, 20, 12] },
-      
-    
     ]);
 
     const gameStarted = useGame((state) => state.gameStarted);
@@ -108,7 +105,6 @@ export default function World() {
                         console.error("No user logged in");
                     }
                     break;
-                // Handle other key events if necessary
                 default:
                     break;
             }
@@ -127,7 +123,6 @@ export default function World() {
             const timer = setTimeout(() => {
                 resetBonusVisible();
             }, 1000);
-
             return () => clearTimeout(timer);
         }
     }, [bonusVisible, resetBonusVisible]);
@@ -152,7 +147,7 @@ export default function World() {
                         characterURL={characterURL}
                         animationSet={animationSet}
                     >
-                        <CatModel ref={catRef} scale={[0.4, 0.4, 0.4]}/>
+                        <CatModel ref={catRef} scale={[0.4, 0.4, 0.4]} />
                     </EcctrlAnimation>
                 </Ecctrl>
             </KeyboardControls>
@@ -177,7 +172,14 @@ export default function World() {
             </RigidBody>
 
             <Boxer position={[-0.5, 2.15, -42]} rotation-y={0} scale={35} />
-            <Trophy position-z={-45} position-y={1} />
+            <Trophy position={[29, 1, 8]} rotation={[2, 12, 5]} /> {/* Rotación ajustada a 45 grados en el eje Y */}
+            <Obstacle.RotatingCube position={[27 , 2, 3]} speed={1} color="#9400D3" />
+            <Obstacle.SwingingSphere position={[30, 2, -21      ]} speed={1} amplitude={2} size={5} color="#FFA500" /> {/* Tamaño incrementado */}
+            <Obstacle.CircularMotionPrism position={[5, 1, 0]} speed={1} radius={5} color="#008080" />
+            <Obstacle.OscillatingWall position={[15  , 2, -2]} speed={1} amplitude={5} color="#FF4500" />
+            <Obstacle.Pendulum position={[20 , 11, -13]} speed={1.5} length={10} color="#DAA520" />
+            <Obstacle.RotatingWall position={[28, 2, -10]} speed={0.5} color="#4682B4" />
+
         </>
     );
 }
