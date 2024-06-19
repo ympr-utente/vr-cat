@@ -1,21 +1,20 @@
-import { Environment, KeyboardControls, OrbitControls } from '@react-three/drei'
-import {RigidBody } from '@react-three/rapier';
-import Ecctrl, { EcctrlAnimation } from 'ecctrl'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { Environment, KeyboardControls } from '@react-three/drei';
+import { RigidBody } from '@react-three/rapier';
+import Ecctrl, { EcctrlAnimation } from 'ecctrl';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
-import CatModel from '../../../components/characters/CatModel'
-import Obstacle from '../../../components/obstacles/Obstacle'
-import Palmera from '../../../components/obstacles/nivel2/Palmera'
-import { Fish } from '../../../components/rewards/Fish'
+import CatModel from '../../../components/characters/CatModel';
+import Obstacle from '../../../components/obstacles/Obstacle';
+import Spinner from '../../../components/obstacles/Spinner';
+import Palmera from '../../../components/obstacles/nivel2/Palmera';
+import { Fish } from '../../../components/rewards/Fish';
 import { useAuth } from '../../../context/AuthContext';
 import { loadCheckpoint } from '../../../stores/loadCheckpoint';
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
+import { useGame } from '../../../stores/useGame';
+import Floor from '../floor/Floor';
+import Trophy from '../trophy/Trophy';
 import Villano2 from '../villano2/Villano2';
-import { useGame } from '../../../stores/useGame'
-import Spinner from '../../../components/obstacles/Spinner'
-import Floor from '../floor/Floor'
-import Trophy from '../trophy/Trophy'
-import { Suspense } from 'react';
 
 export default function World() {
     const { user } = useAuth();

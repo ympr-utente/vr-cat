@@ -4,14 +4,11 @@ import Ecctrl, { EcctrlAnimation } from 'ecctrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel';
-
 import { Fish } from '../../../components/rewards/Fish';
 import { useAuth } from '../../../context/AuthContext';
 import { loadCheckpoint } from '../../../stores/loadCheckpoint';
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import { useGame } from '../../../stores/useGame';
-
-
 import Boxer from '../Boxer/Boxer';
 import Trophy from '../trophy/Trophy';
 
@@ -149,7 +146,11 @@ export default function World() {
                         characterURL={characterURL}
                         animationSet={animationSet}
                     >
-                        <CatModel ref={catRef} />
+                        <CatModel
+                            ref={catRef}
+                            scale={[0.5, 0.5, 0.5]}
+                            position={[10, 1, 10]}  // Cambia la posición inicial aquí
+                        />
                     </EcctrlAnimation>
                 </Ecctrl>
             </KeyboardControls>
@@ -172,8 +173,6 @@ export default function World() {
                     <meshStandardMaterial color="yellow" />
                 </mesh>
             </RigidBody>
-
-        
 
             <Boxer position={[-0.5, 2.15, -42]} rotation-y={0} scale={35} />
             <Trophy position-z={-45} position-y={1} />

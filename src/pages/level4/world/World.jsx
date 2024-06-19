@@ -13,6 +13,7 @@ export function World(props) {
         displacementMap: PATH + "brown_mud_leaves_01_disp_1k.jpg",
     });
 
+    // Configurar las texturas para repetir
     propsTexture.map.repeat.set(20, 20);
     propsTexture.map.wrapS = propsTexture.map.wrapT = RepeatWrapping;
 
@@ -25,8 +26,8 @@ export function World(props) {
 
     return (
         <group {...props} dispose={null}>
-            <RigidBody type="fixed" position={[0, 0, 0]} rotation={[0, 0, 0]} colliders="hull">
-                <mesh receiveShadow={true} geometry={nodes.piso.geometry}>
+            <RigidBody type="fixed" colliders="trimesh" position={[0, 0, 0]} rotation={[0, 0, 0]}>
+                <mesh receiveShadow geometry={nodes.piso.geometry}>
                     <meshStandardMaterial {...propsTexture} />
                 </mesh>
                 <group>

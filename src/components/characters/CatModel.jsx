@@ -24,7 +24,7 @@ const CatModel = forwardRef((props, ref) => {
     }, [ref]);
 
     return (
-        <group ref={catModelRef} {...props} name="Scene" position-y={-0.9}>
+        <group ref={catModelRef} {...props} name="Scene" position={props.position || [0, 0, 0]}>
             <group name="Scene">
                 <group name="Armature" rotation={[-3.133, 0, 0]} scale={0.01}>
                     <skinnedMesh
