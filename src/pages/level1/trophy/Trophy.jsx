@@ -17,6 +17,7 @@ export default function Trophy({ onCollide, ...props }) {
         hitSound.volume = Math.random() * 0.1
         hitSound.play()
         if (onCollide) {
+            onCollide()  // Llama a la función onCollide al detectar colisión
         }
     }
 
