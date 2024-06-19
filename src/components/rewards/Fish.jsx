@@ -1,10 +1,9 @@
-
-import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
-import { MeshBasicMaterial } from 'three'
+import { useGLTF } from '@react-three/drei';
+import React from 'react';
+import { MeshBasicMaterial } from 'three';
 
 export function Fish(props) {
-  const { nodes, materials } = useGLTF('./assets/fish/pez.glb')
+  const { nodes, materials } = useGLTF('./assets/fish/pez.glb');
   const material = new MeshBasicMaterial({ color: 'blue' });
 
   return (
@@ -17,7 +16,7 @@ export function Fish(props) {
         rotation={[-1.594, 0, 0]}
       />
     </group>
-  )
+  );
 }
 
-useGLTF.preload('./assets/fish/pez.glb')
+useGLTF.preload('./assets/fish/pez.glb');

@@ -4,11 +4,13 @@ import Ecctrl, { EcctrlAnimation } from 'ecctrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel';
+
 import { Fish } from '../../../components/rewards/Fish';
 import { useAuth } from '../../../context/AuthContext';
 import { loadCheckpoint } from '../../../stores/loadCheckpoint';
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import { useGame } from '../../../stores/useGame';
+
 import Boxer from '../Boxer/Boxer';
 import Trophy from '../trophy/Trophy';
 
@@ -44,10 +46,16 @@ export default function World() {
     };
 
     const [score, setScore] = useState(0);
+    const [fishPositions, setFishPositions] = useState([
+        { id: 1, position: [2, 9, 16] },
+        { id: 2, position: [50, 20, -6] },
+        { id: 3, position: [80, 20, 12] },
+      
+    
+    ]);
 
     const gameStarted = useGame((state) => state.gameStarted);
     const restartGame = useGame((state) => state.restart);
-    const fishes = useGame((state) => state.fishes);
     const updateCatPosition = useGame((state) => state.updateCatPosition);
     const catPosition = useGame((state) => state.catPosition);
     const resetBonusVisible = useGame((state) => state.resetBonusVisible);
@@ -65,9 +73,7 @@ export default function World() {
 
     const onEatFish = (id) => {
         setScore(score + 1);
-        useGame.setState((state) => ({
-            fishes: state.fishes.filter((fish) => fish.id !== id)
-        }));
+        setFishPositions((prev) => prev.filter((fish) => fish.id !== id));
         useGame.getState().addTime();
         successSound.play();
     };
@@ -146,17 +152,13 @@ export default function World() {
                         characterURL={characterURL}
                         animationSet={animationSet}
                     >
-                        <CatModel
-                            ref={catRef}
-                            scale={[0.5, 0.5, 0.5]}
-                            position={[10, 1, 10]}  // Cambia la posición inicial aquí
-                        />
+                        <CatModel ref={catRef} scale={[0.4, 0.4, 0.4]}/>
                     </EcctrlAnimation>
                 </Ecctrl>
             </KeyboardControls>
 
-            {fishes.map((fish) => (
-                <RigidBody scale={0.7} key={fish.id} type='fixed' colliders={"hull"} onCollisionEnter={() => onEatFish(fish.id)}>
+            {fishPositions.map((fish) => (
+                <RigidBody scale={0.3} key={fish.id} type='fixed' colliders={"hull"} onCollisionEnter={() => onEatFish(fish.id)}>
                     <Fish position={fish.position} />
                 </RigidBody>
             ))}

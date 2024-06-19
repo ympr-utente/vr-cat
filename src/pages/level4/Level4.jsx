@@ -28,7 +28,7 @@ export default function Experience() {
           <Suspense fallback={null}>
             <Physics>
               <World  />
-              <World1/>
+              <World1 />
             
 
               <ShortcutManager />
