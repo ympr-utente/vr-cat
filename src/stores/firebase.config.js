@@ -1,24 +1,27 @@
-// src/stores/firebase.config.js
+import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
 
-
+// Your new Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCdLIM9hiWWP_D_PAlCAiwI35JcJXqKv3s",
-  authDomain: "vr-cat-a8b3a.firebaseapp.com",
-  projectId: "vr-cat-a8b3a",
-  storageBucket: "vr-cat-a8b3a.appspot.com",
-  messagingSenderId: "16540522175",
-  appId: "1:16540522175:web:5615aa1564ca725a73180a"
+  apiKey: "AIzaSyDHNdHZvJGUIdK90cqp1tsEvoWJGb0WkZ0",
+  authDomain: "meowvradventures.firebaseapp.com",
+  databaseURL: "https://meowvradventures-default-rtdb.firebaseio.com",
+  projectId: "meowvradventures",
+  storageBucket: "meowvradventures.appspot.com",
+  messagingSenderId: "1064223602185",
+  appId: "1:1064223602185:web:63842d4c9a9b5c7474aad8",
+  measurementId: "G-N4ZJ5RCF4S"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
+const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const database = getDatabase(app); 
+const database = getDatabase(app);
 
-export { auth, database, db };
+export { analytics, auth, database, db };
 

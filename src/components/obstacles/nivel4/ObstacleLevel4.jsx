@@ -223,6 +223,87 @@ const CircularMotionPrism = function ({ speed = 1, radius = 5, color, position, 
     );
 };
 
+const CombinedObstacle = function ({ speed = 1, color, ...props }) {
+    const obstacleRef = useRef();
+    const rotation = useRef(new THREE.Quaternion());
+
+    useFrame(({ clock }) => {
+        const time = clock.getElapsedTime();
+
+        if (obstacleRef.current) {
+            rotation.current.setFromEuler(new THREE.Euler(time * speed, time * speed, 0));
+            obstacleRef.current.setNextKinematicRotation(rotation.current);
+        }
+    });
+
+    return (
+        <Obstacle ref={obstacleRef} color={color} {...props}>
+            <mesh receiveShadow castShadow>
+                <boxGeometry args={[2, 2, 2]} />
+                <meshStandardMaterial color={color} />
+            </mesh>
+            <mesh position={[3, 0, 0]} receiveShadow castShadow>
+                <sphereGeometry args={[1.5, 32, 32]} />
+                <meshStandardMaterial color={color} />
+            </mesh>
+        </Obstacle>
+    );
+};
+
+const SpinningObstacle = function ({ speed = 1, color, ...props }) {
+    const obstacleRef = useRef();
+    const rotation = useRef(new THREE.Quaternion());
+
+    useFrame(({ clock }) => {
+        const time = clock.getElapsedTime();
+
+        if (obstacleRef.current) {
+            rotation.current.setFromEuler(new THREE.Euler(0, time * speed, time * speed));
+            obstacleRef.current.setNextKinematicRotation(rotation.current);
+        }
+    });
+
+    return (
+        <Obstacle ref={obstacleRef} color={color} {...props}>
+            <mesh receiveShadow castShadow>
+                <cylinderGeometry args={[1, 1, 5, 32]} />
+                <meshStandardMaterial color={color} />
+            </mesh>
+            <mesh position={[0, 2, 0]} receiveShadow castShadow>
+                <boxGeometry args={[1, 1, 1]} />
+                <meshStandardMaterial color={color} />
+            </mesh>
+        </Obstacle>
+    );
+};
+
+const TwistedObstacle = function ({ speed = 1, color, ...props }) {
+    const obstacleRef = useRef();
+    const twist = useRef(new THREE.Quaternion());
+
+    useFrame(({ clock }) => {
+        const time = clock.getElapsedTime();
+
+        if (obstacleRef.current) {
+            twist.current.setFromEuler(new THREE.Euler(0, time * speed, Math.sin(time * speed)));
+            obstacleRef.current.setNextKinematicRotation(twist.current);
+        }
+    });
+
+    return (
+        <Obstacle ref={obstacleRef} color={color} {...props}>
+            <mesh receiveShadow castShadow>
+                <coneGeometry args={[2, 4, 32]} />
+                <meshStandardMaterial color={color} />
+            </mesh>
+            <mesh position={[0, -3, 0]} receiveShadow castShadow>
+                <torusGeometry args={[1, 0.5, 16, 100]} />
+                <meshStandardMaterial color={color} />
+            </mesh>
+        </Obstacle>
+    );
+};
+
 Obstacle.PulsingObstacle = PulsingObstacle;
 Obstacle.FloatingObstacle = FloatingObstacle;
 Obstacle.RotatingWall = RotatingWall;
@@ -231,5 +312,8 @@ Obstacle.OscillatingWall = OscillatingWall;
 Obstacle.RotatingCube = RotatingCube;
 Obstacle.SwingingSphere = SwingingSphere;
 Obstacle.CircularMotionPrism = CircularMotionPrism;
+Obstacle.CombinedObstacle = CombinedObstacle;
+Obstacle.SpinningObstacle = SpinningObstacle;
+Obstacle.TwistedObstacle = TwistedObstacle;
 
 export default Obstacle;

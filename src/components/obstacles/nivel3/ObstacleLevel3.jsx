@@ -1,6 +1,6 @@
-import { useFrame} from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import { RigidBody } from '@react-three/rapier'
-import { forwardRef, useRef, useMemo, useEffect, useState} from 'react'
+import { forwardRef, useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { useAudio } from '../../../stores/useAudio'
 
