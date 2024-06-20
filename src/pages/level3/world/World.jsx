@@ -24,7 +24,7 @@ export default function World() {
     const navigate = useNavigate()
 
     const nextLevel = () => {
-        navigate('/level1')
+        navigate('/level4')
     }
 
     const keyboardMap = [
