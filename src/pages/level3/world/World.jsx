@@ -203,7 +203,7 @@ export default function World() {
             <Lampara position-z={-10} position-y={1}position-x={-17.5} scale={1} />
             <Carreta position-z={-60} position-x={8}position-y={1} scale={0.9} rotation-y={2}/>
             <Carreta position-z={-40} position-x={-7} position-y={1}scale={0.9} rotation-y={2}/>
-            <Villano3 position={[-0.5, 0.4, -42]} rotation-y={0} scale={3.5}/>
+            <Villano3 position={[-0.5, 0.4, -40]} rotation-y={0} scale={3.5}/>
             
      
             

@@ -46,8 +46,8 @@ export default function Villano3(props) {
 
   return (
     <RigidBody ref={pelotaBodyRef} type="fixed" position={props.position} colliders={false}>
-    <CuboidCollider args={[1, 1 , 1]} position={[-0.46,0,-41.7]} />  
-    <CuboidCollider args={[1, 1, 1]} position={[-0.46,1.2,-40]} /> 
+    <CuboidCollider args={[3, 6 , 1]} position={[-0.5, 0.4, -40]} />  
+    <CuboidCollider args={[1, 4, 1]} position={[-0.5, 0.4, -37]} /> 
     <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
