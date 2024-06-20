@@ -10,8 +10,9 @@ import { useAuth } from '../../../context/AuthContext';
 import { loadCheckpoint } from '../../../stores/loadCheckpoint';
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import { useGame } from '../../../stores/useGame';
-import Boxer from '../Boxer/Boxer';
+import Boxer from '../../level4/Boxer/Boxer';
 import Trophy from '../trophy/Trophy';
+import Villano3 from '../villano3/Villano3';
 
 export default function World1() {
     const { user } = useAuth();
@@ -171,7 +172,7 @@ export default function World1() {
                 </mesh>
             </RigidBody>
 
-            <Boxer position={[-0.5, 2.15, -42]} rotation-y={0} scale={35} />
+            <Villano3 position={[-0.5, 2.15, -42]} rotation-y={0} scale={35} />
             <Trophy position={[29, 1, 8]} rotation={[2, 12, 5]} /> {/* Rotación ajustada a 45 grados en el eje Y */}
             <Obstacle.RotatingCube position={[27 , 2, 3]} speed={1} color="#9400D3" />
             <Obstacle.SwingingSphere position={[30, 2, -21      ]} speed={1} amplitude={2} size={5} color="#FFA500" /> {/* Tamaño incrementado */}

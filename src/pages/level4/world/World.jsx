@@ -12,10 +12,10 @@ import { loadCheckpoint } from '../../../stores/loadCheckpoint';
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import { useGame } from '../../../stores/useGame';
 import Arbol from '../Arbol/Arbol';
-import Boxer from '../Boxer/Boxer';
 import Casa from '../casa/Casa';
 import Floor from '../floor/Floor';
 import Trophy from '../trophy/Trophy';
+import Boxer from '../Boxer/Boxer';
 
 
 export default function World() {
