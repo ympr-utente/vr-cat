@@ -24,22 +24,28 @@ const CatModel = forwardRef((props, ref) => {
     }, [ref]);
 
     return (
-        <group ref={catModelRef} {...props} name="Scene" position={props.position || [0, 0, 0]}>
+        <group ref={catModelRef} {...props} name="Scene">
             <group name="Scene">
                 <group name="Armature" rotation={[-3.133, 0, 0]} scale={0.01}>
                     <skinnedMesh
+                        castShadow
+                        receiveShadow
                         name="Bigote"
                         geometry={nodes.Bigote.geometry}
                         material={materials['Nariz.003']}
                         skeleton={nodes.Bigote.skeleton}
                     />
                     <skinnedMesh
+                        castShadow
+                        receiveShadow
                         name="Bigote001"
                         geometry={nodes.Bigote001.geometry}
                         material={materials['Bigote.003']}
                         skeleton={nodes.Bigote001.skeleton}
                     />
                     <skinnedMesh
+                        castShadow
+                        receiveShadow
                         name="Cabeza"
                         geometry={nodes.Cabeza.geometry}
                         material={materials['Piel.003']}
@@ -47,18 +53,24 @@ const CatModel = forwardRef((props, ref) => {
                     />
                     <group name="GafasFacheras">
                         <skinnedMesh
+                            castShadow
+                            receiveShadow
                             name="Plano003"
                             geometry={nodes.Plano003.geometry}
                             material={materials['MarcoGafas.001']}
                             skeleton={nodes.Plano003.skeleton}
                         />
                         <skinnedMesh
+                            castShadow
+                            receiveShadow
                             name="Plano003_1"
                             geometry={nodes.Plano003_1.geometry}
                             material={materials['Rojo.001']}
                             skeleton={nodes.Plano003_1.skeleton}
                         />
                         <skinnedMesh
+                            castShadow
+                            receiveShadow
                             name="Plano003_2"
                             geometry={nodes.Plano003_2.geometry}
                             material={materials['Azul.001']}
@@ -66,12 +78,16 @@ const CatModel = forwardRef((props, ref) => {
                         />
                     </group>
                     <skinnedMesh
+                        castShadow
+                        receiveShadow
                         name="Nariz"
                         geometry={nodes.Nariz.geometry}
                         material={materials['Nariz.004']}
                         skeleton={nodes.Nariz.skeleton}
                     />
                     <skinnedMesh
+                        castShadow
+                        receiveShadow
                         name="Orejas"
                         geometry={nodes.Orejas.geometry}
                         material={materials['Piel.002']}

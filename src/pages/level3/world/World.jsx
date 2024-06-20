@@ -184,7 +184,7 @@ export default function World() {
                 onCollisionEnter={onContactYellowSquare}
                 position={[0, 2, -49]}
             >
-                <mesh>
+                <mesh castShadow receiveShadow>
                     <boxGeometry args={[1, 1, 1]} />
                     <meshStandardMaterial color="yellow" />
                 </mesh>

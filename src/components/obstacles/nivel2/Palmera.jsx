@@ -7,7 +7,7 @@ export default function Palmera({position, props}) {
     return (
       <RigidBody type='fixed' colliders={"cuboid"}>
       <group position={position} {...props} dispose={null}>
-        <group rotation={[-2.861, 0, -Math.PI]} scale={[0.24, 1, 1]}>
+        <group rotation={[-2.861, 0, -Math.PI]} scale={[0.5, 6, 1]}>
           <mesh
             castShadow
             receiveShadow = {true}

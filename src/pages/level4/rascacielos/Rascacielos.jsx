@@ -6,7 +6,7 @@ export function Rascacielos(props) {
   return (
     <group {...props} dispose={null}>
       <group>
-        <mesh geometry={nodes.Cube.geometry} material={nodes.Cube.material} />
+        <mesh castShadow receiveShadow geometry={nodes.Cube.geometry} material={nodes.Cube.material} />
       </group>
     </group>
   )

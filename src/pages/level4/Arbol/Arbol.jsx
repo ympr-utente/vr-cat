@@ -7,8 +7,8 @@ export default function Arbol(props) {
     <group {...props} dispose={null}>
       <group>
         <group>
-          <mesh geometry={nodes.Cube013.geometry} material={materials.Tree} />
-          <mesh geometry={nodes.Cube013_1.geometry} material={materials.leaffs} />
+          <mesh castShadow receiveShadow geometry={nodes.Cube013.geometry} material={materials.Tree} />
+          <mesh castShadow receiveShadow geometry={nodes.Cube013_1.geometry} material={materials.leaffs} />
         </group>
       </group>
     </group>

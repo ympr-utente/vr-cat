@@ -146,7 +146,7 @@ export default function World() {
     return (
         <>
             <Environment
-                files={"./assets/hdris/belfast_sunset_puresky_4k.hdr"}
+                files={"./assets/hdris/umhlanga_sunrise_4k.hdr"}
                 background={true}
                 ground={{ height: 20, scale: 512, radius: 400 }}
             />
@@ -198,10 +198,10 @@ export default function World() {
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert />
 
-            <Palmera position={[-6, 4, -65]} scale={1}/>
+            <Palmera position={[-8, 5, -85]}/>
             <Palmera position={[6, 4, -65]}/>
             <Villano2 position={[-1, 1, -37]} rotation-y={0} scale={0.5} />
             <Trophy onCollide={nextLevel} position-z={-45} position-y={1} />
             </>
     );
-}   
+}

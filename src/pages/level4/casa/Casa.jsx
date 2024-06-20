@@ -6,11 +6,11 @@ export default function Casa(props) {
   return (
     <group {...props} dispose={null}>
       <group>
-        <mesh geometry={nodes.Cube.geometry} material={materials.Techo} />
-        <mesh geometry={nodes.roof.geometry} material={materials.roof} />
-        <mesh geometry={nodes.chemy.geometry} material={nodes.chemy.material} />
-        <mesh geometry={nodes.Door.geometry} material={materials.Material} />
-        <mesh geometry={nodes.window.geometry} material={materials.Techo} />
+        <mesh castShadow receiveShadow geometry={nodes.Cube.geometry} material={materials.Techo} />
+        <mesh castShadow receiveShadow geometry={nodes.roof.geometry} material={materials.roof} />
+        <mesh castShadow receiveShadow geometry={nodes.chemy.geometry} material={nodes.chemy.material} />
+        <mesh castShadow receiveShadow geometry={nodes.Door.geometry} material={materials.Material} />
+        <mesh castShadow receiveShadow geometry={nodes.window.geometry} material={materials.Techo} />
       </group>
     </group>
   )

@@ -18,9 +18,9 @@ const Spinner = ({ speed = 1, initialShift = Math.random() * 10, invert = false,
 
   return (
     <RigidBody ref={obstacleRef} position={position} type="kinematic">
-      <mesh {...props}> <cylinderGeometry args={[1, 0.25, 1.5]}/>
+      <mesh castShadow receiveShadow {...props}> <cylinderGeometry args={[1, 0.25, 1.5]}/>
         <meshStandardMaterial color={'#88E6FF'}/>
-        <mesh rotation={[0, 0, -Math.PI / 2]}>
+        <mesh castShadow receiveShadow rotation={[0, 0, -Math.PI / 2]}>
           <cylinderGeometry args={[0.25, 0.25, 13]} />
           <meshStandardMaterial color={'white'}/>
         </mesh>

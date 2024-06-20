@@ -5,6 +5,7 @@ export default function Lights() {
                 intensity={-0.2}
             />
             <directionalLight
+                castShadow
                 position={[10, 10, 0]}
                 shadow-mapSize = {[2048, 2048]}
                 shadow-camera-far = {50}
