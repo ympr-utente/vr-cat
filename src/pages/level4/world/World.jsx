@@ -16,7 +16,7 @@ const socket = io("http://localhost:3000");
 
 export default function World() {
     const { user } = useAuth();
-    const characterURL = "./assets/character/threedy-realease.glb"; // Definición de characterURL
+    const characterURL = "./assets/character/threedy-realease.glb"; 
     const catRef = useRef();
     const [players, setPlayers] = useState({});
     const updateCatPosition = useGame((state) => state.updateCatPosition);
@@ -104,7 +104,7 @@ export default function World() {
                         console.error("No user logged in");
                     }
                     break;
-                // Handle other key events if necessary
+            
                 default:
                     break;
             }
