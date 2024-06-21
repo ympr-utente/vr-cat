@@ -7,16 +7,16 @@ export default function Palmera({position, props}) {
     return (
       <RigidBody type='fixed' colliders={"cuboid"}>
       <group position={position} {...props} dispose={null}>
-        <group rotation={[-2.861, 0, -Math.PI]} scale={[0.5, 6, 1]}>
+        <group rotation={[-2.861, 0, -Math.PI]} scale={[0.24, 1, 1]}>
           <mesh
             castShadow
-            receiveShadow = {true}
+            receiveShadow 
             geometry={nodes.Plane001.geometry}
             material={materials['Palm_leaf.036']}
           />
           <mesh
             castShadow
-            receiveShadow = {true}
+            receiveShadow 
             geometry={nodes.Plane001_1.geometry}
             material={materials['Palm_wood.003']}
           />

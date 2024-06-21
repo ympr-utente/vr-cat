@@ -7,6 +7,8 @@ import CatModel from '../../../components/characters/CatModel';
 import Obstacle from '../../../components/obstacles/Obstacle';
 import Spinner from '../../../components/obstacles/Spinner';
 import Palmera from '../../../components/obstacles/nivel2/Palmera';
+import Castillo from '../../../components/obstacles/nivel2/Castillo';
+import SillaPlaya from '../../../components/obstacles/nivel2/SillaPlaya';
 import { Fish } from '../../../components/rewards/Fish';
 import { useAuth } from '../../../context/AuthContext';
 import { loadCheckpoint } from '../../../stores/loadCheckpoint';
@@ -198,10 +200,16 @@ export default function World() {
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={6} scale-x={0.75} />
             <Obstacle.Spinner color='white' position-z={-52} speed={5} position-x={-6} scale-x={0.75} invert />
 
-            <Palmera position={[-8, 5, -85]}/>
-            <Palmera position={[6, 4, -65]}/>
-            <Villano2 position={[-1, 1, -37]} rotation-y={0} scale={0.5} />
-            <Trophy onCollide={nextLevel} position-z={-45} position-y={1} />
+            <Palmera position={[6, 5, -65]}/>
+            <Palmera position={[-6, 4, -65]}/>
+            
+            <SillaPlaya position={[3, 1, -64]} scale={3.5}/>
+            <Castillo position={[8, 5, -80]} scale={1.5}/>
+
+            <Palmera position={[-9, 5, -60]}/>
+
+            <Villano2 position={[-1, 0.5, -30]} rotation-y={0} scale={0.5} />
+            <Trophy onCollide={nextLevel} position-z={-40} position-y={0.5} />
             </>
     );
 }
