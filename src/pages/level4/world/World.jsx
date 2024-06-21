@@ -1,26 +1,25 @@
 import { Environment, KeyboardControls } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
 import Ecctrl, { EcctrlAnimation } from 'ecctrl';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from "react";
+import io from "socket.io-client";
 import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel';
 import Spinner from '../../../components/obstacles/Spinner';
 import ObstacleLevel3 from '../../../components/obstacles/nivel3/ObstacleLevel3';
 import { Fish } from '../../../components/rewards/Fish';
 import { useAuth } from '../../../context/AuthContext';
-import { loadCheckpoint } from '../../../stores/loadCheckpoint';
-import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import { useGame } from '../../../stores/useGame';
-import Arbol from '../Arbol/Arbol';
-import Casa from '../casa/Casa';
 import Floor from '../floor/Floor';
-import Trophy from '../trophy/Trophy';
-import Boxer from '../Boxer/Boxer';
 
+const socket = io("http://localhost:3000");
 
 export default function World() {
     const { user } = useAuth();
-    const characterURL = "./assets/character/threedy-realease.glb";
+    const characterURL = "./assets/character/threedy-realease.glb"; // Definición de characterURL
+    const catRef = useRef();
+    const [players, setPlayers] = useState({});
+    const updateCatPosition = useGame((state) => state.updateCatPosition);
 
     const keyboardMap = [
         { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -54,14 +53,11 @@ export default function World() {
     const gameStarted = useGame((state) => state.gameStarted);
     const restartGame = useGame((state) => state.restart);
     const fishes = useGame((state) => state.fishes);
-    const updateCatPosition = useGame((state) => state.updateCatPosition);
     const catPosition = useGame((state) => state.catPosition);
     const resetBonusVisible = useGame((state) => state.resetBonusVisible);
     const bonusVisible = useGame((state) => state.bonusVisible);
     const setNotification = useGame((state) => state.setNotification);
     const saveCheckpointState = useGame((state) => state.saveCheckpoint);
-
-    const catRef = useRef();
 
     const successSound = useMemo(() => {
         const sound = new Audio('./assets/sounds/+5.mp3');
@@ -138,37 +134,52 @@ export default function World() {
         }
     }, [gameStarted, catPosition]);
 
+    useEffect(() => {
+        socket.on("connect", () => {
+            console.log(`Connected to server with ID: ${socket.id}`);
+        });
+
+        socket.on("updatePlayers", (players) => {
+            setPlayers(players);
+        });
+
+        return () => {
+            socket.disconnect();
+        };
+    }, []);
+
+    const handleCatPositionUpdate = () => {
+        if (catRef.current) {
+            const catPosition = new THREE.Vector3();
+            catRef.current.getWorldPosition(catPosition);
+            const position = { x: catPosition.x, y: catPosition.y, z: catPosition.z };
+            socket.emit("updatePosition", position);
+        }
+    };
+
+    useEffect(() => {
+        const interval = setInterval(handleCatPositionUpdate, 200); // Actualizar cada 200 ms
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <>
-            {/* <OrbitControls /> */}
-            <Environment
-                files="./assets/hdris/shanghai_bund_4k.hdr"
-                background={true}
-                // ground={{ height: 100, scale: 512, radius: 400 }}
-                ground={
-                    {
-                        height: 50,
-                        scale: 512,
-                        radius: 400
-                    }
-                }
-            />
+            <Environment files="./assets/hdris/shanghai_bund_4k.hdr" background={true} ground={{ height: 50, scale: 512, radius: 400 }} />
             <KeyboardControls map={keyboardMap}>
-                <Ecctrl animated={true}
-                    camInitDis={-8}
-                    camMaxDis={-8}
-                    maxVelLimit={gameStarted ? 5 : 0}
-                    jumpVel={gameStarted ? 6 : 0}
-                    position={[0, 40, 0]}
-                >
-                    <EcctrlAnimation
-                        characterURL={characterURL}
-                        animationSet={animationSet}
-                    >
+                <Ecctrl animated={true} camInitDis={-8} camMaxDis={-8} maxVelLimit={useGame.getState().gameStarted ? 5 : 0} jumpVel={useGame.getState().gameStarted ? 6 : 0} position={[0, 40, 0]}>
+                    <EcctrlAnimation characterURL={characterURL} animationSet={animationSet}>
                         <CatModel ref={catRef} />
                     </EcctrlAnimation>
                 </Ecctrl>
             </KeyboardControls>
+
+            {Object.keys(players).map((playerId) => {
+                if (playerId !== socket.id) {
+                    const position = players[playerId];
+                    return <CatModel key={playerId} position={[position.x, position.y, position.z]} />;
+                }
+                return null;
+            })}
 
             {fishes.map((fish) => (
                 <RigidBody scale={0.7} key={fish.id} type='fixed' colliders={"hull"} onCollisionEnter={() => onEatFish(fish.id)}>
@@ -176,13 +187,7 @@ export default function World() {
                 </RigidBody>
             ))}
 
-            <RigidBody
-                scale={0.7}
-                type="fixed"
-                colliders={"hull"}
-                onCollisionEnter={onContactYellowSquare}
-                position={[0, 2, -49]}
-            >
+            <RigidBody scale={0.7} type="fixed" colliders={"hull"} onCollisionEnter={onContactYellowSquare} position={[0, 2, -49]}>
                 <mesh>
                     <boxGeometry args={[1, 1, 1]} />
                     <meshStandardMaterial color="yellow" />
@@ -193,15 +198,6 @@ export default function World() {
             <Spinner position={[-2, 4, -12]} speed={2} />
             <Spinner position={[2, 4, -27]} speed={2} invert />
             <ObstacleLevel3.SlidingWall speed={2.3} initialShift={0} color='gray' position-z={-45} />
-            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={2} color='gray' position-z={-55} />
-            <ObstacleLevel3.Spinner color='white' position-z={-50} position-x={6} speed={0.5} scale-x={0.6} />
-            <Casa position-z={-40} position-x={-8} scale={0.9} />
-            <Casa position-z={-60} position-x={8} scale={0.9} rotation-y={3} />
-            <ObstacleLevel3.Limbo position-z={-57} initialShift={0.5} scale-x={1} position-x={-4.8} />
-            <Boxer position={[-0.5, 2.15, -42]} rotation-y={0} scale={35} />
-            <Trophy position-z={-45} position-y={1} />
-            <Arbol position-z={-10} position-x={0.7} scale={1} />
-            <Arbol position-z={-10} position-x={-17.5} scale={1} />
         </>
     );
 }

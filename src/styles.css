@@ -1,3 +1,4 @@
+/* CSS Styles */
 * {
   box-sizing: border-box;
 }
@@ -169,17 +170,25 @@ canvas {
   .audio-toggle, .misc-controls {
     right: 20vw;
   }
-}.interface .notification {
+}
+
+.interface .notification {
   position: absolute;
   top: 100px;
   right: 35px;
   background-color: #4caf50;
-  color: white;
+  color: #ffffff;
   padding: 30px 30px;
   border-radius: 5px;
   z-index: 1000;
   opacity: 0.9;
   transition: opacity 4s ease-in-out;
+  text-align: center;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px; /* Adjust width as needed */
 }
 
 .interface .notification.hidden {
@@ -188,7 +197,7 @@ canvas {
 
 .interface .load-checkpoint {
   position: absolute;
-  top: 70px; /* Ajusta la posición más abajo */
+  top: 70px;
   right: 20px;
   background-color: #f39c12;
   color: white;
@@ -204,34 +213,33 @@ canvas {
 .interface .load-checkpoint:hover {
   background-color: #e67e22;
 }
-  .hud {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-  }
 
-  .lives {
-    display: flex;
-  }
+.hud {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
 
-  .lives img {
-    width: 100px; /* Ajusta el ancho según tus preferencias */
-    height: 40px; /* Ajusta la altura según tus preferencias */
-    margin-right: 10px;
-  }
-  .timer {
-    margin-top: 10px;
-    font-size: 20px;
-    color: white;
-  }
+.lives {
+  display: flex;
+}
 
+.lives img {
+  width: 100px;
+  height: 40px;
+  margin-right: 10px;
+}
 
-  .lives span {
-    font-size: 40px; /* Ajusta el tamaño del corazón según tus preferencias */
-    margin-right: 10px;
-  }
+.timer {
+  margin-top: 10px;
+  font-size: 20px;
+  color: white;
+}
 
-   
+.lives span {
+  font-size: 40px;
+  margin-right: 10px;
+}

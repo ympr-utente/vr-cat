@@ -2,6 +2,7 @@ import { Environment, KeyboardControls } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
 import Ecctrl, { EcctrlAnimation } from 'ecctrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel';
 import Obstacle from '../../../components/obstacles/nivel4/ObstacleLevel4';
@@ -15,7 +16,6 @@ import Floor from '../floor/Floor';
 import { Lampara } from '../lamparas/Lampara';
 import Trophy from '../trophy/Trophy';
 import Villano3 from '../villano3/Villano3';
-import { useNavigate, BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 export default function World() {
     const { user } = useAuth();

@@ -1,3 +1,4 @@
+// Game logic with Zustand
 import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
@@ -70,15 +71,15 @@ const useGame = create(
             set(() => ({
                 catPosition: position
             })),
-        setNotification: (message) => {
+        setNotification: (type, message) => {
             set(() => ({
-                notification: message
+                notification: { type, message }
             }));
             setTimeout(() => {
                 set(() => ({
                     notification: null
                 }));
-            }, 3000); // Desaparece después de 3 segundos
+            }, 3000); // Disappears after 3 seconds
         },
         clearNotification: () =>
             set(() => ({
@@ -87,7 +88,7 @@ const useGame = create(
         saveCheckpoint: (catPosition, countdown, fishes) =>
             set(() => ({
                 checkpoint: { catPosition, countdown, fishes },
-                notification: 'Checkpoint saved!'
+                notification: { type: 'success', message: 'Checkpoint saved successfully!' }
             })),
         loadCheckpoint: () =>
             set((state) => {
@@ -99,7 +100,7 @@ const useGame = create(
                         fishes,
                         phase: 'ready',
                         gameStarted: false,
-                        notification: 'Checkpoint loaded!'
+                        notification: { type: 'success', message: 'Checkpoint loaded successfully!' }
                     };
                 }
                 return {};
