@@ -17,7 +17,9 @@ import Floor from '../floor/Floor';
 import Trophy from '../trophy/Trophy';
 import Boxer from '../Boxer/Boxer';
 
-import Button from './Button';
+import { Rope } from "./Rope.tsx";
+import HangingThing from "./HangingThing.tsx";
+import LetreroTrofeo from "./LetreroTrofeo"
 
 export default function World() {
     const { user } = useAuth();
@@ -238,11 +240,22 @@ export default function World() {
         </mesh>
 
             <Boxer position={[-0.5, 2.15, -42]} rotation-y={0} scale={35} />
-            <Trophy position-z={-45} position-y={1} />
             <Arbol position-z={-30} position-x={0.7} scale={1} />
             <Arbol position-z={-30} position-x={-17.5} scale={1} />
             <Arbol position-z={-40} position-x={0.7} scale={1} />
             <Arbol position-z={-40} position-x={-17.5} scale={1} />
+
+            <HangingThing position={[2, 5.5, -60]} />
+            <HangingThing position={[5, 5.5, -60]} />
+            <HangingThing position={[7, 5.5, -60]} />
+
+            <HangingThing position={[-2, 5.5, -60]} />
+            <HangingThing position={[-5, 5.5, -60]} />
+            <HangingThing position={[-7, 5.5, -60]} />
+
+            <LetreroTrofeo position={[7, 0.5, -40]} scale={1.8}/>
+            <Rope length={20}/>
+            <Trophy position-z={-45} position-y={1} />
         </>
     );
 }
