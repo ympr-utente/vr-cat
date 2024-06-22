@@ -4,6 +4,7 @@ import Ecctrl, { EcctrlAnimation } from 'ecctrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel';
+import CatModel2 from '../../../components/characters/CatModel2';
 import Obstacle from '../../../components/obstacles/Obstacle';
 import { Fish } from '../../../components/rewards/Fish';
 import { useAuth } from '../../../context/AuthContext';
