@@ -7,5 +7,5 @@ const urlDeployServer = "https://vr-cat-re9b.onrender.com";
 /**
  * Socket connection
  */
-export const socket = io(urlLocalServer); // se usa este para desarrollo 
-// export const socket = io(urlDeployServer); // hay que dejar este creo para que funcione en producción
+// export const socket = io(urlLocalServer); // se usa este para desarrollo 
+export const socket = io(urlDeployServer); // hay que dejar este creo para que funcione en producción
