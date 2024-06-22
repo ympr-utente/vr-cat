@@ -25,10 +25,27 @@ import LetreroTrofeo from "./LetreroTrofeo"
 import Obstacle from '../../../components/obstacles/Obstacle';
 import { Confetti } from './Confetti'
 import { useNavigate } from 'react-router-dom'
+import CatModel2 from '../../../components/characters/CatModel2';
 
 export default function World() {
     const { user } = useAuth();
     const characterURL = "./assets/character/threedy-realease.glb";
+    const characterURL2 = "./assets/character/threedy-realease2.glb";
+
+
+    // const keyboardMap = [
+    //     { name: "forward", keys: ["ArrowUp", "KeyW"] },
+    //     { name: "backward", keys: ["ArrowDown", "KeyS"] },
+    //     { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
+    //     { name: "rightward", keys: ["ArrowRight", "KeyD"] },
+    //     { name: "jump", keys: ["Space"] },
+    //     { name: "run", keys: ["Shift"] },
+    //     { name: "action1", keys: ["1"] },
+    //     { name: "action2", keys: ["2"] },
+    //     { name: "action3", keys: ["3"] },
+    //     { name: "action4", keys: ["KeyF"] },
+    //     { name: "loadCheckpoint", keys: ["g", "G"] }
+    // ];
 
     const navigate = useNavigate()
 
@@ -56,10 +73,10 @@ export default function World() {
 
 
     const keyboardMap = [
-        { name: "forward", keys: ["ArrowUp", "KeyW"] },
-        { name: "backward", keys: ["ArrowDown", "KeyS"] },
-        { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
-        { name: "rightward", keys: ["ArrowRight", "KeyD"] },
+        { name: "forward", keys: ["ArrowUp"] },
+        { name: "backward", keys: ["ArrowDown"] },
+        { name: "leftward", keys: ["ArrowLeft"] },
+        { name: "rightward", keys: ["ArrowRight"] },
         { name: "jump", keys: ["Space"] },
         { name: "run", keys: ["Shift"] },
         { name: "action1", keys: ["1"] },
@@ -68,6 +85,21 @@ export default function World() {
         { name: "action4", keys: ["KeyF"] },
         { name: "loadCheckpoint", keys: ["g", "G"] }
     ];
+    
+    const keyboardMap2 = [
+        { name: "forward", keys: ["KeyW"] },
+        { name: "backward", keys: ["KeyS"] },
+        { name: "leftward", keys: ["KeyA"] },
+        { name: "rightward", keys: ["KeyD"] },
+        { name: "jump", keys: ["KeyJ"] },
+        { name: "run", keys: ["KeyK"] },
+        { name: "action1", keys: ["KeyU"] },
+        { name: "action2", keys: ["KeyI"] },
+        { name: "action3", keys: ["KeyO"] },
+        { name: "action4", keys: ["KeyP"] },
+        { name: "loadCheckpoint", keys: ["q", "Q"] }
+    ];
+
 
     const animationSet = {
         idle: "Listisimo",
@@ -82,6 +114,20 @@ export default function World() {
         action3: "PatadaVoladora",
     };
 
+    const animationSet2 = {
+        idle: "Listisimo",
+        walk: "CaminarConEstilacho",
+        run: "CorriendoALoMazeRunner",
+        jump: "SaltadorIntrepido",
+        jumpIdle: "AterrizandoConParkour",
+        jumpLand: "AterrizandoConParkour",
+        fall: "Paracaidista",
+        action1: "Izquierdazo",
+        action2: "Derechazo",
+        action3: "PatadaVoladora",
+    };
+
+
     const [score, setScore] = useState(0);
 
     const gameStarted = useGame((state) => state.gameStarted);
@@ -95,6 +141,7 @@ export default function World() {
     const saveCheckpointState = useGame((state) => state.saveCheckpoint);
 
     const catRef = useRef();
+    const catRef2 = useRef();
     const socketRef = useRef();
     const otherPlayers = useRef({});
     const previousPosition = useRef(new THREE.Vector3());
@@ -250,6 +297,24 @@ export default function World() {
                     </EcctrlAnimation>
                 </Ecctrl>
             </KeyboardControls>
+
+            <KeyboardControls map={keyboardMap2}>
+                <Ecctrl animated={true}
+                    camInitDis={-8}
+                    camMaxDis={-8}
+                    maxVelLimit={gameStarted ? 5 : 0}
+                    jumpVel={gameStarted ? 6 : 0}
+                    position={[5, 40, 0]}
+                >
+                    <EcctrlAnimation
+                        characterURL={characterURL2}
+                        animationSet={animationSet2}
+                    >
+                        <CatModel2 ref={catRef2} />
+                    </EcctrlAnimation>
+                </Ecctrl>
+            </KeyboardControls>
+
 
             {fishes.map((fish) => (
                 <RigidBody scale={0.7} key={fish.id} type='fixed' colliders={"hull"} onCollisionEnter={() => onEatFish(fish.id)}>
