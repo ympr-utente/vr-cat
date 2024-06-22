@@ -17,7 +17,6 @@ import Boxer from '../Boxer/Boxer';
 import Casa from '../casa/Casa';
 import Floor from '../floor/Floor';
 import Trophy from '../trophy/Trophy';
-import Boxer from '../Boxer/Boxer';
 
 import { Rope } from "./Rope.tsx";
 import HangingThing from "./HangingThing.tsx";
