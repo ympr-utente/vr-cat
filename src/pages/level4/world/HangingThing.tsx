@@ -22,11 +22,11 @@ const HangingThing = (props: GroupProps) => {
       <RigidBody ref={anchor} />
       <RigidBody ref={box} position={[0, -2, 0]}>
         <Box args={[0.2, 4, 0.2]}>
-          <meshPhysicalMaterial color={'#20AEB3'}/>
+          <meshPhysicalMaterial color={'#88E6FF'}/>
         </Box>
         <MeshCollider type="ball">
           <Sphere args={[0.5]} position={[0, -2, 0]}>
-            <meshPhysicalMaterial color={'#20AEB3'}/>
+            <meshPhysicalMaterial color={'#88E6FF'}/>
           </Sphere>
         </MeshCollider>
       </RigidBody>

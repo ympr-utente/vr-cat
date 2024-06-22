@@ -20,6 +20,7 @@ import Boxer from '../Boxer/Boxer';
 import { Rope } from "./Rope.tsx";
 import HangingThing from "./HangingThing.tsx";
 import LetreroTrofeo from "./LetreroTrofeo"
+import Obstacle from '../../../components/obstacles/Obstacle';
 
 export default function World() {
     const { user } = useAuth();
@@ -182,6 +183,10 @@ export default function World() {
                     maxVelLimit={gameStarted ? 5 : 0}
                     jumpVel={gameStarted ? 6 : 0}
                     position={[0, 40, 0]}
+            followLight
+            springK={2}
+            dampingC={0.2}
+            autoBalance={false}
                 >
                     <EcctrlAnimation
                         characterURL={characterURL}
@@ -239,7 +244,15 @@ export default function World() {
           <meshStandardMaterial color="red" />
         </mesh>
 
-            <Boxer position={[-0.5, 2.15, -42]} rotation-y={0} scale={35} />
+            <Obstacle color='#88E6FF' position-y={2} position-z={-79} />
+            <Obstacle color='#88E6FF' position-y={4} position-z={-82} />
+            <Obstacle color='#88E6FF' position-y={6} position-z={-85} />
+
+            <Obstacle color='#88E6FF' position-y={3} position-z={-80} />
+            <Obstacle color='#88E6FF' position-y={5} position-z={-83} />
+            <Obstacle color='#88E6FF' position-y={7} position-z={-86} />
+            
+            <Boxer position={[-0.5, 2.15, -22]} rotation-y={0} scale={35} />
             <Arbol position-z={-30} position-x={0.7} scale={1} />
             <Arbol position-z={-30} position-x={-17.5} scale={1} />
             <Arbol position-z={-40} position-x={0.7} scale={1} />
@@ -255,7 +268,7 @@ export default function World() {
 
             <LetreroTrofeo position={[7, 0.5, -40]} scale={1.8}/>
             <Rope length={20}/>
-            <Trophy position-z={-45} position-y={1} />
+            <Trophy position-z={-42} position-y={4} />
         </>
     );
 }

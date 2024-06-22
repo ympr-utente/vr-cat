@@ -27,7 +27,9 @@
     "react-scripts": "^5.0.1",
     "react-useanimations": "^2.0.8",
     "three": "^0.163.0",
-    "zustand": "4.1.4"
+    "zustand": "4.1.4",
+    "@dimforge/rapier3d": "0.13.1",
+    "@types/react-dom": "^18.2.8"
   },
   "browserslist": {
     "production": [

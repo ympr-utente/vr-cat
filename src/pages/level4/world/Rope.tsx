@@ -65,7 +65,7 @@ export const Rope = (props: { length: number }) => {
           component={
 
             <Sphere args={[0.5]}>
-              <meshStandardMaterial color='#20AEB3'/>
+              <meshStandardMaterial color='#88E6FF'/>
             </Sphere>
           }
           type={i === 0 ? "kinematicPosition" : "dynamic"}
