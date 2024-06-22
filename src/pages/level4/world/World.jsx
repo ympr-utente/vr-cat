@@ -2,6 +2,7 @@ import { Environment, KeyboardControls } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
 import Ecctrl, { EcctrlAnimation } from 'ecctrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { io } from 'socket.io-client';
 import * as THREE from 'three';
 import CatModel from '../../../components/characters/CatModel';
 import Spinner from '../../../components/obstacles/Spinner';
@@ -12,6 +13,7 @@ import { loadCheckpoint } from '../../../stores/loadCheckpoint';
 import { saveCheckpoint } from '../../../stores/saveCheckpoint';
 import { useGame } from '../../../stores/useGame';
 import Arbol from '../Arbol/Arbol';
+import Boxer from '../Boxer/Boxer';
 import Casa from '../casa/Casa';
 import Floor from '../floor/Floor';
 import Trophy from '../trophy/Trophy';
@@ -93,11 +95,40 @@ export default function World() {
     const saveCheckpointState = useGame((state) => state.saveCheckpoint);
 
     const catRef = useRef();
+    const socketRef = useRef();
+    const otherPlayers = useRef({});
+    const previousPosition = useRef(new THREE.Vector3());
 
     const successSound = useMemo(() => {
         const sound = new Audio('./assets/sounds/+5.mp3');
         sound.volume = 0.2;
         return sound;
+    }, []);
+
+    useEffect(() => {
+        socketRef.current = io("http://localhost:8080");
+
+        socketRef.current.on("connect", () => {
+            console.log("Connected to the server");
+        });
+
+        socketRef.current.on("disconnect", () => {
+            console.log("Disconnected from the server");
+        });
+
+        socketRef.current.on("player-moving", (data) => {
+            const { id, position } = data;
+            if (!otherPlayers.current[id]) {
+                otherPlayers.current[id] = new THREE.Object3D();
+                // Create a new model for the other player if necessary
+                // and add it to your scene here
+            }
+            otherPlayers.current[id].position.set(position.x, position.y, position.z);
+        });
+
+        return () => {
+            socketRef.current.disconnect();
+        };
     }, []);
 
     const onEatFish = (id) => {
@@ -169,20 +200,35 @@ export default function World() {
         }
     }, [gameStarted, catPosition]);
 
+    useEffect(() => {
+        const handlePlayerMovement = () => {
+            if (catRef.current) {
+                const catObject = catRef.current;
+                const currentPosition = new THREE.Vector3();
+                catObject.getWorldPosition(currentPosition);
+
+                if (!currentPosition.equals(previousPosition.current)) {
+                    const transforms = {
+                        position: { x: currentPosition.x, y: currentPosition.y, z: currentPosition.z },
+                    };
+
+                    socketRef.current.emit("player-moving", transforms);
+                    previousPosition.current.copy(currentPosition);
+                }
+            }
+        };
+
+        const interval = setInterval(handlePlayerMovement, 100); // Check for movement every 100ms
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <>
-            {/* <OrbitControls /> */}
             <Environment
                 files="./assets/hdris/shanghai_bund_4k.hdr"
                 background={true}
-                // ground={{ height: 100, scale: 512, radius: 400 }}
-                ground={
-                    {
-                        height: 50,
-                        scale: 512,
-                        radius: 400
-                    }
-                }
+                ground={{ height: 50, scale: 512, radius: 400 }}
             />
             <KeyboardControls map={keyboardMap}>
                 <Ecctrl animated={true}
