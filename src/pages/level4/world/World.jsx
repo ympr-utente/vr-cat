@@ -17,10 +17,22 @@ import Floor from '../floor/Floor';
 import Trophy from '../trophy/Trophy';
 import Boxer from '../Boxer/Boxer';
 
+import Box from './RigidObjects';
+import Button from './Button';
 
 export default function World() {
     const { user } = useAuth();
     const characterURL = "./assets/character/threedy-realease.glb";
+
+    const [animationsPaused, setAnimationsPaused] = useState(false);
+
+    const handleButtonPress = () => {
+        setAnimationsPaused(true);
+    };
+
+    const handleButtonRelease = () => {
+        setAnimationsPaused(false);
+    };
 
     const keyboardMap = [
         { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -176,32 +188,34 @@ export default function World() {
                 </RigidBody>
             ))}
 
-            <RigidBody
-                scale={0.7}
-                type="fixed"
-                colliders={"hull"}
-                onCollisionEnter={onContactYellowSquare}
-                position={[0, 2, -49]}
-            >
-                <mesh>
-                    <boxGeometry args={[1, 1, 1]} />
-                    <meshStandardMaterial color="yellow" />
-                </mesh>
-            </RigidBody>
+            <Button position={[-2, 8, -2]} scale={15}/>
 
             <Floor scale-y={5} position-z={-45} />
+{/*
             <Spinner position={[-2, 4, -12]} speed={2} />
             <Spinner position={[2, 4, -27]} speed={2} invert />
-            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={0} color='gray' position-z={-45} />
-            <ObstacleLevel3.SlidingWall speed={2.3} initialShift={2} color='gray' position-z={-55} />
+*/}
+{/*
+
             <ObstacleLevel3.Spinner color='white' position-z={-50} position-x={6} speed={0.5} scale-x={0.6} />
             <Casa position-z={-40} position-x={-8} scale={0.9} />
             <Casa position-z={-60} position-x={8} scale={0.9} rotation-y={3} />
             <ObstacleLevel3.Limbo position-z={-57} initialShift={0.5} scale-x={1} position-x={-4.8} />
+ */}
+
+            <mesh position={[-2, 1, -2]} onClick={handleButtonPress} onPointerUp={handleButtonRelease}>
+                <boxGeometry args={[1, 1, 1]} />
+                <meshStandardMaterial  color="red" />
+            </mesh>
+
+            <ObstacleLevel3.SlidingWall speed={3} initialShift={0} color='gray' position-z={-20} paused={animationsPaused} />
+            <ObstacleLevel3.SlidingWall speed={3} initialShift={2} color='gray' position-z={-25} paused={animationsPaused} />
+
             <Boxer position={[-0.5, 2.15, -42]} rotation-y={0} scale={35} />
             <Trophy position-z={-45} position-y={1} />
             <Arbol position-z={-10} position-x={0.7} scale={1} />
             <Arbol position-z={-10} position-x={-17.5} scale={1} />
+            <Box position={[-2, 1, -12]} scale={20}/>
         </>
     );
 }

@@ -63,13 +63,13 @@ const Limbo = function ({ speed = 1, initialShift = 0, color, ...props }) {
     return <ObstacleLevel3 ref={obstacleRef} color={color} scale-x={2} {...props} />;
 };
 
-const SlidingWall = function ({ speed , initialShift, color, ...props }) {
+const SlidingWall = function ({ speed, initialShift, color, paused, ...props }) {
     const obstacleRef = useRef();
 
     useFrame(({ clock }) => {
         const time = clock.getElapsedTime();
 
-        if (obstacleRef.current) {
+        if (obstacleRef.current && !paused) {
             const obstacleTranslation = obstacleRef.current.translation();
             obstacleRef.current.setNextKinematicTranslation({
                 x: Math.sin(time * speed + initialShift) * 5,
@@ -79,9 +79,9 @@ const SlidingWall = function ({ speed , initialShift, color, ...props }) {
         }
     });
 
-    // return <Obstacle ref={obstacleRef} color={color} scale-y={5} position-y={3} {...props} />
     return <ObstacleLevel3 ref={obstacleRef} color={color} scale-y={5} {...props} />
 }
+
 
 ObstacleLevel3.Spinner = Spinner
 ObstacleLevel3.Limbo = Limbo

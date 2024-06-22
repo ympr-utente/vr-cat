@@ -1,5 +1,6 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { forwardRef, useEffect, useRef } from "react";
+import { RigidBody, BallCollider, useRigidBody } from "@react-three/rapier"; 
 import { useCatModel } from "../../context/CatModelContext";
 
 const CatModel = forwardRef((props, ref) => {
@@ -25,6 +26,7 @@ const CatModel = forwardRef((props, ref) => {
 
     return (
         <group ref={catModelRef} {...props} name="Scene">
+            <RigidBody mass={2}/>
             <group name="Scene" position-y={-0.85}>
                 <group name="Armature" rotation={[-3.133, 0, 0]} scale={0.01}>
                     <skinnedMesh
@@ -96,6 +98,7 @@ const CatModel = forwardRef((props, ref) => {
                     <primitive object={nodes.mixamorigHips} />
                 </group>
             </group>
+            <RigidBody/>
         </group>
     );
 });
