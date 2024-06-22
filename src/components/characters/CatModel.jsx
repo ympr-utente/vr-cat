@@ -1,9 +1,9 @@
-import { useAnimations, useGLTF } from "@react-three/drei";
-import { forwardRef, useEffect, useRef } from "react";
+import { useAnimations, useGLTF, useKeyboardControls } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+import * as THREE from 'three';
 import { useCatModel } from "../../context/CatModelContext";
 import { socket } from "../../socket/socket-manager";
-import { useFrame } from "@react-three/fiber";
-import { useKeyboardControls } from "@react-three/drei";
 
 const CatModel = forwardRef((props, ref) => {
     const { catModel } = useCatModel();
@@ -11,10 +11,27 @@ const CatModel = forwardRef((props, ref) => {
     const { nodes, materials, animations } = useGLTF('./assets/character/threedy-realease.glb');
     const { actions } = useAnimations(animations, catModelRef);
     const [sub, get] = useKeyboardControls();
-    const player1Ref = useRef();
+
+    useImperativeHandle(ref, () => ({
+        translation: () => {
+            const position = new THREE.Vector3();
+            if (catModelRef.current) {
+                catModelRef.current.getWorldPosition(position);
+            }
+            return position;
+        },
+        rotation: () => {
+            if (catModelRef.current) {
+                return catModelRef.current.rotation;
+            }
+            return new THREE.Euler();
+        }
+    }), []);
 
     useEffect(() => {
-        actions[catModel.animation]?.reset().fadeIn(0.5).play();
+        if (actions[catModel.animation]) {
+            actions[catModel.animation].reset().fadeIn(0.5).play();
+        }
         return () => {
             if (actions[catModel.animation]) {
                 actions[catModel.animation].fadeOut(0.5);
@@ -31,23 +48,23 @@ const CatModel = forwardRef((props, ref) => {
     useFrame(() => {
         // Get current keyboard input states
         const { forward, backward, leftward, rightward } = get();
-    
+
         // If any movement key is pressed, emit the player's movement data to the server
         if (forward || backward || leftward || rightward) {
-          window.setTimeout(() => {
-            socket.emit("player-moving", {
-              translation: catModelRef.current?.translation(),
-              rotation: catModelRef.current?.rotation(),
-            });
-          }, 100);
+            window.setTimeout(() => {
+                if (ref.current && typeof ref.current.translation === 'function' && typeof ref.current.rotation === 'function') {
+                    socket.emit("player-moving", {
+                        translation: ref.current.translation(),
+                        rotation: ref.current.rotation(),
+                    });
+                }
+            }, 100);
         }
-      });
-
-
+    });
 
     return (
         <group ref={catModelRef} {...props} name="Scene">
-            <group  name="Scene" position-y={-0.85}>
+            <group name="Scene" position-y={-0.85}>
                 <group name="Armature" rotation={[-3.133, 0, 0]} scale={0.01}>
                     <skinnedMesh
                         castShadow
@@ -121,6 +138,7 @@ const CatModel = forwardRef((props, ref) => {
         </group>
     );
 });
+
 useGLTF.preload('./assets/character/threedy-realease.glb');
 
 export default CatModel;
