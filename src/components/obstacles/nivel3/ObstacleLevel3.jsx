@@ -72,14 +72,14 @@ const SlidingWall = function ({ speed, initialShift, color, paused, ...props }) 
         if (obstacleRef.current && !paused) {
             const obstacleTranslation = obstacleRef.current.translation();
             obstacleRef.current.setNextKinematicTranslation({
-                x: Math.sin(time * speed + initialShift) * 5,
+                x: Math.sin(time * speed + initialShift) * 6,
                 y: obstacleTranslation.y,
                 z: obstacleTranslation.z
             });
         }
     });
 
-    return <ObstacleLevel3 ref={obstacleRef} color={color} scale-y={5} {...props} />
+    return <ObstacleLevel3 ref={obstacleRef} color={color} scale-y={8} {...props} />
 }
 
 
