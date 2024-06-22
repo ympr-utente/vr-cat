@@ -196,8 +196,6 @@ export default function World() {
                 </RigidBody>
             ))}
 
-            <Button position={[-2, 8, -2]} scale={15}/>
-
             <Floor scale-y={5} position-z={-45} />
 {/*
             <Spinner position={[-2, 4, -12]} speed={2} />
@@ -222,15 +220,29 @@ export default function World() {
           <meshStandardMaterial color="red" />
         </mesh>
 
-            <ObstacleLevel3.SlidingWall speed={8} initialShift={1} color='red' position-z={-10} paused={animationsPaused} />
-            <ObstacleLevel3.SlidingWall speed={8} initialShift={3} color='red' position-z={-14} paused={animationsPaused} />
-            <ObstacleLevel3.SlidingWall speed={8} initialShift={2} color='red' position-z={-18} paused={animationsPaused} />
-            <ObstacleLevel3.SlidingWall speed={8} initialShift={4} color='red' position-z={-22} paused={animationsPaused} />
+            <ObstacleLevel3.SlidingWall speed={8} initialShift={1} color='red' position-z={-6} paused={animationsPaused} />
+            <ObstacleLevel3.SlidingWall speed={8} initialShift={3} color='red' position-z={-10} paused={animationsPaused} />
+            <ObstacleLevel3.SlidingWall speed={8} initialShift={2} color='red' position-z={-14} paused={animationsPaused} />
+            <ObstacleLevel3.SlidingWall speed={8} initialShift={4} color='red' position-z={-18} paused={animationsPaused} />
+
+
+        <mesh
+          position={[-6, 1, -23]}
+          onClick={handleButtonPress}
+          onPointerUp={handleButtonRelease}
+          onPointerOver={handleButtonHover}
+          onPointerOut={handleButtonHoverOut}
+        >
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="red" />
+        </mesh>
 
             <Boxer position={[-0.5, 2.15, -42]} rotation-y={0} scale={35} />
             <Trophy position-z={-45} position-y={1} />
-            <Arbol position-z={-12} position-x={0.7} scale={1} />
-            <Arbol position-z={-12} position-x={-17.5} scale={1} />
+            <Arbol position-z={-30} position-x={0.7} scale={1} />
+            <Arbol position-z={-30} position-x={-17.5} scale={1} />
+            <Arbol position-z={-40} position-x={0.7} scale={1} />
+            <Arbol position-z={-40} position-x={-17.5} scale={1} />
         </>
     );
 }
