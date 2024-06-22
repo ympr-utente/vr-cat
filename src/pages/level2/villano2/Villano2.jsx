@@ -47,7 +47,7 @@ export default function Villano2(props) {
 
   return (
     <RigidBody ref={pelotaBodyRef} type="fixed" position={props.position} colliders={false}>
-       <CuboidCollider args={[3, 2 , 4]} position={[-0.1, 1, -40]} />  
+       <CuboidCollider args={[3, 2 , 4]} position={[-1, 0.5, -30]} />  
 
     <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
