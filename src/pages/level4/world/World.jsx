@@ -21,28 +21,36 @@ import { Rope } from "./Rope.tsx";
 import HangingThing from "./HangingThing.tsx";
 import LetreroTrofeo from "./LetreroTrofeo"
 import Obstacle from '../../../components/obstacles/Obstacle';
+import { Confetti } from './Confetti'
+import { useNavigate } from 'react-router-dom'
 
 export default function World() {
     const { user } = useAuth();
     const characterURL = "./assets/character/threedy-realease.glb";
 
-  const [animationsPaused, setAnimationsPaused] = useState(false);
+    const navigate = useNavigate()
 
-  const handleButtonPress = () => {
-    setAnimationsPaused(true);
-  };
+    const nextLevel = () => {
+        navigate('/level1')
+    }
 
-  const handleButtonRelease = () => {
-    setAnimationsPaused(false);
-  };
+    const [animationsPaused, setAnimationsPaused] = useState(false);
 
-  const handleButtonHover = () => {
-    setAnimationsPaused(true);
-  };
+    const handleButtonPress = () => {
+        setAnimationsPaused(true);
+    };
 
-  const handleButtonHoverOut = () => {
-    setAnimationsPaused(false);
-  };
+    const handleButtonRelease = () => {
+        setAnimationsPaused(false);
+    };
+
+    const handleButtonHover = () => {
+        setAnimationsPaused(true);
+    };
+
+    const handleButtonHoverOut = () => {
+        setAnimationsPaused(false);
+    };
 
 
     const keyboardMap = [
@@ -268,7 +276,10 @@ export default function World() {
 
             <LetreroTrofeo position={[7, 0.5, -40]} scale={1.8}/>
             <Rope length={20}/>
-            <Trophy position-z={-42} position-y={4} />
-        </>
+            <Trophy ponCollide={nextLevel} position-z={-42} position-y={4} />
+            <group position-z={90}>
+                <Confetti />
+            </group> 
+            </>
     );
-}
+} 
